@@ -3,19 +3,54 @@ const bcrypt = require('bcrypt-nodejs')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: 1,
+          msg: 'Must provide a first name.'
+        }
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: 1,
+          msg: 'Must provide a last name.'
+        }
+      }
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        msg: 'This email is already in use.'
+      },
       validate: {
-        isEmail: true
+        len: {
+          args: 1,
+          msg: 'Must provide an email.'
+
+        },
+        isEmail: {
+          msg: 'Must provide valid email.'
+        }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        notEmpty: true,
+        validate: {
+          len: {
+            args: 1,
+            msg: 'Must provide a password.'
+
+          },
+        }
       }
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   }, {})
    User.prototype.validPassword = function(password) {

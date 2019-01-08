@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const db = require('./db/models')
 
 const app = express()
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
 const router = express.Router()
 
 app.use(bodyParser.json())
@@ -44,6 +44,21 @@ app.get('/api/blogs/:id', async (req, res)=> {
 app.get('/api/users/:id', async (req, res)=> {
 	let r = await db.User.findAll({where: {id: req.params.id}})
 	res.json(r)
+})
+
+app.post('/api/signup', (req,res)=> {
+	console.log(req.body)
+	db.User.create({
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: req.body.password,
+	}).then(()=> {
+		res.redirect('/')
+	}).catch(err=> {
+		console.log(err)
+		res.json(err)
+	})
 })
 
 

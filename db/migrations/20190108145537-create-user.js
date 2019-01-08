@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -28,9 +28,15 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE
       }
-    });
+    })
+    .then(()=> {
+      return queryInterface.addIndex('Users', ['email'], {
+        indexName: 'email',
+        indicesType: 'UNIQUE'
+      })
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Users')
   }
-};
+}

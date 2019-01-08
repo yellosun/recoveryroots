@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const db = require('./db/models')
+const passport = require('./config/passport')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -9,6 +10,8 @@ const router = express.Router()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
+app.use(passport.initialize())
+app.use(passport.session())
 
 db.sequelize.sync()
 .then(()=> {
@@ -60,6 +63,10 @@ app.post('/api/signup', (req,res)=> {
 		res.json(err)
 	})
 })
+
+app.get("/api/login", passport.authenticate("local"), function(req, res) {
+    res.redirect('/')
+  })
 
 
 //----------->

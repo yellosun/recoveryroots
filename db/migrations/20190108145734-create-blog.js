@@ -14,21 +14,24 @@ module.exports = {
       body: {
         type: Sequelize.TEXT
       },
-      category: {
+      uri: {
         type: Sequelize.STRING
       },
-      uri: {
+      category: {
         type: Sequelize.STRING
       },
       headerImg: {
         type: Sequelize.STRING
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

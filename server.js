@@ -1,14 +1,15 @@
 require('dotenv/config')
 const express = require('express')
 const bodyParser = require('body-parser')
+var path = require('path')
+
 const db = require('./db/models')
 const jwt = require('jsonwebtoken')
-
 const passport = require('passport')
 require('./config/passport')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -25,7 +26,7 @@ db.sequelize.sync()
 
 
 //----------->
-// Home Routes
+// API Routes
 //----------->
 
 app.get('/api', (req,res)=> {
@@ -104,9 +105,9 @@ function reqLoginAsync(req, user) {
 // Home Routes
 //----------->
 
-app.get('/', (req,res)=> {
-	res.send('Welcome to the rr2 index.html page')
-})
+// app.get('/', (req,res)=> {
+// 	res.sendFile(path.join(__dirname + '/rr2/public/index.html'))
+// })
 
 
 

@@ -33,9 +33,10 @@ passport.use(new JWTStrategy({
     secretOrKey: process.env.JWT_SECRET,
 }, async (jwtPayload, done) => {
     try {
-        const user = await User.get(jwtPayload.userID)
-        if (user === null || user === undefined) { return done(null, false) }
-
+        const user = await db.User.findOne({ where: { email: jwtPayload.email } })
+        if (user === null || user === undefined) {
+            return done(null, false)
+        }
         done(null, user)
 
     } catch (err) {
@@ -49,10 +50,12 @@ passport.use(new LocalStrategy({
 }, async (email, password, done) => {
     try {
         const user = await db.User.findOne({ where: { email } })
-        if (user === null || user === undefined) { return done(null, false) }
+        if (user === null || user === undefined) {
+            return done(null, false)
+        }
 
-        console.log('USER ~>', user)
-        console.log('xyzzy ~>', {email, password, pw: user.password})
+        // console.log('USER ~>', user)
+        // console.log('xyzzy ~>', {email, password, pw: user.password})
 
         const isMatch = await bcrypt.compareAsync(password, user.password)
         if (isMatch) {

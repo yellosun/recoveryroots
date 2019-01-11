@@ -23,7 +23,7 @@ export function userReducer(state = initialState, action:action) {
 
     case SET_USER:
         const { user } = action.payload
-        
+        console.log(user)
         return {
             ...state,
             user: {

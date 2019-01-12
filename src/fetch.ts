@@ -2,7 +2,7 @@ let jwt: string|null = null
 
 export async function checkToken() {
     const token = localStorage.getItem('app-token')
-
+    console.log(token)
     try {
         const r = await fetch('/checktoken', {
             method: 'GET',
@@ -60,10 +60,11 @@ export async function login(email: string, password: string) {
 
 
 function getHeaders(): any {
-    if (jwt) {
+    const token = localStorage.getItem('app-token')
+    if (token) {
         return {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
         }
     } else {
         return {

@@ -1,9 +1,8 @@
-import { SET_TOKEN, SET_USER } from '../actions/userAction'
+import { SET_USER } from '../actions/userAction'
 
 interface action {type:string, payload:any}
 
 const initialState = {
-    token: null,
     user: {
         firstName: null,
         lastName: null,
@@ -15,15 +14,8 @@ const initialState = {
 export function userReducer(state = initialState, action:action) {
     switch (action.type) {
 
-    case SET_TOKEN:
-        return {
-            ...state,
-            token: action.payload.token
-        }
-
     case SET_USER:
         const { user } = action.payload
-        console.log(user)
         return {
             ...state,
             user: {

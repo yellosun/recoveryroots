@@ -10,10 +10,11 @@ const styles = createStyles({
 
 class AdminHome extends Component<Props, State> {
 	render() {
+		console.log('i loaded properly')
 		const {classes} = this.props
 		return (
 			<div>
-				you're logged in && an admin!!
+				you admin
 			</div>
 		)
 	}

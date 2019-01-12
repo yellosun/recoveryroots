@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
+import history from './history'
 import * as serviceWorker from './serviceWorker'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './reducers/rootReducer'
-import { setToken, setUser } from './actions/userAction'
+import { setUser } from './actions/userAction'
 import { getUsers, checkToken } from './fetch'
 
 const store = createStore(
@@ -15,9 +16,11 @@ const store = createStore(
 )
 
 
-checkToken().then(user => {
+checkToken()
+.then(user => {	
 	if (user) {
 		store.dispatch(setUser(user))
+		history.push('/admin')
 	}
 })
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { setToken, setUser } from '../../actions/userAction'
+import { setUser } from '../../actions/userAction'
 import history from '../../history'
 import { login } from '../../fetch'
 
@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 
-interface Props {classes: any, setToken:any, setUser:any, token:string}
+interface Props {classes: any, setToken:any, setUser:any, email:string}
 interface State {email?:string, password?:string, errorMsg?:string}
 
 const styles = createStyles({
@@ -30,7 +30,7 @@ class Login extends Component<Props, State> {
 	}
 
 	componentDidMount() {
-		if (this.props.token) return history.push('/admin')
+		if (this.props.email) return history.push('/admin')
 	}
 
 	handleChange = (name:string) => (event:React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ class Login extends Component<Props, State> {
 		try {
 			const user = await login(this.state.email, this.state.password)
 	        this.props.setUser(user)
-	        // history.push('/admin')
+	        history.push('/admin')
 
 		} catch (err) {
 			console.log('login error ~>', err.toString())
@@ -91,7 +91,7 @@ class Login extends Component<Props, State> {
 	}
 }
 
-const mapStateToProps = (state:any) => ({ token: state.token })
-const mapDispatchToProps = {setToken, setUser}
+const mapStateToProps = (state:any) => ({ email: state.user.email })
+const mapDispatchToProps = {setUser}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))

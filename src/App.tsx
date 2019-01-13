@@ -3,30 +3,26 @@ import { Router, Route, Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { setUser } from './actions/userAction'
 import history from './history'
-import AdminHome from './components/admin/AdminHome'
+import AdminPortal from './components/admin/AdminPortal'
 import AdminLogin from './components/admin/AdminLogin'
 
 interface Props {email:string}
 interface State {}
 
 class App extends Component<Props, State> {	
-
-	renderRoute = () => ({
-					
-	})
-
+	
 	render() {
 		console.log(this.props.email)
 		return (
 			<Router history={history}>
-				<F>
+				<div style={{fontFamily: 'Roboto'}}>
 					{this.props.email ? 
-						<Route path='/admin' exact component={AdminHome} /> 
+						<Route path='/admin' exact component={AdminPortal} /> 
 					: 
 						<Redirect to='/admin/login'/>
 					}
 					<Route path='/admin/login' component={AdminLogin} />
-				</F>
+				</div>
 			</Router>
 		)
 	}

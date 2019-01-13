@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core'
 import { InsertComment, LibraryBooks } from '@material-ui/icons'
+import BlogForm from './BlogForm'
+import whiteLogo from '../../styles/images/inverse-transparent-logo.png'
 
 interface Props {classes: any}
 interface State {}
@@ -13,6 +15,7 @@ const styles = createStyles({
 		flexFlow: 'row wrap',
 		justifyContent: 'center',
 		marginLeft: 73,
+		width: '100%',
 	},
 	drawer: {
 		backgroundColor: 'rgba(0,0,0,.85)'
@@ -21,43 +24,47 @@ const styles = createStyles({
 		fill: 'white',
 	},
 	markdownDisplay: {
-		marginLeft: 40,
-		width: '40%',
+		marginLeft: 50,
+		width: '45%',
 	},
-	textarea: {
-		outline: 'none',
-		width: '40%',
+	logo: {
+		height: 25,
 	}
 })
 
 class AdminHome extends Component<Props, State> {
 	
 	state = {
-		input: '# Text displays here'
+		textarea: '# Text displays here'
 	}
 	
-	handleChange = (event:any) => {
-		this.setState({input: event.target.value})
+	handleChange = (input:any) => (event:any) => {
+		this.setState({[input]: event.target.value})
 	}
 
 	render() {		
 		const {classes} = this.props
 		const navicons: {[titleText: string]: JSX.Element} = {
+			'img':<img src={whiteLogo} className={classes.logo}/>,
 			'Create Blog':<InsertComment className={classes.icon}/>, 
-			'View Blogs':<LibraryBooks className={classes.icon}/>
+			'View Blogs':<LibraryBooks className={classes.icon}/>,
 		}
 		return (
 			<F>
 				<Drawer variant='permanent' classes={{paper:classes.drawer}}>
 					<List>
-						{ Object.keys(navicons).map((icon)=> {
+						{ Object.keys(navicons).map((title)=> {
 							return (
-								<ListItem>
-									<ListItemIcon>
-									 <Tooltip title={icon} placement="right">
-										{navicons[icon]}
-						            </Tooltip>
-									</ListItemIcon>
+								<ListItem style={{justifyContent: 'center'}}>
+									
+									{title === 'img' ? 
+										navicons[title]
+									:
+										<Tooltip title={title} placement="right">
+											{navicons[title]}
+							            </Tooltip>
+									}
+									
 								</ListItem>
 								)
 						})
@@ -67,15 +74,10 @@ class AdminHome extends Component<Props, State> {
 					</List>
 				</Drawer>
 				<div className={classes.contentContainer}>
-					<textarea 
-						rows={50} 
-						placeholder='# Write your blog here'
-						className={classes.textarea} 
-						onChange={this.handleChange}>	
-					</textarea>
+					<BlogForm handleChange={this.handleChange}/>
 					<ReactMarkdown 
 						className={classes.markdownDisplay} 
-						source={this.state.input}
+						source={this.state.textarea}
 					/>
 				</div>
 			</F>

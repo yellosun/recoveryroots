@@ -31,3 +31,4 @@ class App extends Component<Props, State> {
 const mapStateToProps = (state:any) => ({email: state.user.user.email})
 
 export default connect(mapStateToProps)(App)
+		

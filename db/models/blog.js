@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Blog = sequelize.define('Blog', {
     title: DataTypes.STRING,
     body: DataTypes.TEXT,
+    description: DataTypes.TEXT,
     uri: DataTypes.STRING,
     category: DataTypes.STRING,
     headerImg: DataTypes.STRING,

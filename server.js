@@ -38,7 +38,6 @@ app.get('/api', (req, res)=> {
 })
 
 app.get('/api/users', authenticate, asyncMiddleware(async (req, res)=> {
-	// console.log('ASDFASDF ~>', req.user)
 	let r = await db.User.findAll()
 	res.json(r)
 }))
@@ -57,6 +56,24 @@ app.get('/api/users/:id', asyncMiddleware(async (req, res)=> {
 	let r = await db.User.findAll({where: {id: req.params.id}})
 	res.json(r)
 }))
+
+app.post('/api/blogs/create', (req, res)=> {
+	console.log(req.body)
+	db.Blog.create({
+		title: req.body.title,
+		body: req.body.body,
+		description: req.body.description,
+		uri: req.body.uri,
+		category: req.body.category,
+		headerImg: req.body.headerImg,
+		userId: req.body.userId,
+	}).then(()=> {
+		res.redirect({'success':'yay it worked'})
+	}).catch(err=> {
+		console.log(err)
+		res.json(err)
+	})
+})
 
 app.post('/api/signup', (req, res)=> {
 	console.log(req.body)

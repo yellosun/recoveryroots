@@ -1,5 +1,4 @@
-'use strict'
-
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Blog = sequelize.define('Blog', {
     title: DataTypes.STRING,
@@ -8,12 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     uri: DataTypes.STRING,
     category: DataTypes.STRING,
     headerImg: DataTypes.STRING,
+    render: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER
-  }, {})
+  }, {});
   Blog.associate = function(models) {
-    Blog.belongsTo(models.User, {
-      foreignKey: 'userId'
-    })
-  }
-  return Blog
-}
+    // associations can be defined here
+  };
+  return Blog;
+};

@@ -27,7 +27,7 @@ class CreateBlog extends Component<Props, State> {
 		const {classes} = this.props
 		return (
 			<Fragment>
-				<BlogForm handleChange={this.handleChange}/>
+				<BlogForm handleChange={this.handleChange} textarea={this.state.textarea}/>
 				<ReactMarkdown 
 					className={classes.markdownDisplay} 
 					source={this.state.textarea}

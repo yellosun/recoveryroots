@@ -66,6 +66,7 @@ app.post('/api/blogs/create', (req, res)=> {
 		uri: req.body.uri,
 		category: req.body.category,
 		headerImg: req.body.headerImg,
+		render: req.body.render,
 		userId: req.body.userId,
 	}).then(()=> {
 		res.redirect({'success':'yay it worked'})
@@ -74,6 +75,11 @@ app.post('/api/blogs/create', (req, res)=> {
 		res.json(err)
 	})
 })
+
+app.delete('/api/blogs/delete/:id', ()=> {
+
+})
+
 
 app.post('/api/signup', (req, res)=> {
 	console.log(req.body)

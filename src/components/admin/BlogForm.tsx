@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, MenuItem } from '@material-ui/core'
 
 interface Props {
 	classes: any, 
@@ -39,6 +39,7 @@ const categories = ['mental', 'emotional', 'physical', 'spiritual']
 class BlogForm extends Component<Props, State> {
 	render() {
 		const {classes, handleChange, title, headerImg, description, category, uri, textarea, handleSave, handlePost} = this.props
+
 		return (
 			<form className={classes.form}>
 				<TextField
@@ -86,7 +87,7 @@ class BlogForm extends Component<Props, State> {
 					label='Category'
 					value={category}>
 					{categories.map(c=> (
-						<option key={c} value={c}>{c}</option>
+						<MenuItem key={c} value={c}>{c}</MenuItem>
 					))}
 				</TextField>
 				<div className={classes.submitBtns}>

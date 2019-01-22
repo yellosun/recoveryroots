@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react'
+import {connect} from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import BlogForm from './BlogForm'
-import { login } from '../../fetch'
+import history from '../../history'
+import { createBlog } from '../../fetch'
 
-interface Props {classes:any}
+interface Props {classes:any, userId:number}
 interface State {}
 
 const styles = createStyles({
@@ -31,12 +33,11 @@ class CreateBlog extends Component<Props, State> {
 	}
 
  	handleSave = async (event:any) => {
+ 		const {title,textarea, headerImg, uri, category, description} = this.state
  		event.preventDefault()
  		try {
-			
-			})
-	        history.push('/admin')
-
+			const user = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
+	        history.push('/admin/blogs')
 		} catch (err) {
 			console.log('save error ~>', err.toString())
 		}
@@ -44,7 +45,14 @@ class CreateBlog extends Component<Props, State> {
 
 	handlePost = async (event:any) => {
 		event.preventDefault()
-			
+		const {title,textarea, headerImg, uri, category, description} = this.state
+ 		event.preventDefault()
+ 		try {
+			const user = await createBlog(title, textarea, headerImg, uri, category, description, true, this.props.userId)
+	        history.push('/admin/blogs')
+		} catch (err) {
+			console.log('save error ~>', err.toString())
+		}
 	}
 
 	render() {
@@ -71,4 +79,5 @@ class CreateBlog extends Component<Props, State> {
 	}
 }
 
-export default withStyles(styles)(CreateBlog)
+const mapStateToProps = (state:any) => ({ userId: state.user.user.id })
+export default connect(mapStateToProps)(withStyles(styles)(CreateBlog))

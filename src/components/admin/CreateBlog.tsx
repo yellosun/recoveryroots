@@ -33,8 +33,7 @@ class CreateBlog extends Component<Props, State> {
  	handleSave = async (event:any) => {
  		event.preventDefault()
  		try {
-			let r = await fetch('/api/blogs/create', {
-				head
+			
 			})
 	        history.push('/admin')
 
@@ -45,13 +44,7 @@ class CreateBlog extends Component<Props, State> {
 
 	handlePost = async (event:any) => {
 		event.preventDefault()
-		try {
 			
-	        history.push('/admin')
-
-		} catch (err) {
-			console.log('post error ~>', err.toString())
-		}		
 	}
 
 	render() {

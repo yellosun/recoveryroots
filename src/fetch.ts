@@ -1,3 +1,7 @@
+//----------->
+// JWT Routes
+//----------->
+
 let jwt: string|null = null
 
 export async function checkToken() {
@@ -25,6 +29,10 @@ export function setJWT(token: string|null) {
         window.localStorage.setItem('app-token', jwt)
     }
 }
+
+//----------->
+// User Routes
+//----------->
 
 export async function getUsers() {
 	let r = await fetch('/api/users', {
@@ -58,6 +66,23 @@ export async function login(email: string, password: string) {
     return data.user
 }
 
+//----------->
+// Blog Routes
+//----------->
+
+export async function createBlog(title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean, userId:integer) {
+    let r = await fetch('/api/users', {
+        method: 'GET',
+        headers: getHeaders(),
+    })
+
+    let resp = await r.json()
+    return resp
+}
+
+//----------->
+// MISC Routes
+//----------->
 
 function getHeaders(): any {
     const token = localStorage.getItem('app-token')

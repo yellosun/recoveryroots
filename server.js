@@ -81,16 +81,20 @@ app.get('/api/users/:id', authenticate, asyncMiddleware(async (req, res)=> {
 //----------->
 
 app.get('/api/blogs', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log(req.body)
 	let r = await db.Blog.findAll()
 	res.json(r)
 }))
 
 app.get('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log('\n\n/api/blogs/:id START\n\n')
 	let r = await db.Blog.findAll({where: {id: req.params.id}})
+	console.log('\n\n/api/blogs/:id END\n\n')
 	res.json(r)
 }))
 
 app.get('/api/blogs/user/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log(req.body)
 	let r = await db.Blog.findAll({where: {userId: req.params.id}})
 	res.json(r)
 }))
@@ -107,10 +111,10 @@ app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
 		render: req.body.render,
 		userId: req.body.userId,
 	}).then(()=> {
-		res.redirect({'success':'yay it worked'})
+		res.status(200).json({'success':'yay it worked'})
 	}).catch(err=> {
 		console.log(err)
-		res.json(err)
+		res.status(500).json(err)
 	})
 }))
 

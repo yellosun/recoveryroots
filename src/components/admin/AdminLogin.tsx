@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { setUser } from '../../actions/userAction'
 import history from '../../history'
 import { login } from '../../fetch'
-
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'

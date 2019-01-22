@@ -9,6 +9,7 @@ interface blog {
 	uri:string,
 	category:string,
 	render:boolean,
+	createdAt:Date
 }
 
 export function setBlog(blog:blog) {

@@ -24,6 +24,7 @@ export function blogReducer(state:any = initialState, action:action) {
                     category: blog.category,
                     headerImg: blog.headerImg,
                     render: blog.render,
+                    createdAt: blog.createdAt
                 }
             ]
         }

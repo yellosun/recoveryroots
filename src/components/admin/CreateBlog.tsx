@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
+import { setBlog } from '../../actions/blogAction'
 import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import BlogForm from './BlogForm'
 import history from '../../history'
-import { createBlog } from '../../fetch'
+import { createBlog, getBlogs } from '../../fetch'
 
-interface Props {classes:any, userId:number}
+interface Props {classes:any, userId:number, setBlog:any}
 interface State {}
 
 const styles = createStyles({
@@ -28,28 +29,35 @@ class CreateBlog extends Component<Props, State> {
 	}
 	
 	handleChange = (input:any) => (event:any) => {
-		console.log(event.target.value)
 		this.setState({[input]: event.target.value})
 	}
 
  	handleSave = async (event:any) => {
- 		const {title,textarea, headerImg, uri, category, description} = this.state
  		event.preventDefault()
+ 		const { title, textarea, headerImg, uri, category, description } = this.state
  		try {
-			const user = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
+ 			console.log(typeof this.props.userId)
+			const blog = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
+			console.log(blog)
+	        // const blogs = await getBlogs(blog.id)
+	        // console.log(blogs)
+	        // if (blogs) blogs.forEach((blog:any)=> this.props.setBlog(blog))
 	        history.push('/admin/blogs')
+
 		} catch (err) {
 			console.log('save error ~>', err.toString())
 		}
 	}
 
 	handlePost = async (event:any) => {
-		event.preventDefault()
-		const {title,textarea, headerImg, uri, category, description} = this.state
  		event.preventDefault()
+		const { title,textarea, headerImg, uri, category, description } = this.state
  		try {
-			const user = await createBlog(title, textarea, headerImg, uri, category, description, true, this.props.userId)
+			const blog = await createBlog(title, textarea, headerImg, uri, category, description, true, this.props.userId)
+	        console.log(blog)
+	        
 	        history.push('/admin/blogs')
+
 		} catch (err) {
 			console.log('save error ~>', err.toString())
 		}
@@ -80,4 +88,5 @@ class CreateBlog extends Component<Props, State> {
 }
 
 const mapStateToProps = (state:any) => ({ userId: state.user.user.id })
-export default connect(mapStateToProps)(withStyles(styles)(CreateBlog))
+const mapDispatchToProps = {setBlog}
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateBlog))

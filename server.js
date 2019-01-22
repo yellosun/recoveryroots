@@ -25,12 +25,11 @@ db.sequelize.sync()
 	})
 })
 
-
 const asyncMiddleware = fn => (req, res, next) => { Promise.resolve(fn(req, res, next)).catch(next) }
 
 
 //----------->
-// API Routes
+// User Routes
 //----------->
 
 app.get('/api', (req, res)=> {
@@ -41,45 +40,6 @@ app.get('/api/users', authenticate, asyncMiddleware(async (req, res)=> {
 	let r = await db.User.findAll()
 	res.json(r)
 }))
-
-app.get('/api/blogs', asyncMiddleware(async (req, res)=> {
-	let r = await db.Blog.findAll()
-	res.json(r)
-}))
-
-app.get('/api/blogs/:id', asyncMiddleware(async (req, res)=> {
-	let r = await db.Blog.findAll({where: {id: req.params.id}})
-	res.json(r)
-}))
-
-app.get('/api/users/:id', asyncMiddleware(async (req, res)=> {
-	let r = await db.User.findAll({where: {id: req.params.id}})
-	res.json(r)
-}))
-
-app.post('/api/blogs/create', (req, res)=> {
-	console.log(req.body)
-	db.Blog.create({
-		title: req.body.title,
-		body: req.body.body,
-		description: req.body.description,
-		uri: req.body.uri,
-		category: req.body.category,
-		headerImg: req.body.headerImg,
-		render: req.body.render,
-		userId: req.body.userId,
-	}).then(()=> {
-		res.redirect({'success':'yay it worked'})
-	}).catch(err=> {
-		console.log(err)
-		res.json(err)
-	})
-})
-
-app.delete('/api/blogs/delete/:id', ()=> {
-
-})
-
 
 app.post('/api/signup', (req, res)=> {
 	console.log(req.body)
@@ -110,6 +70,55 @@ app.post("/api/login", asyncMiddleware(async function(req, res, next) {
     return res.status(200).json({ token, user })
 }))
 
+app.get('/api/users/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	let r = await db.User.findAll({where: {id: req.params.id}})
+	res.json(r)
+}))
+
+
+//----------->
+// Blog Routes
+//----------->
+
+app.get('/api/blogs', authenticate, asyncMiddleware(async (req, res)=> {
+	let r = await db.Blog.findAll()
+	res.json(r)
+}))
+
+app.get('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	let r = await db.Blog.findAll({where: {id: req.params.id}})
+	res.json(r)
+}))
+
+app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log(req.body)
+	db.Blog.create({
+		title: req.body.title,
+		body: req.body.body,
+		description: req.body.description,
+		uri: req.body.uri,
+		category: req.body.category,
+		headerImg: req.body.headerImg,
+		render: req.body.render,
+		userId: req.body.userId,
+	}).then(()=> {
+		res.redirect({'success':'yay it worked'})
+	}).catch(err=> {
+		console.log(err)
+		res.json(err)
+	})
+}))
+
+
+//------------------->
+// Auth Routes + Funcs
+//------------------->
+
+app.get("/checktoken", authenticate, async (req, res) => {
+	res.json(req.user)
+})
+
+
 function passportAuthenticateAsync(strategy, req, res, next) {
     return new Promise((resolve, reject) => {
         passport.authenticate(strategy, {session: false}, (err, user, info) => {
@@ -130,11 +139,6 @@ function reqLoginAsync(req, user) {
     })
 }
 
-app.get("/checktoken", authenticate, async (req, res) => {
-	res.json(req.user)
-})
-
-
 // error handler
 app.use((err, req, res, next) => {
     if (process.env.NODE_ENV === 'development') {
@@ -147,4 +151,3 @@ app.use((err, req, res, next) => {
         res.status(500).json({ error: `Unhandled error: ${err.toString()}` })
     }
 })
-

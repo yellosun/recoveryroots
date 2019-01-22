@@ -14,7 +14,6 @@ interface State {}
 class App extends Component<Props, State> {	
 	
 	render() {
-		console.log(this.props.email)
 		return (
 			<Router history={history}>
 				<div style={{fontFamily: 'Roboto'}}>

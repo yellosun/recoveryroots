@@ -7,6 +7,7 @@ import whiteLogo from '../../styles/images/inverse-transparent-logo.png'
 import AdminPortal from './AdminPortal'
 import CreateBlog from './CreateBlog'
 import AdminLogin from './AdminLogin'
+import ViewBlogs from './ViewBlogs'
 
 interface Props {classes: any}
 interface State {route:string}
@@ -54,7 +55,7 @@ class Sidebar extends Component<Props, State> {
 		let route = this.state.route.split(' ')[0].toLowerCase()
 		switch (route) {
 			case 'view':
-				return <Route path='/admin/blogs' component={AdminPortal} />
+				return <Route path='/admin/blogs' component={ViewBlogs} />
 			case 'create' :
 				return <Route path='/admin/create' component={CreateBlog} />
 			default:

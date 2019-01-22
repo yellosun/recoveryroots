@@ -8,7 +8,7 @@ import { createStore } from 'redux'
 import rootReducer from './reducers/rootReducer'
 import { setUser } from './actions/userAction'
 import { setBlog } from './actions/blogAction'
-import { getUsers, checkToken } from './fetch'
+import { getUsers, checkToken, getBlogs } from './fetch'
 
 const store = createStore(
 	rootReducer,
@@ -24,9 +24,11 @@ checkToken()
 		return user
 	}
 })
-.then(user=> {
-
-	history.push('/admin')
+.then(user=> getBlogs(user.id))
+.then(r=> {
+	if (r) {
+		r.forEach((blog:any)=> store.dispatch(setBlog(blog)))
+	}
 })
 
 ReactDOM.render(

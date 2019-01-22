@@ -6,7 +6,6 @@ let jwt: string|null = null
 
 export async function checkToken() {
     const token = localStorage.getItem('app-token')
-    console.log(token)
     try {
         const r = await fetch('/checktoken', {
             method: 'GET',
@@ -61,7 +60,6 @@ export async function login(email: string, password: string) {
     }
 
     let data = await r.json()
-    
     setJWT(data.token)
     return data.user
 }

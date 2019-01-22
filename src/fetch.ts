@@ -71,9 +71,18 @@ export async function login(email: string, password: string) {
 //----------->
 
 export async function createBlog(title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean, userId:integer) {
-    let r = await fetch('/api/users', {
+    let r = await fetch('/api/blogs/create', {
         method: 'GET',
         headers: getHeaders(),
+        body: JSON.stringify{
+            title: title,
+            body: body,
+            description: description,
+            render: render,
+            headerImg: headerImg,
+            uri: uri,
+            userId: userId
+        }
     })
 
     let resp = await r.json()

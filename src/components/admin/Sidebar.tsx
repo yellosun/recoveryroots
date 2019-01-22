@@ -9,10 +9,18 @@ import CreateBlog from './CreateBlog'
 import AdminLogin from './AdminLogin'
 
 interface Props {classes: any}
-interface State {title:string}
+interface State {route:string}
 
 const styles = createStyles({
+	contentContainer: {
+		display: 'flex',
+		flexFlow: 'row wrap',
+		justifyContent: 'center',
+		marginLeft: 73,
+		width: '100%',
+	},
 	drawer: {
+		marginRight: 73,
 		backgroundColor: 'rgba(0,0,0,.85)'
 	},
 	icon: {
@@ -26,18 +34,31 @@ const styles = createStyles({
 class Sidebar extends Component<Props, State> {
 
 	state = {
-		title: 'home'
+		route: 'home',
 	}
 
-	handleClick = (title:string) => (event:any) => {
-		let route = title.split(' ').join('')
+	handleClick = (route:string) => (event:any) => this.setState({route})
+
+	route = (link:string) => {
+		switch (link) {
+			case 'create':
+				return '/create'
+			case 'view':
+				return '/blogs'
+			default:
+				return ''
+		}
+	}
+
+	renderRoute = () => {
+		let route = this.state.route.split(' ')[0].toLowerCase()
 		switch (route) {
-			case "ViewBlogs":
-				return <Route path='/admin/blogs' component={CreateBlog} />
-			case "CreateBlog" :
+			case 'view':
+				return <Route path='/admin/blogs' component={AdminPortal} />
+			case 'create' :
 				return <Route path='/admin/create' component={CreateBlog} />
-		default:
-			return <Route path='/admin' component={AdminPortal} />
+			default:
+				return <Route path='/admin' component={AdminPortal} />
 		}		
 	}
 
@@ -49,37 +70,27 @@ class Sidebar extends Component<Props, State> {
 			'View Blogs':<LibraryBooks className={classes.icon}/>,
 		}
 		return (		
-			<Drawer variant='permanent' classes={{paper:classes.drawer}}>
-				<List>
-					{ Object.keys(navicons).map((title)=> {
-						let link = title.split(' ')[0].toLowerCase()
-						return (
-								<F>
-								{title === 'Home' ?
-									<Link to='/admin'>
-										<ListItem style={{justifyContent: 'center'}} onClick={this.handleClick(title)}>
-											<Tooltip title={title} placement="right">
-												{navicons[title]}
-								            </Tooltip>
-										</ListItem>
-									</Link>
-								:
-									<Link to={`/admin/${link}`}>
-										<ListItem style={{justifyContent: 'center'}} onClick={this.handleClick(title)}>
-											<Tooltip title={title} placement="right">
-												{navicons[title]}
-								            </Tooltip>
-										</ListItem>
-									</Link>
-								}
-								</F>
+			<div>
+				<Drawer variant='permanent' classes={{paper:classes.drawer}}>
+					<List>
+						{Object.keys(navicons).map((title)=> {
+							let link = title.split(' ')[0].toLowerCase()
+							return (
+								<Link to={`/admin${this.route(link)}`}>
+									<ListItem style={{justifyContent: 'center'}} onClick={this.handleClick(title)}>
+										<Tooltip title={title} placement="right">
+											{navicons[title]}
+							            </Tooltip>
+									</ListItem>
+								</Link>
 							)
-					})
-					
-					}
-					
-				</List>
-			</Drawer>
+						})}
+					</List>
+				</Drawer>
+				<div className={classes.contentContainer}>
+					{this.state.route ? this.renderRoute() : null}
+				</div>
+			</div>
 		)
 	}
 }

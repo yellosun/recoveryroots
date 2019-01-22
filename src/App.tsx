@@ -21,13 +21,11 @@ class App extends Component<Props, State> {
 					{this.props.email ? 
 						<F>
 							<Sidebar/>
-							<Route path='/admin' component={AdminPortal} />
+							<Redirect to='/admin'/>
 						</F>
 					:	
 						<Route path='/admin/login' component={AdminLogin} />
 					}
-					<Route path='/admin/create' component={CreateBlog} />
-					
 				</div>
 			</Router>
 		)

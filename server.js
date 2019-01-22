@@ -112,16 +112,6 @@ app.get("/checktoken", authenticate, async (req, res) => {
 })
 
 
-//----------->
-// HTML Routes
-//----------->
-
-// app.get('/', (req,res)=> {
-// 	res.sendFile(path.join(__dirname + '/rr2/public/index.html'))
-// })
-
-
-
 // error handler
 app.use((err, req, res, next) => {
     if (process.env.NODE_ENV === 'development') {

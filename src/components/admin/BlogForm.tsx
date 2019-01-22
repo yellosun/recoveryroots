@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { TextField } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 
-interface Props {classes: any, handleChange:any, textarea:string}
+interface Props {
+	classes: any, 
+	handleChange:any,
+	handleSave:any,
+	handlePost:any, 
+	textarea:string,
+	title:string,
+	uri:string,
+	category:string,
+	description:string,
+	headerImg:string,
+}
+
 interface State {}
 
 const styles = createStyles({
@@ -13,41 +25,84 @@ const styles = createStyles({
 		flexFlow: 'column wrap'
 	},
 	textField: {
-		margin: '20px 0',
+		margin: ' 0 0 20px',
+	},
+	submitBtns: {
+		display: 'flex',
+		justifyContent: 'space-around',
+		margin: '20px 0'
 	}
 })
 
 const categories = ['mental', 'emotional', 'physical', 'spiritual']
 
 class BlogForm extends Component<Props, State> {
-	
-	state = {
-		title: '# Text displays here',
-		uri: 'sample: my-blog-name',
-		headerImg: 'input any image url here',
-		category: 'meps',
-		description: ''
-	}
-	
-	handleChange = (input:any) => (event:any) => {
-		this.setState({[input]: event.target.value})
-	}
-
 	render() {
-		const {classes, handleChange} = this.props
+		const {classes, handleChange, title, headerImg, description, category, uri, textarea, handleSave, handlePost} = this.props
 		return (
 			<form className={classes.form}>
-				<TextField className={classes.textField}label='Title' value={this.state.title}></TextField>
+				<TextField
+					required 
+					onChange={handleChange('title')}
+					className={classes.textField}
+					label='Title' 
+					value={title}
+				/>
 				<textarea 
+					className={classes.textField}
+					onChange={handleChange('textarea')}
 					rows={30} 
 					placeholder='# Write blog here'
-					onChange={handleChange('textarea')}	
 					style={{width: '100%'}}>
 				</textarea>
-				<TextField className={classes.textField}label='Description' value={this.state.description}></TextField>
-				<TextField className={classes.textField}label='URL Slug' value={this.state.uri}></TextField>
-				<TextField className={classes.textField}label='Main Image' value={this.state.headerImg}></TextField>
-				<TextField className={classes.textField}label='Category' value={this.state.category}></TextField>
+				<TextField
+					required 
+					className={classes.textField}
+					onChange={handleChange('description')}
+					label='Description' 
+					value={description}
+				/>
+				<TextField
+					required 
+					className={classes.textField}
+					onChange={handleChange('uri')}
+					helperText='example: my-blog-name'
+					label='URL Slug'
+					value={uri}
+				/>
+				<TextField
+					required 
+					className={classes.textField}
+					onChange={handleChange('headerImg')}
+					helperText='example: http://tny.im/hhZ'
+					label='Main Image'
+					value={headerImg}
+				/>
+				<TextField
+					required
+					select
+					className={classes.textField}
+					onChange={handleChange('category')}
+					label='Category'
+					value={category}>
+					{categories.map(c=> (
+						<option key={c} value={c}>{c}</option>
+					))}
+				</TextField>
+				<div className={classes.submitBtns}>
+					<Button 
+						variant='contained'
+						onClick={handleSave} 
+						type='submit'>
+						Save
+					</Button>
+					<Button 
+						variant='outlined'
+						onClick={handlePost} 
+						type='submit'>
+						Post
+					</Button>
+				</div>
 			</form>
 		)
 	}

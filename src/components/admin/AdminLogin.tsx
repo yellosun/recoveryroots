@@ -29,17 +29,12 @@ class Login extends Component<Props, State> {
 		errorMsg: ''
 	}
 
-	componentDidMount() {
-		if (this.props.email) return history.push('/admin')
-	}
-
 	handleChange = (name:string) => (event:React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ [name]: event.target.value })
 	}
 
 	handleSubmit = async (event:any) => {
 		event.preventDefault()
-		
 		try {
 			const user = await login(this.state.email, this.state.password)
 	        this.props.setUser(user)

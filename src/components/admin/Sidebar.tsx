@@ -76,7 +76,7 @@ class Sidebar extends Component<Props, State> {
 						{Object.keys(navicons).map((title)=> {
 							let link = title.split(' ')[0].toLowerCase()
 							return (
-								<Link to={`/admin${this.route(link)}`}>
+								<Link key={title} to={`/admin${this.route(link)}`}>
 									<ListItem style={{justifyContent: 'center'}} onClick={this.handleClick(title)}>
 										<Tooltip title={title} placement="right">
 											{navicons[title]}

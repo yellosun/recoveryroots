@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './reducers/rootReducer'
 import { setUser } from './actions/userAction'
+import { setBlog } from './actions/blogAction'
 import { getUsers, checkToken } from './fetch'
 
 const store = createStore(
@@ -20,8 +21,12 @@ checkToken()
 .then(user => {	
 	if (user) {
 		store.dispatch(setUser(user))
-		history.push('/admin')
+		return user
 	}
+})
+.then(user=> {
+
+	history.push('/admin')
 })
 
 ReactDOM.render(

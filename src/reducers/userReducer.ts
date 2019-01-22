@@ -1,17 +1,16 @@
 import { SET_USER } from '../actions/userAction'
 
-interface action {type:string, payload:any}
+interface action {type:string, payload?:any}
 
 const initialState = {
     user: {
         firstName: null,
         lastName: null,
         email: null,
-    },
-    blogs: []
+    }
 }
 
-export function userReducer(state = initialState, action:action) {
+export function userReducer(state:any = initialState, action:action) {
     switch (action.type) {
 
     case SET_USER:

@@ -70,12 +70,12 @@ export async function login(email: string, password: string) {
 // Blog Routes
 //----------->
 
-export async function getBlogs() {
-    let r = await fetch('/api/blogs', {
+export async function getBlogs(id:number) {
+    let r = await fetch(`/api/blogs/user/${id}`, {
         method: 'GET',
         headers: getHeaders(),
     })
-
+    
     let resp = await r.json()
     return resp
 }

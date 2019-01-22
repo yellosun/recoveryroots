@@ -90,6 +90,11 @@ app.get('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
 	res.json(r)
 }))
 
+app.get('/api/blogs/user/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	let r = await db.Blog.findAll({where: {userId: req.params.id}})
+	res.json(r)
+}))
+
 app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
 	console.log(req.body)
 	db.Blog.create({

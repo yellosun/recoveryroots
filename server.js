@@ -110,8 +110,8 @@ app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
 		headerImg: req.body.headerImg,
 		render: req.body.render,
 		userId: req.body.userId,
-	}).then(()=> {
-		res.status(200).json({'success':'yay it worked'})
+	}).then(blog=> {
+		res.status(200).json(blog)
 	}).catch(err=> {
 		console.log(err)
 		res.status(500).json(err)

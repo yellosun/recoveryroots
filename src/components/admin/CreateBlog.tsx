@@ -37,11 +37,9 @@ class CreateBlog extends Component<Props, State> {
  		const { title, textarea, headerImg, uri, category, description } = this.state
  		try {
  			console.log(typeof this.props.userId)
-			const blog = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
-			console.log(blog)
-	        // const blogs = await getBlogs(blog.id)
-	        // console.log(blogs)
-	        // if (blogs) blogs.forEach((blog:any)=> this.props.setBlog(blog))
+			const create = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
+	        const blog = await getBlogs(create.id)
+	        if (blog) setBlog(create)
 	        history.push('/admin/blogs')
 
 		} catch (err) {

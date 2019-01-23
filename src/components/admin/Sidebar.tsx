@@ -1,16 +1,17 @@
-import React, { Component, Fragment as F } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { InsertComment, LibraryBooks } from '@material-ui/icons'
+import { InsertComment, LibraryBooks, Close } from '@material-ui/icons'
 import whiteLogo from '../../styles/images/inverse-transparent-logo.png'
 import AdminPortal from './AdminPortal'
 import CreateBlog from './CreateBlog'
-import AdminLogin from './AdminLogin'
 import ViewBlogs from './ViewBlogs'
+import AdminLogin from './AdminLogin'
+import Logout from './AdminLogout'
 
-interface Props {classes: any}
-interface State {route:string}
+interface Props {classes: any, history:any}
+interface State {}
 
 const styles = createStyles({
 	contentContainer: {
@@ -34,33 +35,17 @@ const styles = createStyles({
 
 class Sidebar extends Component<Props, State> {
 
-	state = {
-		route: 'home',
-	}
-
-	handleClick = (route:string) => (event:any) => this.setState({route})
-
 	route = (link:string) => {
 		switch (link) {
 			case 'create':
-				return '/create'
+				return 'create'
 			case 'view':
-				return '/blogs'
+				return 'blogs'
+			case 'logout':
+				return 'logout'
 			default:
 				return ''
 		}
-	}
-
-	renderRoute = () => {
-		let route = this.state.route.split(' ')[0].toLowerCase()
-		switch (route) {
-			case 'view':
-				return <Route path='/admin/blogs' component={ViewBlogs} />
-			case 'create' :
-				return <Route path='/admin/create' component={CreateBlog} />
-			default:
-				return <Route path='/admin' component={AdminPortal} />
-		}		
 	}
 
 	render() {
@@ -69,6 +54,7 @@ class Sidebar extends Component<Props, State> {
 			'Home':<img src={whiteLogo} alt='rr-logo' className={classes.logo}/>,
 			'Create Blog':<InsertComment className={classes.icon}/>, 
 			'View Blogs':<LibraryBooks className={classes.icon}/>,
+			'Logout':<Close className={classes.icon}/>,
 		}
 		return (		
 			<div>
@@ -77,8 +63,8 @@ class Sidebar extends Component<Props, State> {
 						{Object.keys(navicons).map((title)=> {
 							let link = title.split(' ')[0].toLowerCase()
 							return (
-								<Link key={title} to={`/admin${this.route(link)}`}>
-									<ListItem style={{justifyContent: 'center'}} onClick={this.handleClick(title)}>
+								<Link key={title} to={`/admin/${this.route(link)}`}>
+									<ListItem style={{justifyContent: 'center'}}>
 										<Tooltip title={title} placement="right">
 											{navicons[title]}
 							            </Tooltip>
@@ -89,7 +75,10 @@ class Sidebar extends Component<Props, State> {
 					</List>
 				</Drawer>
 				<div className={classes.contentContainer}>
-					{this.state.route ? this.renderRoute() : null}
+					<Route path='/admin' exact component={AdminPortal} />
+					<Route path='/admin/blogs' component={ViewBlogs} />
+					<Route path='/admin/create' component={CreateBlog} />
+					<Route path='/admin/logout' exact component={Logout} />
 				</div>
 			</div>
 		)
@@ -97,3 +86,4 @@ class Sidebar extends Component<Props, State> {
 }
 
 export default withStyles(styles)(Sidebar)
+

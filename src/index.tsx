@@ -23,8 +23,10 @@ checkToken()
 		store.dispatch(setUser(user))
 		return user
 	}
+	throw new Error('no user')
 })
 .then(user=> getBlogs(user.id))
+.catch(err=> console.log(err))
 .then(r=> {
 	if (r) {
 		r.forEach((blog:any)=> store.dispatch(setBlog(blog)))

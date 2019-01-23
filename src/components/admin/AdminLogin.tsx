@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { setUser } from '../../actions/userAction'
 import history from '../../history'
 import { login } from '../../fetch'
@@ -45,6 +46,7 @@ class Login extends Component<Props, State> {
 	}
 
 	render() {
+		if (this.props.email) return <Redirect to='/admin'/>
 		const {classes} = this.props
 		return (
 			<div className={classes.container} style={{height: '100vh'}}>
@@ -85,7 +87,7 @@ class Login extends Component<Props, State> {
 	}
 }
 
-const mapStateToProps = (state:any) => ({ email: state.user.email })
+const mapStateToProps = (state:any) => ({ email: state.user.user.email })
 const mapDispatchToProps = {setUser}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))

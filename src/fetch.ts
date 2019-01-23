@@ -69,12 +69,10 @@ export async function login(email: string, password: string) {
 //----------->
 
 export async function getBlogs(id:number) {
-    console.log('getBlogs START')
     let r = await fetch(`/api/blogs/user/${id}`, {
         method: 'GET',
         headers: getHeaders(),
     })
-    console.log('getBlogs END')
     let resp = await r.json()
     return resp
 }

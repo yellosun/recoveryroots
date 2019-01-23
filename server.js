@@ -48,8 +48,8 @@ app.post('/api/signup', (req, res)=> {
 		lastName: req.body.lastName,
 		email: req.body.email,
 		password: req.body.password,
-	}).then(()=> {
-		res.redirect('/')
+	}).then(user=> {
+		res.status(200).json(user)
 	}).catch(err=> {
 		console.log(err)
 		res.json(err)
@@ -58,11 +58,8 @@ app.post('/api/signup', (req, res)=> {
 
 app.post("/api/login", asyncMiddleware(async function(req, res, next) {
 	console.log(req.body)
-	
 	const { user, info } = await passportAuthenticateAsync('local', req, res, next)
-	
 	if (!user) {
-		console.log('ERROR~>')
         throw new HTTPError(403, 'Username or password is invalid')
 	} 
 

@@ -77,6 +77,15 @@ export async function getBlogs(id:number) {
     return resp
 }
 
+export async function deleteBlog(id:number) {
+    let r = await fetch(`/api/blogs/delete/${id}`, {
+        method: 'DELETE',
+        headers: getHeaders(),
+    })
+    let resp = await r.json()
+    return resp
+}
+
 export async function createBlog(title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean, userId:number) {
     console.log('createBlog START')
     let r = await fetch('/api/blogs/create', {

@@ -115,6 +115,16 @@ app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
 	})
 }))
 
+app.delete('/api/blogs/delete/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log(req.body)
+	db.Blog.destroy({where: {id: req.params.id}})
+	.then(()=> {
+		res.status(200).json({'message': 'your blog has been deleted successfully'})
+	}).catch(err=> {
+		console.log(err)
+		res.status(500).json(err)
+	})
+}))
 
 //------------------->
 // Auth Routes + Funcs

@@ -46,38 +46,40 @@ const styles = createStyles({
 class ViewBlogs extends Component<Props, State> {
 	render() {
 		const {classes, blogs} = this.props
-		return (
-			<div className={classes.blogContainer}>
-				{(blogs || []).map((b:blogs)=> (  
-					<Card key={b.id} className={classes.card}>
-						<CardMedia
-							className={classes.blogImg}
-							image={`${b.headerImg}`}
-							title={b.title}
-						/>
-						<CardContent>
-							<Typography variant='h5' style={{justifyContent: 'space-between'}}>
-									{b.title}
-									<Tooltip title='Edit Blog' placement='right'>
-										<IconButton style={{marginLeft: 10}}>
-											<EditIcon/>
-										</IconButton>
-									</Tooltip>
-							</Typography>
-							<div className={classes.desc}>
-								{b.description}
-							</div>
-							<div style={{fontSize: '.8em', fontWeight: 'bold'}}>
-								Posted? {b.render.toString()}
-							</div>
-							<div style={{fontSize: '.8em'}}>
-								Created: {moment(b.createdAt).format("MMM Do YYYY")}
-							</div>
-						</CardContent>
-					</Card>
-				))}
-			</div>
-		)
+		if (blogs) {
+			return (
+				<div className={classes.blogContainer}>
+					{(blogs || []).map((b:blogs)=> (  
+						<Card key={b.id} className={classes.card}>
+							<CardMedia
+								className={classes.blogImg}
+								image={`${b.headerImg}`}
+								title={b.title}
+							/>
+							<CardContent>
+								<Typography variant='h5' style={{justifyContent: 'space-between'}}>
+										{b.title}
+										<Tooltip title='Edit Blog' placement='right'>
+											<IconButton style={{marginLeft: 10}}>
+												<EditIcon/>
+											</IconButton>
+										</Tooltip>
+								</Typography>
+								<div className={classes.desc}>
+									{b.description}
+								</div>
+								<div style={{fontSize: '.8em', fontWeight: 'bold'}}>
+									Posted? {b.render.toString()}
+								</div>
+								<div style={{fontSize: '.8em'}}>
+									Created: {moment(b.createdAt).format("MMM Do YYYY")}
+								</div>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			)
+		}
 	}
 }
 

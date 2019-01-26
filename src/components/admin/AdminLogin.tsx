@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { setUser } from '../../actions/userAction'
+import { setBlog } from '../../actions/blogAction'
 import history from '../../history'
-import { login } from '../../fetch'
+import { login, getBlogs } from '../../fetch'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 
-interface Props {classes: any, setToken:any, setUser:any, email:string}
+interface Props {classes: any, setToken:any, setUser:any, setBlog:any, email:string}
 interface State {email?:string, password?:string, errorMsg?:string}
 
 const styles = createStyles({
@@ -37,6 +38,9 @@ class Login extends Component<Props, State> {
 		event.preventDefault()
 		try {
 			const user = await login(this.state.email, this.state.password)
+	        const blogs = await getBlogs(user.id)
+	        console.log(blogs)
+	        blogs.map((b:any)=> this.props.setBlog(b))
 	        this.props.setUser(user)
 	        history.push('/admin')
 
@@ -88,6 +92,6 @@ class Login extends Component<Props, State> {
 }
 
 const mapStateToProps = (state:any) => ({ email: state.user.user.email })
-const mapDispatchToProps = {setUser}
+const mapDispatchToProps = {setUser, setBlog}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))

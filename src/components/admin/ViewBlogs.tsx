@@ -42,8 +42,7 @@ class ViewBlogs extends Component<Props, State> {
 			deleteBlog(blogId)
 			let r = await getUserBlogs(userId)
 			console.log(r)
-			let blogs = await r.forEach((blog:any)=> setBlog(blog))
-			console.log(blogs)
+			r.forEach((b:any)=> setBlog(b))
 			this.forceUpdate()
 		} catch(err) {
 			console.log(err)

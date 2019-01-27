@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { deleteBlog, getUserBlogs } from '../../fetch'
-import { setBlog } from '../../actions/blogAction'
+import { destroyBlog, getUserBlogs } from '../../fetch'
+import { deleteBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
-interface Props {classes: any, blogs:any, userId:number}
+interface Props {classes: any, blogs:any, userId:number, deleteBlog:any}
 interface State {open:boolean, blogIdToDelete:number|null}
 interface blogs {
 	id:number,
@@ -39,13 +39,11 @@ class ViewBlogs extends Component<Props, State> {
 		let blogId = this.state.blogIdToDelete
 		let userId = this.props.userId
 		try {
-			deleteBlog(blogId)
-			let r = await getUserBlogs(userId)
-			console.log(r)
-			r.forEach((b:any)=> setBlog(b))
-			this.forceUpdate()
+			await destroyBlog(blogId)	
+			this.props.deleteBlog(blogId)
+			
 		} catch(err) {
-			console.log(err)
+			console.log(err.toString())
 		}
 		
 		this.setState({open: false, blogIdToDelete: null})
@@ -156,5 +154,5 @@ const mapStateToProps = (state:any) => ({
 	blogs: state.blog.blogs, 
 	userId: state.user.user.id
 })
-const mapDispatchToProps = {setBlog}
+const mapDispatchToProps = { deleteBlog }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ViewBlogs))

@@ -36,10 +36,8 @@ class CreateBlog extends Component<Props, State> {
  		event.preventDefault()
  		const { title, textarea, headerImg, uri, category, description } = this.state
  		try {
- 			console.log(typeof this.props.userId)
 			const create = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
-	        const blog = await getBlog(create.id)
-	        blog.forEach((b:any)=> setBlog(b))
+	        await this.props.setBlog(create)
 	        history.push('/admin/blogs')
 
 		} catch (err) {
@@ -52,8 +50,7 @@ class CreateBlog extends Component<Props, State> {
 		const { title,textarea, headerImg, uri, category, description } = this.state
  		try {
 			const blog = await createBlog(title, textarea, headerImg, uri, category, description, true, this.props.userId)
-	        console.log(blog)
-	        
+	        await setBlog(blog)
 	        history.push('/admin/blogs')
 
 		} catch (err) {
@@ -86,5 +83,5 @@ class CreateBlog extends Component<Props, State> {
 }
 
 const mapStateToProps = (state:any) => ({ userId: state.user.user.id })
-const mapDispatchToProps = {setBlog}
+const mapDispatchToProps = { setBlog }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateBlog))

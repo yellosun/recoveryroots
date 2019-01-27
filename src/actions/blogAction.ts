@@ -1,6 +1,7 @@
 export const SET_BLOG:string = 'SET_BLOG'
+export const DELETE_BLOG:string = 'DELETE_BLOG'
 
-interface blog {
+export interface blog {
 	id:number,
 	title:string, 
 	body:string, 
@@ -16,5 +17,12 @@ export function setBlog(blog:blog) {
     return {
         type: SET_BLOG,
         payload: { blog }
+    }
+}
+
+export function deleteBlog(id:number) {
+    return {
+        type: DELETE_BLOG,
+        payload: { id }
     }
 }

@@ -26,16 +26,15 @@ checkToken()
 })
 .then(user=> getUserBlogs(user.id))
 .catch(err=> console.log(err))
-.then(r=> {
-	if (r) {
-		r.forEach((blog:any)=> store.dispatch(setBlog(blog)))
+.then(blogs=> {
+	if (blogs) {
+		blogs.forEach((blog:any)=> store.dispatch(setBlog(blog)))
 	}
 })
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App 
-		/>
+		<App/>
 	</Provider>, 
 	document.getElementById('root')
 )

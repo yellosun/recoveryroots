@@ -5,7 +5,7 @@ import { setBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography'
-import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Popover, Button } from '@material-ui/core'
+import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, Button } from '@material-ui/core'
 
 interface Props {classes: any, blogs:any}
 interface State {open:boolean}
@@ -28,12 +28,13 @@ class ViewBlogs extends Component<Props, State> {
 		open: false
 	}
 
-	handlePopover = () => {
+	handleDialog = () => {
 		this.setState({open: !this.state.open})
 	}
 
 	handleDelete = () => {
 		console.log('DELETEDDDDD X/')
+		this.setState({open: !this.state.open})	
 	}
 
 	render() {
@@ -66,19 +67,17 @@ class ViewBlogs extends Component<Props, State> {
 										</IconButton>
 									</Tooltip>
 									<Tooltip title='Delete Blog' placement='right'>
-										<IconButton style={{marginLeft: 10}} onClick={this.handlePopover}>
+										<IconButton style={{marginLeft: 10}} onClick={this.handleDialog}>
 											<DeleteIcon/>
 										</IconButton>
 									</Tooltip>
-									<Popover open={this.state.open} 
-										anchorOrigin={{vertical: 'bottom', horizontal:'center'}}
-										transformOrigin={{vertical: 'top', horizontal:'center'}}>
-										Are you sure you want to delete?
-										<Button onClick={this.handleDelete}>Yes</Button>
-										<Button>No</Button>
-									</Popover>
 								</div>
 							</CardContent>
+							<Dialog open={this.state.open} >
+								<DialogTitle> Are you sure you want to delete?</DialogTitle>
+								<Button onClick={this.handleDelete}>Yes</Button>
+								<Button onClick={this.handleDialog}>No</Button>
+							</Dialog>
 						</Card>
 					))}
 				</div>

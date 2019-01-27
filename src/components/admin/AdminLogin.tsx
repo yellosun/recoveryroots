@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { setUser } from '../../actions/userAction'
 import { setBlog } from '../../actions/blogAction'
 import history from '../../history'
-import { login, getBlogs } from '../../fetch'
+import { login, getUserBlogs } from '../../fetch'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
@@ -38,7 +38,7 @@ class Login extends Component<Props, State> {
 		event.preventDefault()
 		try {
 			const user = await login(this.state.email, this.state.password)
-	        const blogs = await getBlogs(user.id)
+	        const blogs = await getUserBlogs(user.id)
 	        console.log(blogs)
 	        blogs.map((b:any)=> this.props.setBlog(b))
 	        this.props.setUser(user)

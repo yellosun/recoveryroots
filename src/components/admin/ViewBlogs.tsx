@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { deleteBlog } from '../../fetch'
+import { deleteBlog, getUserBlogs } from '../../fetch'
 import { setBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
-interface Props {classes: any, blogs:any}
-interface State {open:boolean, blogIDToDelete:number|null}
+interface Props {classes: any, blogs:any, userId:number}
+interface State {open:boolean, blogIdToDelete:number|null}
 interface blogs {
 	id:number,
 	title:string, 
@@ -27,18 +27,30 @@ class ViewBlogs extends Component<Props, State> {
 	
 	state = {
 		open: false,
-		blogIDToDelete: null,
+		blogIdToDelete: null,
 	}
 
-	handleDialog = (blogIDToDelete: number|null = null) => {
-		this.setState({open: !this.state.open, blogIDToDelete})
+	handleDialog = (blogIdToDelete: number|null = null) => {
+		this.setState({open: !this.state.open, blogIdToDelete})
 	}
 
 
-	handleDelete = () => {
-		console.log(`DELETEDDDDD ${this.state.blogIDToDelete} X/`)
-		deleteBlog(this.state.blogIDToDelete)
-		this.setState({open: false, blogIDToDelete: null})
+	handleDelete = async () => {
+		let blogId = this.state.blogIdToDelete
+		let userId = this.props.userId
+		try {
+			deleteBlog(blogId)
+			let r = await getUserBlogs(userId)
+			console.log(r)
+			let blogs = await r.forEach((blog:any)=> setBlog(blog))
+			console.log(blogs)
+			this.forceUpdate()
+		} catch(err) {
+			console.log(err)
+		}
+		
+		this.setState({open: false, blogIdToDelete: null})
+
 	}
 
 
@@ -141,6 +153,9 @@ const styles = createStyles({
 	},
 })
 
-const mapStateToProps = (state:any) => ({ blogs: state.blog.blogs })
+const mapStateToProps = (state:any) => ({ 
+	blogs: state.blog.blogs, 
+	userId: state.user.user.id
+})
 const mapDispatchToProps = {setBlog}
-export default connect(mapStateToProps)(withStyles(styles)(ViewBlogs))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ViewBlogs))

@@ -68,8 +68,17 @@ export async function login(email: string, password: string) {
 // Blog Routes
 //----------->
 
-export async function getBlogs(id:number) {
+export async function getUserBlogs(id:number) {
     let r = await fetch(`/api/blogs/user/${id}`, {
+        method: 'GET',
+        headers: getHeaders(),
+    })
+    let resp = await r.json()
+    return resp
+}
+
+export async function getBlog(id:number) {
+    let r = await fetch(`/api/blogs/${id}`, {
         method: 'GET',
         headers: getHeaders(),
     })
@@ -87,7 +96,6 @@ export async function deleteBlog(id:number|null) {
 }
 
 export async function createBlog(title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean, userId:number) {
-    console.log('createBlog START')
     let r = await fetch('/api/blogs/create', {
         method: 'POST',
         headers: getHeaders(),
@@ -102,7 +110,6 @@ export async function createBlog(title:string, body:string, headerImg:string, ur
             userId: userId
         })
     })
-    console.log('createBlog END')
 
     let resp = await r.json()
     return resp

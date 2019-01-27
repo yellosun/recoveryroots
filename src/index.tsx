@@ -8,7 +8,7 @@ import { createStore } from 'redux'
 import rootReducer from './reducers/rootReducer'
 import { setUser } from './actions/userAction'
 import { setBlog } from './actions/blogAction'
-import { getUsers, checkToken, getBlogs } from './fetch'
+import { getUsers, checkToken, getUserBlogs } from './fetch'
 
 const store = createStore(
 	rootReducer,
@@ -23,9 +23,8 @@ checkToken()
 		store.dispatch(setUser(user))
 		return user
 	}
-	throw new Error('no user')
 })
-.then(user=> getBlogs(user.id))
+.then(user=> getUserBlogs(user.id))
 .catch(err=> console.log(err))
 .then(r=> {
 	if (r) {

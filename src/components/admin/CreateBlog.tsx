@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import BlogForm from './BlogForm'
 import history from '../../history'
-import { createBlog, getBlogs } from '../../fetch'
+import { createBlog, getBlog } from '../../fetch'
 
 interface Props {classes:any, userId:number, setBlog:any}
 interface State {}
@@ -38,7 +38,8 @@ class CreateBlog extends Component<Props, State> {
  		try {
  			console.log(typeof this.props.userId)
 			const create = await createBlog(title, textarea, headerImg, uri, category, description, false, this.props.userId)
-	        const blog = await getBlogs(create.id)
+	        const blog = await getBlog(create.id)
+	        console.log(blog)
 	        if (blog) setBlog(create)
 	        history.push('/admin/blogs')
 

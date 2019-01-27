@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import EditBlog from './EditBlog'
 import { destroyBlog, getUserBlogs } from '../../fetch'
 import { deleteBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
@@ -9,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
 interface Props {classes: any, blogs:any, userId:number, deleteBlog:any}
-interface State {open:boolean, blogIdToDelete:number|null}
+interface State {openDelete:boolean, openEdit:boolean, blogId:number|null}
 interface blogs {
 	id:number,
 	title:string, 
@@ -26,17 +27,21 @@ interface blogs {
 class ViewBlogs extends Component<Props, State> {
 	
 	state = {
-		open: false,
-		blogIdToDelete: null,
+		openDelete: false,
+		openEdit: false,
+		blogId: null,
 	}
 
-	handleDialog = (blogIdToDelete: number|null = null) => {
-		this.setState({open: !this.state.open, blogIdToDelete})
+	handleDeleteDialog = (blogId: number|null = null) => {
+		this.setState({openDelete: !this.state.openDelete, blogId})
 	}
 
+	handleEditDialog = (blogId: number|null = null) => {
+		this.setState({openEdit: !this.state.openEdit, blogId})
+	}
 
 	handleDelete = async () => {
-		let blogId = this.state.blogIdToDelete
+		let blogId = this.state.blogId
 		let userId = this.props.userId
 		try {
 			await destroyBlog(blogId)	
@@ -46,7 +51,7 @@ class ViewBlogs extends Component<Props, State> {
 			console.log(err.toString())
 		}
 		
-		this.setState({open: false, blogIdToDelete: null})
+		this.setState({openDelete: false, blogId: null})
 
 	}
 
@@ -76,12 +81,12 @@ class ViewBlogs extends Component<Props, State> {
 
 								<div className={classes.cardActions}>
 									<Tooltip title='Edit Blog' placement='right'>
-										<IconButton style={{marginLeft: 10}}>
+										<IconButton style={{marginLeft: 10}} onClick={()=> this.handleEditDialog(b.id)}>
 											<EditIcon/>
 										</IconButton>
 									</Tooltip>
 									<Tooltip title='Delete Blog' placement='right'>
-										<IconButton style={{marginLeft: 10}} onClick={() => this.handleDialog(b.id)}>
+										<IconButton style={{marginLeft: 10}} onClick={() => this.handleDeleteDialog(b.id)}>
 											<DeleteIcon/>
 										</IconButton>
 									</Tooltip>
@@ -90,13 +95,14 @@ class ViewBlogs extends Component<Props, State> {
 							
 						</Card>
 					))}
-					<Dialog open={this.state.open} disableBackdropClick={true}>
+					<Dialog open={this.state.openDelete} disableBackdropClick={true}>
 						<DialogTitle> Are you sure you want to delete?</DialogTitle>
 						<DialogActions>
-							<Button variant='outlined' style={{color: '#A51A30', borderColor: '#A51A30'}}onClick={this.handleDelete}>Yes</Button>
-							<Button onClick={() => this.handleDialog(null)}>No</Button>
+							<Button variant='outlined' style={{color: '#A51A30', borderColor: '#A51A30'}} onClick={this.handleDelete}>Yes</Button>
+							<Button onClick={() => this.handleDeleteDialog(null)}>No</Button>
 						</DialogActions>
 					</Dialog>
+					<EditBlog open={this.state.openEdit} blogId={this.state.blogId}/>
 				</div>
 			)
 		}

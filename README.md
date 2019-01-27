@@ -7,4 +7,6 @@ __www.edrecoveryroots.com__
 - React/Redux frontend
 - Auth and admin sections
 - Markdown rendering
-
+- Dynamic routing
+- Material UI
+- RESTful API

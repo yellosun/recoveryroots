@@ -19,11 +19,7 @@ class App extends Component<Props, State> {
 		return (
 			<Router history={history}>
 				<div style={{fontFamily: 'Roboto'}}>
-					{this.props.email ? 
-						<Sidebar history={history}/>
-					:	
-						<Redirect to='/admin/login' />
-					}
+					{this.props.email ? <Sidebar history={history}/> : null}
 					<Route path='/admin/login' component={AdminLogin} />
 				</div>
 			</Router>

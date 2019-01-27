@@ -77,7 +77,7 @@ export async function getBlogs(id:number) {
     return resp
 }
 
-export async function deleteBlog(id:number) {
+export async function deleteBlog(id:number|null) {
     let r = await fetch(`/api/blogs/delete/${id}`, {
         method: 'DELETE',
         headers: getHeaders(),

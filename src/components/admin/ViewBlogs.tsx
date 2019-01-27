@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { deleteBlog } from '../../fetch'
 import { setBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
@@ -36,6 +37,7 @@ class ViewBlogs extends Component<Props, State> {
 
 	handleDelete = () => {
 		console.log(`DELETEDDDDD ${this.state.blogIDToDelete} X/`)
+		deleteBlog(this.state.blogIDToDelete)
 		this.setState({open: false, blogIDToDelete: null})
 	}
 
@@ -79,15 +81,10 @@ class ViewBlogs extends Component<Props, State> {
 							
 						</Card>
 					))}
-					<Dialog 
-						open={this.state.open} 
-						disableBackdropClick={false}
-						BackdropProps={{ classes: {root: classes.root}}}
-						PaperProps ={{classes: {root: classes.paper}}}
-					>
+					<Dialog open={this.state.open} disableBackdropClick={true}>
 						<DialogTitle> Are you sure you want to delete?</DialogTitle>
 						<DialogActions>
-							<Button onClick={this.handleDelete}>Yes</Button>
+							<Button variant='outlined' style={{color: '#A51A30', borderColor: '#A51A30'}}onClick={this.handleDelete}>Yes</Button>
 							<Button onClick={() => this.handleDialog(null)}>No</Button>
 						</DialogActions>
 					</Dialog>
@@ -142,12 +139,6 @@ const styles = createStyles({
 		display: 'flex',
 		justifyContent: 'flex-start',
 	},
-	root: {
-		backgroundColor: 'transparent',
-	},
-	paper: {
-		// backgroundColor: 'transparent',
-	}
 })
 
 const mapStateToProps = (state:any) => ({ blogs: state.blog.blogs })

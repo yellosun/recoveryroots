@@ -1,4 +1,8 @@
-import { SET_BLOG, DELETE_BLOG, blog as blogInterface } from '../actions/blogAction'
+import { 
+    SET_BLOG, 
+    DELETE_BLOG, 
+    blog as blogInterface, 
+    DELETE_ALL_BLOGS } from '../actions/blogAction'
 
 interface action {type:string, payload?:any}
 
@@ -40,6 +44,12 @@ export function blogReducer(state:any = initialState, action:action) {
             blogs: cleansedBlogs
         }
  
+     case DELETE_ALL_BLOGS: {
+        return {
+            ...state,
+            blogs: []
+        }
+    }
         
     default:
     	return state

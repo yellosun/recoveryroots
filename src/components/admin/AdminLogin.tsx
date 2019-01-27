@@ -39,11 +39,9 @@ class Login extends Component<Props, State> {
 		try {
 			const user = await login(this.state.email, this.state.password)
 	        const blogs = await getUserBlogs(user.id)
-	        console.log(blogs)
-	        blogs.map((b:any)=> this.props.setBlog(b))
-	        this.props.setUser(user)
+	        await blogs.forEach((b:any)=> this.props.setBlog(b))
+	        await this.props.setUser(user)
 	        history.push('/admin')
-
 		} catch (err) {
 			console.log('login error ~>', err.toString())
 		}

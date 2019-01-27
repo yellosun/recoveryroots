@@ -5,10 +5,10 @@ import { setBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography'
-import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, Button } from '@material-ui/core'
+import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
 interface Props {classes: any, blogs:any}
-interface State {open:boolean}
+interface State {open:boolean, blogIDToDelete:number|null}
 interface blogs {
 	id:number,
 	title:string, 
@@ -25,17 +25,20 @@ interface blogs {
 class ViewBlogs extends Component<Props, State> {
 	
 	state = {
-		open: false
+		open: false,
+		blogIDToDelete: null,
 	}
 
-	handleDialog = () => {
-		this.setState({open: !this.state.open})
+	handleDialog = (blogIDToDelete: number|null = null) => {
+		this.setState({open: !this.state.open, blogIDToDelete})
 	}
+
 
 	handleDelete = () => {
-		console.log('DELETEDDDDD X/')
-		this.setState({open: !this.state.open})	
+		console.log(`DELETEDDDDD ${this.state.blogIDToDelete} X/`)
+		this.setState({open: false, blogIDToDelete: null})
 	}
+
 
 	render() {
 		const {classes, blogs} = this.props
@@ -67,19 +70,27 @@ class ViewBlogs extends Component<Props, State> {
 										</IconButton>
 									</Tooltip>
 									<Tooltip title='Delete Blog' placement='right'>
-										<IconButton style={{marginLeft: 10}} onClick={this.handleDialog}>
+										<IconButton style={{marginLeft: 10}} onClick={() => this.handleDialog(b.id)}>
 											<DeleteIcon/>
 										</IconButton>
 									</Tooltip>
 								</div>
 							</CardContent>
-							<Dialog open={this.state.open} >
-								<DialogTitle> Are you sure you want to delete?</DialogTitle>
-								<Button onClick={this.handleDelete}>Yes</Button>
-								<Button onClick={this.handleDialog}>No</Button>
-							</Dialog>
+							
 						</Card>
 					))}
+					<Dialog 
+						open={this.state.open} 
+						disableBackdropClick={false}
+						BackdropProps={{ classes: {root: classes.root}}}
+						PaperProps ={{classes: {root: classes.paper}}}
+					>
+						<DialogTitle> Are you sure you want to delete?</DialogTitle>
+						<DialogActions>
+							<Button onClick={this.handleDelete}>Yes</Button>
+							<Button onClick={() => this.handleDialog(null)}>No</Button>
+						</DialogActions>
+					</Dialog>
 				</div>
 			)
 		}
@@ -130,6 +141,12 @@ const styles = createStyles({
 		padding: '10px 0',
 		display: 'flex',
 		justifyContent: 'flex-start',
+	},
+	root: {
+		backgroundColor: 'transparent',
+	},
+	paper: {
+		// backgroundColor: 'transparent',
 	}
 })
 

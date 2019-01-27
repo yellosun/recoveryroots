@@ -77,7 +77,7 @@ export async function getUserBlogs(id:number) {
     return resp
 }
 
-export async function getBlog(id:number) {
+export async function getBlog(id:number|null) {
     let r = await fetch(`/api/blogs/${id}`, {
         method: 'GET',
         headers: getHeaders(),

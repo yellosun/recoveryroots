@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
+import moment from 'moment'
+import { connect } from 'react-redux'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Close as CloseIcon } from '@material-ui/icons'
-import { AppBar, Toolbar, IconButton, Dialog } from '@material-ui/core'
+import { Close as CloseIcon, Person as PersonIcon, AccessTime as TimeIcon } from '@material-ui/icons'
+import { AppBar, Toolbar, IconButton, Dialog, Divider } from '@material-ui/core'
 
 interface State {}
 interface Props {
 	classes: any,
+	user:any,
 	open:boolean,
 	blog:any,
 	handleViewDialog:any,
@@ -15,7 +18,7 @@ interface Props {
 
 class ViewBlog extends Component<Props, State> {
 	render() {
-		const {classes, open, blog} = this.props
+		const {classes, open, blog, user} = this.props
 		if (blog[0]) {
 			return (
 				<Dialog open={open} fullScreen className={classes.dialog} classes={{paper: classes.paper}}>
@@ -28,10 +31,17 @@ class ViewBlog extends Component<Props, State> {
 						</Toolbar>
 					</AppBar>
 					<div className={classes.markdownDisplay} >
-						<div className={classes.imgBox}>
+						<div style={{width: '50%'}}>
 							<img src={blog[0].headerImg} className={classes.img}/>
 						</div>
 						<div className={classes.title}>{blog[0].title}</div>
+						<div className={classes.subHeader}>
+							<PersonIcon style={{fill: 'black', marginRight: 5}}/>
+							{user.firstName} {user.lastName}
+							<TimeIcon style={{fill: 'black', margin: '0 5px 0 15px'}}/> 
+							{moment(blog[0].createdAt).format("MMM Do YYYY")}
+						</div>
+						
 						<ReactMarkdown source={blog[0].body}/>
 					</div>
 				</Dialog>
@@ -80,7 +90,15 @@ const styles = createStyles({
 	title: {
 		fontWeight: 'bold',
 		fontSize: '3em',
+		marginTop: 20,
+	},
+	subHeader: {
+		textTransform: 'capitalize',
+		margin: '20px 0 40px',
+		display: 'flex',
+		alignItems: 'center'
 	}
 })
 
-export default withStyles(styles)(ViewBlog)
+const mapStateToProps = (state:any) => ({user: state.user.user})
+export default connect(mapStateToProps)(withStyles(styles)(ViewBlog))

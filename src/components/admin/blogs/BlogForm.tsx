@@ -56,7 +56,6 @@ class BlogForm extends Component<Props, State> {
 					rows={30} 
 					placeholder='# Write blog here'
 					style={{
-						width: '100%', 
 						borderRadius: 5,
 						outline: 'none',
 						padding: 20,

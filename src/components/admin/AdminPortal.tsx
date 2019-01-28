@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import ReactMarkdown from 'react-markdown'
+import {connect} from 'react-redux'
+import pageHeader from './PageHeader'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import Sidebar from './Sidebar'
 
-interface Props {classes: any}
+interface Props {classes: any, user:any}
 interface State {}
 
 const styles = createStyles({
@@ -13,13 +13,11 @@ class AdminPortal extends Component<Props, State> {
 
 
 	render() {		
-		const {classes} = this.props
-		return (
-			<div >
-				'hi'
-			</div>
-		)
+		const {classes, user} = this.props
+		return pageHeader(`Welcome back, ${user.firstName}!`, '#E9E6AB')
 	}
 }
 
-export default withStyles(styles)(AdminPortal)
+const mapStateToProps = (state:any) => ({user: state.user.user})
+
+export default connect(mapStateToProps)(withStyles(styles)(AdminPortal))

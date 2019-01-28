@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
+import pageHeader from './PageHeader'
 import { setBlog } from '../../actions/blogAction'
 import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
@@ -62,6 +63,7 @@ class CreateBlog extends Component<Props, State> {
 		const {classes} = this.props
 		return (
 			<Fragment>
+				{pageHeader('Create New Blog', '#7FA2FA')}
 				<BlogForm 
 					handleChange={this.handleChange}
 					handleSave={this.handleSave}

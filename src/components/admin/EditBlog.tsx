@@ -32,34 +32,100 @@ class EditBlog extends Component<Props, State> {
 		uri: null,
 	}
 
+	handleClose = async () => {
+		await this.setState({
+			title: null,
+			body: null,
+			headerImg: null,
+			description: null,
+			render: null,
+			category: null,
+			uri: null,
+		})
+		this.props.handleEditDialog()
+	}
+
+	handleSubmit = () => {
+		console.log('woo! submitted!!')
+	}
+
 	render() {
-		const {classes, open, handleEditDialog, blog} = this.props
-		return (
-			<Dialog open={open} fullScreen>
-				<AppBar position='static'>
-					<Toolbar>
-						<IconButton onClick={()=> handleEditDialog()}>
-							<CloseIcon/>
-						</IconButton>
-						<DialogTitle>Edit Blog</DialogTitle>
-					</Toolbar>
-				</AppBar>
-				
-				
-				<DialogActions>
-					<Button className={classes.saveBtn}>
-						<SaveIcon style={{marginRight: 5}}/>
-						Save
-					</Button>
-				</DialogActions>
-			</Dialog>
-		)
+		const {classes, open, blog} = this.props
+		if (blog[0]) {
+			return (
+				<Dialog open={open} fullScreen>
+					<AppBar position='static'>
+						<Toolbar>
+							<IconButton onClick={this.handleClose}>
+								<CloseIcon/>
+							</IconButton>
+							<DialogTitle>Edit Blog</DialogTitle>
+						</Toolbar>
+					</AppBar>
+
+					<form onSubmit={this.handleSubmit} className={classes.form}>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							label='Title'
+							defaultValue={blog[0].title}
+						/>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							multiline
+							rows={6}
+							label='Body'
+							defaultValue={blog[0].body}
+						/>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							label='Description'
+							defaultValue={blog[0].description}
+						/>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							label='Blog URL Path'
+							defaultValue={blog[0].uri}
+						/>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							label='Publish?'
+							defaultValue={blog[0].render.toString()}
+						/>
+						<TextField
+							className={classes.textField}
+							variant='outlined'
+							label='Main Image'
+							defaultValue={blog[0].headerImg}
+						/>
+						<DialogActions>
+							<Button type='submit'>
+								<SaveIcon style={{marginRight: 5}}/>
+								Save
+							</Button>
+						</DialogActions>
+					</form>
+				</Dialog>
+			)
+		} else {
+			return null
+		}
 	}
 }
 
 const styles = createStyles({
-	saveBtn: {
-		justifyContent: 'flex-end',
+	form: {
+		margin: '20px 40px',
+		display: 'flex',
+		flexFlow: 'column nowrap',
+		// alignItems: 'flex'
+	},
+	textField: {
+		margin: '10px 0'
 	}
 })
 

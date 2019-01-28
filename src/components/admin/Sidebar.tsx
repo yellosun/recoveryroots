@@ -18,8 +18,7 @@ const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'row wrap',
 		justifyContent: 'center',
-		paddingLeft: 73,
-		width: '90%',
+		paddingLeft: 63,
 	},
 	drawer: {
 		marginRight: 73,

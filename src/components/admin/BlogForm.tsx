@@ -43,6 +43,7 @@ class BlogForm extends Component<Props, State> {
 		return (
 			<form className={classes.form}>
 				<TextField
+					variant='outlined'
 					required 
 					onChange={handleChange('title')}
 					className={classes.textField}
@@ -54,16 +55,27 @@ class BlogForm extends Component<Props, State> {
 					onChange={handleChange('textarea')}
 					rows={30} 
 					placeholder='# Write blog here'
-					style={{width: '100%'}}>
+					style={{
+						width: '100%', 
+						borderRadius: 5,
+						outline: 'none',
+						padding: 20,
+						fontFamily: 'Roboto'
+					}}>
 				</textarea>
 				<TextField
+					variant='outlined'
 					required 
 					className={classes.textField}
+					multiline
+					rows={3}
+					inputProps={{maxLength: 120}}
 					onChange={handleChange('description')}
 					label='Description' 
 					value={description}
 				/>
 				<TextField
+					variant='outlined'
 					required 
 					className={classes.textField}
 					onChange={handleChange('uri')}
@@ -72,6 +84,7 @@ class BlogForm extends Component<Props, State> {
 					value={uri}
 				/>
 				<TextField
+					variant='outlined'
 					required 
 					className={classes.textField}
 					onChange={handleChange('headerImg')}
@@ -80,12 +93,14 @@ class BlogForm extends Component<Props, State> {
 					value={headerImg}
 				/>
 				<TextField
+					variant='outlined'
 					required
 					select
 					className={classes.textField}
 					onChange={handleChange('category')}
 					label='Category'
-					value={category}>
+					value={category}
+				>
 					{categories.map(c=> (
 						<MenuItem key={c} value={c}>{c}</MenuItem>
 					))}

@@ -54,12 +54,17 @@ class EditBlog extends Component<Props, State> {
 		if (blog[0]) {
 			return (
 				<Dialog open={open} fullScreen>
-					<AppBar position='static'>
+					<AppBar position='static' className={classes.appbar}>
 						<Toolbar>
 							<IconButton onClick={this.handleClose}>
 								<CloseIcon/>
 							</IconButton>
-							<DialogTitle>Edit Blog</DialogTitle>
+							<div style={{marginRight: 10}}>
+								Edit Blog
+								<span className={classes.appBlogTitle}>
+									{blog[0].title}
+								</span>
+							</div>
 						</Toolbar>
 					</AppBar>
 
@@ -81,6 +86,9 @@ class EditBlog extends Component<Props, State> {
 						<TextField
 							className={classes.textField}
 							variant='outlined'
+							multiline
+							rows={3}
+							inputProps={{maxLength:120}}
 							label='Description'
 							defaultValue={blog[0].description}
 						/>
@@ -118,14 +126,30 @@ class EditBlog extends Component<Props, State> {
 }
 
 const styles = createStyles({
+	appbar: {
+		color: 'black',
+		fontFamily: 'Roboto',
+		backgroundColor: '#CBDFCF',
+		fontSize: '1.5em',
+		fontWeight: 'bold',
+		display: 'flex',
+		justifyContent: 'center',
+	},
+	appBlogTitle: {
+		fontWeight: 'normal',
+		fontSize: '.8em',
+		color: 'rgba(0,0,0,.4)',
+		marginLeft: 10,
+	},
 	form: {
-		margin: '20px 40px',
+		margin: 40,
 		display: 'flex',
 		flexFlow: 'column nowrap',
 		// alignItems: 'flex'
 	},
 	textField: {
-		margin: '10px 0'
+		margin: '10px 0',
+
 	}
 })
 

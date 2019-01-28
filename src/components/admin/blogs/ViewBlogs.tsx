@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import EditBlog from './EditBlog'
+import ViewBlog from './ViewBlog'
 import pageHeader from '../PageHeader'
 import { destroyBlog, getUserBlogs, getBlog } from '../../../fetch'
 import { deleteBlog } from '../../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon, RemoveRedEye as EyeIcon } from '@material-ui/icons'
-import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
 interface Props {
@@ -19,6 +19,7 @@ interface Props {
 interface State {
 	openDelete:boolean,
 	openEdit:boolean,
+	openView:boolean,
 	blogId:number|null,
 	blog:any
 }
@@ -40,6 +41,7 @@ class ViewBlogs extends Component<Props, State> {
 	state = {
 		openDelete: false,
 		openEdit: false,
+		openView: false,
 		blogId: null,
 		blog: {}
 	}
@@ -60,9 +62,9 @@ class ViewBlogs extends Component<Props, State> {
 	handleViewDialog = async (blogId: number|null = null) => {
 		if (blogId) {
 			let blog = await getBlog(blogId)
-			await this.setState({openEdit: !this.state.openEdit, blog})	
+			await this.setState({openView: !this.state.openView, blog})	
 		} else {
-			this.setState({openEdit: !this.state.openEdit, blogId})
+			this.setState({openView: !this.state.openView, blogId})
 		}
 	}
 
@@ -102,19 +104,19 @@ class ViewBlogs extends Component<Props, State> {
 									</div>
 
 									<div className={classes.cardActions}>
+										<Tooltip title='View Blog' placement='bottom'>
+											<IconButton onClick={() => this.handleViewDialog(b.id)}>
+												<EyeIcon style={{fill: 'rgba(0,0,0,.3)'}}/>
+											</IconButton>
+										</Tooltip>
 										<Tooltip title='Edit Blog' placement='bottom'>
 											<IconButton onClick={()=> this.handleEditDialog(b.id)}>
-												<EditIcon/>
+												<EditIcon style={{fill: 'rgba(0,0,0,.3)'}}/>
 											</IconButton>
 										</Tooltip>
 										<Tooltip title='Delete Blog' placement='bottom'>
 											<IconButton onClick={() => this.handleDeleteDialog(b.id)}>
-												<DeleteIcon/>
-											</IconButton>
-										</Tooltip>
-										<Tooltip title='View Blog' placement='bottom'>
-											<IconButton onClick={() => this.handleViewDialog(b.id)}>
-												<EyeIcon/>
+												<DeleteIcon style={{fill: 'rgba(0,0,0,.3)'}}/>
 											</IconButton>
 										</Tooltip>
 									</div>
@@ -129,7 +131,16 @@ class ViewBlogs extends Component<Props, State> {
 								<Button onClick={() => this.handleDeleteDialog(null)}>No</Button>
 							</DialogActions>
 						</Dialog>
-						<EditBlog open={this.state.openEdit} blog={this.state.blog} handleEditDialog={this.handleEditDialog}/>
+						<EditBlog 
+							open={this.state.openEdit}
+							blog={this.state.blog}
+							handleEditDialog={this.handleEditDialog}
+						/>
+						<ViewBlog 
+							open={this.state.openView}
+							blog={this.state.blog}
+							handleViewDialog={this.handleViewDialog}
+						/>
 					</div>
 				</Fragment>
 			)
@@ -178,7 +189,7 @@ const styles = createStyles({
 		minWidth: 150,
 	},
 	cardActions: {
-	    backgroundColor: 'rgba(0,0,0,.04)',
+	    backgroundColor: 'rgba(0,0,0,.03)',
 		display: 'flex',
 		justifyContent: 'space-evenly',
 	},

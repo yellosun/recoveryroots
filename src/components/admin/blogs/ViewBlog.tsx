@@ -24,12 +24,14 @@ class ViewBlog extends Component<Props, State> {
 							<IconButton onClick={()=> this.props.handleViewDialog()}>
 								<CloseIcon/>
 							</IconButton>
-							<div style={{marginRight: 10}}>View Blog</div>
+							<div style={{marginRight: 10}}>Blog Preview</div>
 						</Toolbar>
 					</AppBar>
 					<div className={classes.markdownDisplay} >
+						<div className={classes.imgBox}>
+							<img src={blog[0].headerImg} className={classes.img}/>
+						</div>
 						<div className={classes.title}>{blog[0].title}</div>
-						<img src={blog[0].headerImg} className={classes.img}/>
 						<ReactMarkdown source={blog[0].body}/>
 					</div>
 				</Dialog>
@@ -57,7 +59,7 @@ const styles = createStyles({
 	markdownDisplay: {
 		display: 'flex',
 		flexFlow: 'column nowrap',
-		width: '80%',
+		width: '60%',
 		marginTop: 40,
 	},
 	dialog:{
@@ -66,6 +68,18 @@ const styles = createStyles({
 	},
 	paper: {
 		alignItems: 'center'
+	},
+	img: {
+		height: 'auto',
+		width: '100%',
+		borderRadius: 15,
+	},
+	imgBox: {
+
+	},
+	title: {
+		fontWeight: 'bold',
+		fontSize: '3em',
 	}
 })
 

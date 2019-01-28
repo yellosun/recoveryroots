@@ -110,8 +110,8 @@ class EditBlog extends Component<Props, State> {
 							label='Main Image'
 							defaultValue={blog[0].headerImg}
 						/>
-						<DialogActions>
-							<Button type='submit'>
+						<DialogActions style={{justifyContent:'flex-start'}}>
+							<Button variant='contained' style={{backgroundColor: '#e5c85c'}} type='submit'>
 								<SaveIcon style={{marginRight: 5}}/>
 								Save
 							</Button>

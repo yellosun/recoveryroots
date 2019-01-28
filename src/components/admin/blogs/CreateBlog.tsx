@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
-import pageHeader from './PageHeader'
-import { setBlog } from '../../actions/blogAction'
+import pageHeader from '../PageHeader'
+import { setBlog } from '../../../actions/blogAction'
 import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import BlogForm from './BlogForm'
-import history from '../../history'
-import { createBlog, getBlog } from '../../fetch'
+import history from '../../../history'
+import { createBlog, getBlog } from '../../../fetch'
 
 interface Props {classes:any, userId:number, setBlog:any}
 interface State {}

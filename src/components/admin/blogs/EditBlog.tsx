@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getBlog } from '../../fetch'
+import { getBlog } from '../../../fetch'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { AppBar, Toolbar, TextField, IconButton, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 import { Close as CloseIcon, Save as SaveIcon } from '@material-ui/icons'

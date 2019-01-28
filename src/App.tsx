@@ -6,8 +6,8 @@ import history from './history'
 import Sidebar from './components/admin/Sidebar'
 import AdminLogin from './components/admin/AdminLogin'
 import AdminPortal from './components/admin/AdminPortal'
-import CreateBlog from './components/admin/CreateBlog'
-import ViewBlogs from './components/admin/ViewBlogs'
+import CreateBlog from './components/admin/blogs/CreateBlog'
+import ViewBlogs from './components/admin/blogs/ViewBlogs'
 
 interface Props {email:string}
 interface State {}

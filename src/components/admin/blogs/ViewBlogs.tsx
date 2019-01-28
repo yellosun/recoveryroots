@@ -2,16 +2,26 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import EditBlog from './EditBlog'
-import pageHeader from './PageHeader'
-import { destroyBlog, getUserBlogs, getBlog } from '../../fetch'
-import { deleteBlog } from '../../actions/blogAction'
+import pageHeader from '../PageHeader'
+import { destroyBlog, getUserBlogs, getBlog } from '../../../fetch'
+import { deleteBlog } from '../../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
+import { Edit as EditIcon, Delete as DeleteIcon, RemoveRedEye as EyeIcon } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
-interface Props {classes: any, blogs:any, userId:number, deleteBlog:any}
-interface State {openDelete:boolean, openEdit:boolean, blogId:number|null, blog:any}
+interface Props {
+	classes: any,
+	blogs:any,
+	userId:number,
+	deleteBlog:any
+}
+interface State {
+	openDelete:boolean,
+	openEdit:boolean,
+	blogId:number|null,
+	blog:any
+}
 interface blogs {
 	id:number,
 	title:string, 
@@ -47,6 +57,15 @@ class ViewBlogs extends Component<Props, State> {
 		}
 	}
 
+	handleViewDialog = async (blogId: number|null = null) => {
+		if (blogId) {
+			let blog = await getBlog(blogId)
+			await this.setState({openEdit: !this.state.openEdit, blog})	
+		} else {
+			this.setState({openEdit: !this.state.openEdit, blogId})
+		}
+	}
+
 	handleDelete = async () => {
 		let blogId = this.state.blogId
 		let userId = this.props.userId
@@ -65,7 +84,7 @@ class ViewBlogs extends Component<Props, State> {
 		if (blogs) {
 			return (
 				<Fragment>
-					{pageHeader('View All Blogs', '#CF9E89')}
+					{pageHeader('Your Blogs', '#CF9E89')}
 					<div className={classes.blogContainer}>
 						{(blogs || []).map((b:blogs)=> (  
 							<Card key={b.id} className={classes.card}>
@@ -76,21 +95,26 @@ class ViewBlogs extends Component<Props, State> {
 								/>
 								<CardContent className={classes.cardContent}>
 									<div className={classes.cardText}>
-										<div style={{fontSize: '.8em'}}>
+										<div style={{fontSize: '.8em', color: 'rgba(0,0,0,.3)'}}>
 											{moment(b.createdAt).format("MMM Do YYYY")}
 										</div>
 										<div className={classes.title}>{b.title}</div>
 									</div>
 
 									<div className={classes.cardActions}>
-										<Tooltip title='Edit Blog' placement='right'>
-											<IconButton style={{marginLeft: 10}} onClick={()=> this.handleEditDialog(b.id)}>
+										<Tooltip title='Edit Blog' placement='bottom'>
+											<IconButton onClick={()=> this.handleEditDialog(b.id)}>
 												<EditIcon/>
 											</IconButton>
 										</Tooltip>
-										<Tooltip title='Delete Blog' placement='right'>
-											<IconButton style={{marginLeft: 10}} onClick={() => this.handleDeleteDialog(b.id)}>
+										<Tooltip title='Delete Blog' placement='bottom'>
+											<IconButton onClick={() => this.handleDeleteDialog(b.id)}>
 												<DeleteIcon/>
+											</IconButton>
+										</Tooltip>
+										<Tooltip title='View Blog' placement='bottom'>
+											<IconButton onClick={() => this.handleViewDialog(b.id)}>
+												<EyeIcon/>
 											</IconButton>
 										</Tooltip>
 									</div>
@@ -142,7 +166,7 @@ const styles = createStyles({
 	title: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		paddingTop: 5,
+		padding: '5px 0 30px',
 	},
 	desc: {
 		fontStyle: 'oblique',
@@ -154,9 +178,9 @@ const styles = createStyles({
 		minWidth: 150,
 	},
 	cardActions: {
-		padding: '10px 0',
+	    backgroundColor: 'rgba(0,0,0,.04)',
 		display: 'flex',
-		justifyContent: 'flex-start',
+		justifyContent: 'space-evenly',
 	},
 })
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import EditBlog from './EditBlog'
-import { destroyBlog, getUserBlogs } from '../../fetch'
+import { destroyBlog, getUserBlogs, getBlog } from '../../fetch'
 import { deleteBlog } from '../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons'
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardMedia, CardActionArea, CardActions, IconButton, Tooltip, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
 
 interface Props {classes: any, blogs:any, userId:number, deleteBlog:any}
-interface State {openDelete:boolean, openEdit:boolean, blogId:number|null}
+interface State {openDelete:boolean, openEdit:boolean, blogId:number|null, blog:any}
 interface blogs {
 	id:number,
 	title:string, 
@@ -30,14 +30,20 @@ class ViewBlogs extends Component<Props, State> {
 		openDelete: false,
 		openEdit: false,
 		blogId: null,
+		blog: {}
 	}
 
 	handleDeleteDialog = (blogId: number|null = null) => {
 		this.setState({openDelete: !this.state.openDelete, blogId})
 	}
 
-	handleEditDialog = (blogId: number|null = null) => {
-		this.setState({openEdit: !this.state.openEdit, blogId})
+	handleEditDialog = async (blogId: number|null = null) => {
+		if (blogId) {
+			let blog = await getBlog(blogId)
+			await this.setState({openEdit: !this.state.openEdit, blog})	
+		} else {
+			this.setState({openEdit: !this.state.openEdit, blogId})
+		}
 	}
 
 	handleDelete = async () => {
@@ -46,13 +52,10 @@ class ViewBlogs extends Component<Props, State> {
 		try {
 			await destroyBlog(blogId)	
 			this.props.deleteBlog(blogId)
-			
 		} catch(err) {
 			console.log(err.toString())
 		}
-		
 		this.setState({openDelete: false, blogId: null})
-
 	}
 
 
@@ -102,7 +105,7 @@ class ViewBlogs extends Component<Props, State> {
 							<Button onClick={() => this.handleDeleteDialog(null)}>No</Button>
 						</DialogActions>
 					</Dialog>
-					<EditBlog open={this.state.openEdit} blogId={this.state.blogId}/>
+					<EditBlog open={this.state.openEdit} blog={this.state.blog} handleEditDialog={this.handleEditDialog}/>
 				</div>
 			)
 		}

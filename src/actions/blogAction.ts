@@ -22,10 +22,10 @@ export function setBlog(blog:blog) {
     }
 }
 
-export function updateBlog(id:number) {
+export function updateBlog(blog:number) {
     return {
         type: UPDATE_BLOG,
-        payload: { id }
+        payload: { blog }
     }
 }
 

@@ -86,7 +86,7 @@ export async function getBlog(id:number|null) {
     return resp
 }
 
-export async function updateBlog(id:number,title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean) {
+export async function patchBlog(id:number,title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean) {
     let r = await fetch(`/api/blogs/${id}`, {
         method: 'PATCH',
         headers: getHeaders(),
@@ -100,8 +100,8 @@ export async function updateBlog(id:number,title:string, body:string, headerImg:
             render: render,
         })
     })
-    let resp = await r.json()
-    return resp
+    let b = await getBlog(id) 
+    return b
 }
 
 export async function destroyBlog(id:number|null) {

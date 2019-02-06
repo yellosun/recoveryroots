@@ -1,5 +1,6 @@
 import { 
-    SET_BLOG, 
+    SET_BLOG,
+    UPDATE_BLOG,
     DELETE_BLOG, 
     blog as blogInterface, 
     DELETE_ALL_BLOGS } from '../actions/blogAction'
@@ -8,6 +9,17 @@ interface action {type:string, payload?:any}
 
 const initialState = {
     blogs: []
+}
+
+interface updatedBlog {
+    id:number,
+    title:string, 
+    body:string, 
+    headerImg:string, 
+    uri:string, 
+    category:string, 
+    description:string, 
+    render:boolean
 }
 
 export function blogReducer(state:any = initialState, action:action) {
@@ -33,6 +45,33 @@ export function blogReducer(state:any = initialState, action:action) {
                 }
             ]
         }
+
+    case UPDATE_BLOG: {
+        const { blog } = action.payload
+        const newBlog = blog[0] 
+        let newBlogs = state.blogs.map((b:updatedBlog)=> {
+            if (b.id !== newBlog.id) {
+                console.log(b.id, newBlog.id)
+                return b
+            } else {
+                return ({
+                    ...state,
+                    title: newBlog.title,
+                    body: newBlog.body,
+                    description: newBlog.description,
+                    uri: newBlog.uri,
+                    category: newBlog.category,
+                    headerImg: newBlog.headerImg,
+                    render: newBlog.render
+                })
+            }
+        })
+
+        return {
+            ...state,
+            blogs: newBlogs
+        }
+    }
 
     case DELETE_BLOG:
         const { id } = action.payload

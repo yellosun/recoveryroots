@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getBlog, updateBlog } from '../../../fetch'
+import { getBlog, patchBlog } from '../../../fetch'
+import { updateBlog } from '../../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Close as CloseIcon, Save as SaveIcon } from '@material-ui/icons'
 import { AppBar, Toolbar, TextField, IconButton, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
@@ -10,7 +11,8 @@ interface Props {
 	open:boolean,
 	blog:any,
 	handleEditDialog:any,
-	userId:number
+	userId:number,
+	updateBlog:Function
 }
 interface State {
 	title:string, 
@@ -74,8 +76,14 @@ class EditBlog extends Component<Props, State> {
 		const { title, body, headerImg, uri,
 			category, description, render } = this.state
 		const id = this.props.blog[0].id
-		updateBlog(id, title, body, headerImg,
+		try {
+			let b = await patchBlog(id, title, body, headerImg,
 			uri, category, description, render)
+			console.log(b[0])
+			this.props.updateBlog(b)
+		} catch(err) {
+			console.log(err.toString())
+		}
 	}
 
 	render() {
@@ -188,4 +196,5 @@ const styles = createStyles({
 })
 
 const mapStateToProps = (state:any) => ({userId: state.user.user.id})
-export default connect(mapStateToProps)(withStyles(styles)(EditBlog))
+const mapDispatchToProps = { updateBlog }
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditBlog))

@@ -1,9 +1,9 @@
-# Recovery Roots
+# Recovery Roots 2.0
 __www.edrecoveryroots.com__
 
-2.0 Version includes:
+2.0 Version updates:
 - Node/Express backend
-- Postgres database
+- PostgreSQL database
 - React/Redux frontend
 - Auth and admin sections
 - Markdown rendering

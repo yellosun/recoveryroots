@@ -86,6 +86,24 @@ export async function getBlog(id:number|null) {
     return resp
 }
 
+export async function updateBlog(id:number,title:string, body:string, headerImg:string, uri:string, category:string, description:string, render:boolean) {
+    let r = await fetch(`/api/blogs/${id}`, {
+        method: 'PATCH',
+        headers: getHeaders(),
+         body: JSON.stringify({
+            title: title,
+            body: body,
+            headerImg: headerImg,
+            uri: uri,
+            category: category,
+            description: description,
+            render: render,
+        })
+    })
+    let resp = await r.json()
+    return resp
+}
+
 export async function destroyBlog(id:number|null) {
     let r = await fetch(`/api/blogs/delete/${id}`, {
         method: 'DELETE',

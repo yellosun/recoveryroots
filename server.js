@@ -77,22 +77,35 @@ app.get('/api/users/:id', authenticate, asyncMiddleware(async (req, res)=> {
 // Blog Routes
 //----------->
 
-app.get('/api/blogs', authenticate, asyncMiddleware(async (req, res)=> {
+app.get('/api/blogs', async (req, res)=> {
 	console.log(req.body)
 	let r = await db.Blog.findAll()
 	res.json(r)
-}))
+})
 
 app.get('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
-	console.log('\n\n/api/blogs/:id START\n\n')
 	let r = await db.Blog.findAll({where: {id: req.params.id}})
-	console.log('\n\n/api/blogs/:id END\n\n')
+	
 	res.json(r)
 }))
 
 app.get('/api/blogs/user/:id', authenticate, asyncMiddleware(async (req, res)=> {
 	console.log(req.body)
 	let r = await db.Blog.findAll({where: {userId: req.params.id}})
+	res.json(r)
+}))
+
+app.patch('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
+	console.log(req.body)
+	let r = await db.Blog.update({
+		title: req.body.title,
+		body: req.body.body,
+		headerImg: req.body.headerImg,
+		uri: req.body.uri,
+		category: req.body.category,
+		description: req.body.description,
+		render: req.body.render,
+		}, {where: {id: req.params.id}})
 	res.json(r)
 }))
 

@@ -1,4 +1,5 @@
 export const SET_BLOG:string = 'SET_BLOG'
+export const UPDATE_BLOG:string = 'UPDATE_BLOG'
 export const DELETE_BLOG:string = 'DELETE_BLOG'
 export const DELETE_ALL_BLOGS:string = 'DELETE_ALL_BLOGS'
 
@@ -18,6 +19,13 @@ export function setBlog(blog:blog) {
     return {
         type: SET_BLOG,
         payload: { blog }
+    }
+}
+
+export function updateBlog(id:number) {
+    return {
+        type: UPDATE_BLOG,
+        payload: { id }
     }
 }
 

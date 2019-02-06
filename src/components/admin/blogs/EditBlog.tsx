@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { getBlog } from '../../../fetch'
+import { connect } from 'react-redux'
+import { getBlog, updateBlog } from '../../../fetch'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Close as CloseIcon, Save as SaveIcon } from '@material-ui/icons'
 import { AppBar, Toolbar, TextField, IconButton, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
@@ -9,48 +10,78 @@ interface Props {
 	open:boolean,
 	blog:any,
 	handleEditDialog:any,
+	userId:number
 }
 interface State {
-	title:string|null, 
-    body:string|null, 
-    headerImg:string|null, 
-    uri:string|null, 
-    category:string|null, 
-    description:string|null, 
-    render:boolean|null,    
+	title:string, 
+    body:string, 
+    headerImg:string, 
+    uri:string, 
+    category:string, 
+    description:string, 
+    render:boolean,    
 }
 
 class EditBlog extends Component<Props, State> {
+
+	constructor(props: Props) {
+		super(props)
+		
+		this.state = {
+			title: '',
+			body: '',
+			headerImg: '',
+			description: '',
+			render: false,
+			category: '',
+			uri: ''
+		}
+	}
+
+
+	componentDidUpdate(prevProps:any, prevState:any) {
+		if (prevProps.blog !== this.props.blog) {
+
+			const blog = this.props.blog[0]
+			this.setState({
+				title: blog.title,
+				body: blog.body,
+				headerImg: blog.headerImg,
+				description: blog.description,
+				render: blog.render,
+				category: blog.category,
+				uri: blog.uri
+			})
+		}
+	}
 	
-	state = {
-		title: null,
-		body: null,
-		headerImg: null,
-		description: null,
-		render: null,
-		category: null,
-		uri: null,
-	}
-
 	handleClose = async () => {
-		await this.setState({
-			title: null,
-			body: null,
-			headerImg: null,
-			description: null,
-			render: null,
-			category: null,
-			uri: null,
+		this.setState({
+			title: '',
+			body: '',
+			headerImg: '',
+			description: '',
+			render: false,
+			category: '',
+			uri: '',
+		}, () => {
+			this.props.handleEditDialog()
 		})
-		this.props.handleEditDialog()
 	}
 
-	handleSubmit = () => {
-		console.log('woo! submitted!!')
+	handleSubmit = async (event:any) => {
+		event.preventDefault()
+		const { title, body, headerImg, uri,
+			category, description, render } = this.state
+		const id = this.props.blog[0].id
+		updateBlog(id, title, body, headerImg,
+			uri, category, description, render)
 	}
 
 	render() {
 		const {classes, open, blog} = this.props
+		const { title, body, headerImg, uri, category, description, render } = this.state
+
 		if (blog[0]) {
 			return (
 				<Dialog open={open} fullScreen>
@@ -73,7 +104,8 @@ class EditBlog extends Component<Props, State> {
 							className={classes.textField}
 							variant='outlined'
 							label='Title'
-							defaultValue={blog[0].title}
+							onChange={evt => this.setState({title: evt.target.value}, ()=> console.log(this.state.title))}
+							value={title}
 						/>
 						<TextField
 							className={classes.textField}
@@ -81,7 +113,8 @@ class EditBlog extends Component<Props, State> {
 							multiline
 							rows={6}
 							label='Body'
-							defaultValue={blog[0].body}
+							onChange={evt => this.setState({body: evt.target.value})}
+							value={body}
 						/>
 						<TextField
 							className={classes.textField}
@@ -90,25 +123,29 @@ class EditBlog extends Component<Props, State> {
 							rows={3}
 							inputProps={{maxLength:120}}
 							label='Description'
-							defaultValue={blog[0].description}
+							onChange={evt => this.setState({description: evt.target.value})}
+							value={description}
 						/>
 						<TextField
 							className={classes.textField}
 							variant='outlined'
 							label='Blog URL Path'
-							defaultValue={blog[0].uri}
+							onChange={evt => this.setState({uri: evt.target.value})}
+							value={uri}
 						/>
 						<TextField
 							className={classes.textField}
 							variant='outlined'
 							label='Publish?'
-							defaultValue={blog[0].render.toString()}
+							onChange={evt => this.setState({render: true /* @@TODO: this shouldn't be hard coded */ })}
+							value={render}
 						/>
 						<TextField
 							className={classes.textField}
 							variant='outlined'
 							label='Main Image'
-							defaultValue={blog[0].headerImg}
+							onChange={evt => this.setState({headerImg: evt.target.value})}
+							value={headerImg}
 						/>
 						<DialogActions style={{justifyContent:'flex-start'}}>
 							<Button variant='contained' style={{backgroundColor: '#e5c85c'}} type='submit'>
@@ -143,7 +180,6 @@ const styles = createStyles({
 		margin: 40,
 		display: 'flex',
 		flexFlow: 'column nowrap',
-		// alignItems: 'flex'
 	},
 	textField: {
 		margin: '10px 0',
@@ -151,4 +187,5 @@ const styles = createStyles({
 	}
 })
 
-export default withStyles(styles)(EditBlog)
+const mapStateToProps = (state:any) => ({userId: state.user.user.id})
+export default connect(mapStateToProps)(withStyles(styles)(EditBlog))

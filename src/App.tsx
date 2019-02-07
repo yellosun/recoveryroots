@@ -1,24 +1,25 @@
 import React, { Component, Fragment as F} from 'react'
 import { Router, Route, Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { setUser } from './actions/userAction'
+import { setUser } from './redux/actions/userAction'
 import history from './history'
 import Sidebar from './components/admin/Sidebar'
 import AdminLogin from './components/admin/AdminLogin'
-import AdminPortal from './components/admin/AdminPortal'
-import CreateBlog from './components/admin/blogs/CreateBlog'
-import ViewBlogs from './components/admin/blogs/ViewBlogs'
+import NavBar from './components/desktop/NavBar'
 
 interface Props {email:string}
-interface State {}
 
-class App extends Component<Props, State> {	
+class App extends Component<Props> {	
 	
 	render() {
 		return (
 			<Router history={history}>
 				<div style={{fontFamily: 'Roboto'}}>
-					{this.props.email ? <Sidebar history={history}/> : null}
+					{this.props.email ? 
+						<Sidebar history={history}/> 
+						:
+						<NavBar history={history}/>
+					}
 					<Route path='/admin/login' component={AdminLogin} />
 				</div>
 			</Router>

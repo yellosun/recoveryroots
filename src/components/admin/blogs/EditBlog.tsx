@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getBlog, patchBlog } from '../../../fetch'
-import { updateBlog } from '../../../actions/blogAction'
+import { updateBlog } from '../../../redux/actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import CloseIcon from '@material-ui/icons/Close'
 import SaveIcon from '@material-ui/icons/Save'

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
 import pageHeader from '../PageHeader'
-import { setBlog } from '../../../actions/blogAction'
+import { setBlog } from '../../../redux/actions/blogAction'
 import ReactMarkdown from 'react-markdown'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import BlogForm from './BlogForm'

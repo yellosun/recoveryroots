@@ -3,7 +3,7 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, Tooltip } from '@ma
 import { Route, Link, Redirect } from 'react-router-dom'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { InsertComment, LibraryBooks, Close } from '@material-ui/icons'
-import whiteLogo from '../../styles/images/inverse-transparent-logo.png'
+import whiteLogo from '../../styles/imgs/inverse-transparent-logo.png'
 import AdminPortal from './AdminPortal'
 import CreateBlog from './blogs/CreateBlog'
 import ViewBlogs from './blogs/ViewBlogs'

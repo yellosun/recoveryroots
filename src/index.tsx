@@ -5,9 +5,9 @@ import history from './history'
 import * as serviceWorker from './serviceWorker'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import rootReducer from './reducers/rootReducer'
-import { setUser } from './actions/userAction'
-import { setBlog } from './actions/blogAction'
+import rootReducer from './redux/reducers/rootReducer'
+import { setUser } from './redux/actions/userAction'
+import { setBlog } from './redux/actions/blogAction'
 import { getUsers, checkToken, getUserBlogs } from './fetch'
 
 const store = createStore(

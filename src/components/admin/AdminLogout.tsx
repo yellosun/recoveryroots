@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { setUser } from '../../actions/userAction'
-import { deleteAllBlogs } from '../../actions/blogAction'
+import { setUser } from '../../redux/actions/userAction'
+import { deleteAllBlogs } from '../../redux/actions/blogAction'
 
 interface Props {setUser:any, deleteAllBlogs:any}
 interface State {}

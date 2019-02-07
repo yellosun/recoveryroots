@@ -3,8 +3,16 @@ import { connect } from 'react-redux'
 import { getBlog, patchBlog } from '../../../fetch'
 import { updateBlog } from '../../../actions/blogAction'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Close as CloseIcon, Save as SaveIcon } from '@material-ui/icons'
-import { AppBar, Toolbar, TextField, IconButton, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
+import SaveIcon from '@material-ui/icons/Save'
+import Button from '@material-ui/core/Button'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 interface Props {
 	classes: any,

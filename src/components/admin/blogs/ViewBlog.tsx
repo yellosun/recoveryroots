@@ -3,8 +3,14 @@ import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Close as CloseIcon, Person as PersonIcon, AccessTime as TimeIcon } from '@material-ui/icons'
-import { AppBar, Toolbar, IconButton, Dialog, Divider } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
+import TimeIcon from '@material-ui/icons/AccessTime'
+import PersonIcon from '@material-ui/icons/Person'
+import Divider from '@material-ui/core/Divider'
+import Dialog from '@material-ui/core/Dialog'
+import IconButton from '@material-ui/core/IconButton'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 
 interface State {}
 interface Props {

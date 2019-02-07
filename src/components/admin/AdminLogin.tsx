@@ -73,19 +73,10 @@ class Login extends Component<Props, State> {
 							type='submit'
 							style={{marginTop: 20}} 
 						>Login</Button>
-
-						<div onClick={this.test}>test</div>
 					</form>
 				</Card>
 			</div>
 		)
-	}
-	test = async () => {
-		const token = window.localStorage.getItem('app-token')
-		await fetch('/api/users', {
-			method: 'GET',
-			headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-		})
 	}
 }
 

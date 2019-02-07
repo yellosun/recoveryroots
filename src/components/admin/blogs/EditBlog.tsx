@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Switch from '@material-ui/core/Switch'
 
 interface Props {
 	classes: any,
@@ -89,6 +90,7 @@ class EditBlog extends Component<Props, State> {
 			uri, category, description, render)
 			console.log(b[0])
 			this.props.updateBlog(b)
+			this.props.handleEditDialog()
 		} catch(err) {
 			console.log(err.toString())
 		}
@@ -149,13 +151,16 @@ class EditBlog extends Component<Props, State> {
 							onChange={evt => this.setState({uri: evt.target.value})}
 							value={uri}
 						/>
-						<TextField
-							className={classes.textField}
-							variant='outlined'
-							label='Publish?'
-							onChange={evt => this.setState({render: true /* @@TODO: this shouldn't be hard coded */ })}
-							value={render}
-						/>
+						<div className={classes.toggleSection}>
+							<div>Draft</div>
+							<Switch
+								color='primary'
+								checked={this.state.render}
+								onChange={evt => this.setState({render: !this.state.render }, ()=> console.log(this.state.render))}
+								value={render}
+							/>
+							<div>Publish</div>
+						</div>
 						<TextField
 							className={classes.textField}
 							variant='outlined'
@@ -199,8 +204,12 @@ const styles = createStyles({
 	},
 	textField: {
 		margin: '10px 0',
-
-	}
+	},
+	toggleSection: {
+		display: 'flex',
+		alignItems: 'center',
+		fontFamily: 'Roboto',
+	},
 })
 
 const mapStateToProps = (state:any) => ({userId: state.user.user.id})

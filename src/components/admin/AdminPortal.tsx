@@ -23,11 +23,13 @@ class AdminPortal extends Component<Props, State> {
 
 	published=()=> {
 		const {classes} = this.props
-		const published = this.props.blogs.map((b:blog)=> {
-			if (b.render) return <li className={classes.listItem}>{b.title}</li>
+		let published:Array<JSX.Element> = []
+
+		this.props.blogs.forEach((b:blog)=> {
+			if (b.render) published.push(<li key ={b.id} className={classes.listItem}>{b.title}</li>)
 		})
 
-		if (this.props.blogs.length === published.length) {
+		if (published.length === 0) {
 			return <div className={classes.nix}>No published blogs yet...</div>
 		} else {
 			return published
@@ -36,14 +38,16 @@ class AdminPortal extends Component<Props, State> {
 
 	drafts=()=> {
 		const {classes} = this.props
-		const drafts = this.props.blogs.map((b:blog)=> {
-			if (b.render === false) return <li className={classes.listItem}>{b.title}</li>
+		let drafts:Array<JSX.Element> = []
+
+		this.props.blogs.forEach((b:blog)=> {
+			if (!b.render) drafts.push(<li key ={b.id} className={classes.listItem}>{b.title}</li>)
 		})
 
-		if (this.props.blogs.length === drafts.length) {
-			return drafts
-		} else {
+		if (drafts.length === 0) {
 			return <div className={classes.nix}>No drafts currently...</div>
+		} else {
+			return drafts
 		}
 	}
 
@@ -76,7 +80,8 @@ class AdminPortal extends Component<Props, State> {
 
 const styles = createStyles({
 	cardContainer: {
-
+		display: 'flex',
+		flexFlow: 'column wrap'
 	},
 	card: {
 		padding: 20,

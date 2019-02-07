@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
+import ReactMarkdown from 'react-markdown'
 import pageHeader from './PageHeader'
+import ViewBlog from './blogs/ViewBlog'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 
 interface Props {classes: any, user:any, blogs:any}
-interface State {}
+interface State {blog:blog|null}
 interface blog {
 	id:number,
 	title:string, 
@@ -21,12 +24,16 @@ interface blog {
 
 class AdminPortal extends Component<Props, State> {
 
+	state = {
+		blog: null
+	}
+
 	published=()=> {
 		const {classes} = this.props
 		let published:Array<JSX.Element> = []
 
 		this.props.blogs.forEach((b:blog)=> {
-			if (b.render) published.push(<li key ={b.id} className={classes.listItem}>{b.title}</li>)
+			if (b.render) published.push(<li key={b.id} className={classes.listItem}>{b.title}</li>)
 		})
 
 		if (published.length === 0) {
@@ -41,7 +48,7 @@ class AdminPortal extends Component<Props, State> {
 		let drafts:Array<JSX.Element> = []
 
 		this.props.blogs.forEach((b:blog)=> {
-			if (!b.render) drafts.push(<li key ={b.id} className={classes.listItem}>{b.title}</li>)
+			if (!b.render) drafts.push(<li key={b.id} className={classes.listItem}>{b.title}</li>)
 		})
 
 		if (drafts.length === 0) {
@@ -57,6 +64,7 @@ class AdminPortal extends Component<Props, State> {
 			return (
 				<Fragment>
 					{pageHeader(`Welcome back, ${user.firstName}!`, '#E9E6AB')}
+					<div className={classes.contentContainer}>
 					<div className={classes.cardContainer}>
 						<Card className={classes.card}>
 							<div className={classes.title}>Published Blogs</div>
@@ -71,6 +79,14 @@ class AdminPortal extends Component<Props, State> {
 							</ul>
 						</Card>
 					</div>
+						<Card className={classes.displayedCard}>
+							{this.state.blog ? 
+								<div>meep</div>
+							:
+								<div className={classes.previewText}>Click a blog to view a preview here...</div>
+							}
+						</Card>
+					</div>
 				</Fragment>
 			)
 		} else return null
@@ -79,13 +95,21 @@ class AdminPortal extends Component<Props, State> {
 }
 
 const styles = createStyles({
+	contentContainer: {
+		display: 'flex'
+	},
+	displayedCard: {
+		height: '80vh',
+		width: '60vh',
+		overflow: 'auto'
+	},
 	cardContainer: {
 		display: 'flex',
 		flexFlow: 'column wrap'
 	},
 	card: {
 		padding: 20,
-		margin: 20,
+		margin: '0 20px 20px',
 	},
 	title: {
 		fontSize: '1.5em',

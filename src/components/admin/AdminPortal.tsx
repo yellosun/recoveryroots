@@ -105,7 +105,9 @@ class AdminPortal extends Component<Props, State> {
 
 const styles = createStyles({
 	contentContainer: {
-		display: 'flex'
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
 	},
 	displayedCard: {
 		height: '80vh',

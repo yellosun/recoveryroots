@@ -19,7 +19,7 @@ interface blog {
     createdAt:Date
 }
 interface user {
-	fistName:string
+	firstName:string
 	lastName:string
 	email:string
 }
@@ -31,7 +31,7 @@ class BlogPreview extends Component<Props> {
 		if (blog) {
 			return (
 				<div className={classes.markdownDisplay} >
-					<div style={{width: '50%'}}>
+					<div>
 						<img src={blog.headerImg} className={classes.img}/>
 					</div>
 					<div className={classes.title}>{blog.title}</div>
@@ -50,7 +50,27 @@ class BlogPreview extends Component<Props> {
 }
 
 const styles = createStyles({
-
+	markdownDisplay: {
+		display: 'flex',
+		flexFlow: 'column nowrap',
+		padding: 20,
+	},
+	img: {
+		height: 'auto',
+		width: '100%',
+		borderRadius: 15,
+	},
+	title: {
+		fontWeight: 'bold',
+		fontSize: '3em',
+		marginTop: 20,
+	},
+	subHeader: {
+		textTransform: 'capitalize',
+		margin: '20px 0 40px',
+		display: 'flex',
+		alignItems: 'center'
+	}
 })
 
 export default withStyles(styles)(BlogPreview)

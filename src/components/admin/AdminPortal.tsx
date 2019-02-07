@@ -20,7 +20,7 @@ interface blog {
     createdAt:Date
 }
 interface user {
-	fistName:string
+	firstName:string
 	lastName:string
 	email:string
 }

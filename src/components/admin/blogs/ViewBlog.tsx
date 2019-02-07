@@ -89,9 +89,6 @@ const styles = createStyles({
 		width: '100%',
 		borderRadius: 15,
 	},
-	imgBox: {
-
-	},
 	title: {
 		fontWeight: 'bold',
 		fontSize: '3em',

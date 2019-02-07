@@ -5,19 +5,24 @@ import BlogPreview from './blogs/BlogPreview'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 
-interface Props {classes: any, user:any, blogs:any}
+interface Props {classes: any, user:user, blogs:any}
 interface State {blog:blog|null}
 interface blog {
-	id:number,
-	title:string, 
-    body:string, 
-    headerImg:string, 
-    uri:string, 
-    category:string, 
-    description:string, 
-    render:boolean, 
-    userId:number,
+	id:number
+	title:string 
+    body:string 
+    headerImg:string 
+    uri:string 
+    category:string 
+    description:string 
+    render:boolean 
+    userId:number
     createdAt:Date
+}
+interface user {
+	fistName:string
+	lastName:string
+	email:string
 }
 
 class AdminPortal extends Component<Props, State> {
@@ -63,6 +68,7 @@ class AdminPortal extends Component<Props, State> {
 
 	render() {		
 		const {classes, user, blogs} = this.props
+		console.log(user)
 		if (blogs) {
 			return (
 				<Fragment>
@@ -84,7 +90,7 @@ class AdminPortal extends Component<Props, State> {
 					</div>
 						<Card className={classes.displayedCard}>
 							{this.state.blog ? 
-								<BlogPreview blog={this.state.blog} />
+								<BlogPreview blog={this.state.blog} user={user}/>
 							:
 								<div className={classes.previewText}>Click a blog to view a preview here...</div>
 							}

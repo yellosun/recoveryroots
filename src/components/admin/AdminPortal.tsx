@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
-import moment from 'moment'
-import ReactMarkdown from 'react-markdown'
 import pageHeader from './PageHeader'
-import ViewBlog from './blogs/ViewBlog'
+import BlogPreview from './blogs/BlogPreview'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 
@@ -33,7 +31,10 @@ class AdminPortal extends Component<Props, State> {
 		let published:Array<JSX.Element> = []
 
 		this.props.blogs.forEach((b:blog)=> {
-			if (b.render) published.push(<li key={b.id} className={classes.listItem}>{b.title}</li>)
+			if (b.render) {
+
+				published.push(<li key={b.id} onClick={()=> this.setState({blog: b})} className={classes.listItem}>{b.title}</li>)
+			}
 		})
 
 		if (published.length === 0) {
@@ -48,7 +49,9 @@ class AdminPortal extends Component<Props, State> {
 		let drafts:Array<JSX.Element> = []
 
 		this.props.blogs.forEach((b:blog)=> {
-			if (!b.render) drafts.push(<li key={b.id} className={classes.listItem}>{b.title}</li>)
+			if (!b.render) {
+				drafts.push(<li key={b.id} onClick={()=> this.setState({blog: b})} className={classes.listItem}>{b.title}</li>)
+			}
 		})
 
 		if (drafts.length === 0) {
@@ -81,7 +84,7 @@ class AdminPortal extends Component<Props, State> {
 					</div>
 						<Card className={classes.displayedCard}>
 							{this.state.blog ? 
-								<div>meep</div>
+								<BlogPreview blog={this.state.blog} />
 							:
 								<div className={classes.previewText}>Click a blog to view a preview here...</div>
 							}
@@ -102,6 +105,12 @@ const styles = createStyles({
 		height: '80vh',
 		width: '60vh',
 		overflow: 'auto'
+	},
+	previewText: {
+	    fontSize: '7em',
+	    color: 'rgba(0,0,0,.05)',
+	    padding: '40px',
+	    textAlign: 'center',
 	},
 	cardContainer: {
 		display: 'flex',

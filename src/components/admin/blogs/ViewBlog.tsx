@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 
-interface State {}
 interface Props {
 	classes: any,
 	user:any,
@@ -22,7 +21,7 @@ interface Props {
 }
 
 
-class ViewBlog extends Component<Props, State> {
+class ViewBlog extends Component<Props> {
 	render() {
 		const {classes, open, blog, user} = this.props
 		if (blog[0]) {

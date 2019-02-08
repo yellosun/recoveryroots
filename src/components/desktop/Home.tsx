@@ -12,6 +12,20 @@ class Home extends Component<Props, State> {
 		return (
 			<Grid container>
 				<Grid item xs={12} className={classes.header}>
+					
+						<div className={classes.introContainer}>
+							<div className={classes.title}>
+								Recovery<br/>Roots.
+							</div>
+						<div className={classes.tag}>
+							Created to support brave
+							souls through the eating disorder recovery process. It's time to reclaim your roots, and grow strong.
+						</div>
+						</div>
+						
+					
+					
+					
 				</Grid>
 			</Grid>
 		)
@@ -20,10 +34,27 @@ class Home extends Component<Props, State> {
 
 const styles = createStyles({
 	header: {
-		backgroundImage: 'url(https://images.pexels.com/photos/612891/pexels-photo-612891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)',
-		height: 500,
+		display: 'flex',
+		justifyContent: 'flex-end',
+		backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
+		height: '94.2vh',
+	},
+	introContainer: {
+		margin: 40,
+		    display: 'flex',
+		    flexFlow: 'column wrap',
+		    justifyContent: 'flex-start',
+		    alignItems: 'flex-end',
+		    textAlign: 'right',
+	},
+	title: {
+		fontSize: '7em',
+		fontWeight: 'bold'
+	},
+	tag: {
+		width: 300,
 	}
 })
 

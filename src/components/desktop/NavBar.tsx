@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react'
 import { Route, Link, Redirect } from 'react-router-dom'
 import classnames from 'classnames'
 import Home from './Home'
-import About from './About'
+import About from './About.jsx'
 import Blog from './Blog'
 import Contact from './Contact'
 import Community from './Community'
-import logo from '../../styles/imgs/inverse-transparent-logo.png'
+import logo from '../../styles/imgs/transparent-logo.png'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -21,40 +21,49 @@ class NavBar extends Component<Props> {
 		const path = history.location.pathname
 		return (
 			<Fragment>
-				<AppBar position="fixed">
-					<Toolbar className={classes.appbar}>
+				<div className={classes.navbar}>
 						<Link
 							to='/about' 
-							className={path === '/about' ? classnames(classes.link, classes.path) : classes.link}
+							className={path === '/about' ? 
+							classnames(classes.link, classes.path)
+							: classes.link}
 						>
 							about
 						</Link>
 						<Link 
 							to='/contact'
-							className={path === '/contact' ? classnames(classes.link, classes.path) : classes.link}
+							className={path === '/contact' ? 
+							classnames(classes.link, classes.path)
+							: classes.link}
 						>
 							contact
 						</Link>
 						<Link 
 							to='/'
-							className={path === '/' ? classnames(classes.link, classes.path) : classes.link}
+							className={path === '/' ? 
+							classnames(classes.link, classes.path)
+							: classes.link}
 						>
 							<img height={25} src={logo}/>
 						</Link>
 						<Link 
 							to='/community'
-							className={path === '/community' ? classnames(classes.link, classes.path) : classes.link}
+							className={path === '/community' ? 
+							classnames(classes.link, classes.path)
+							: classes.link}
 						>
 							community
 						</Link>
 						<Link 
 							to='/blog'
-							className={path === '/blog' ? classnames(classes.link, classes.path) : classes.link}
+							className={path === '/blog' ? 
+							classnames(classes.link, classes.path)
+							: classes.link}
 						>
 							blog
 						</Link>
-					</Toolbar>
-				</AppBar>
+					
+				</div>
 				<div className={classes.contentContainer}>
 					<Route path='/' exact component={Home} />
 					<Route path='/about' exact component={About} />
@@ -69,13 +78,19 @@ class NavBar extends Component<Props> {
 
 const styles = createStyles({
 	contentContainer: {
-		marginTop: 64,
 		display: 'flex',
 		flexFlow: 'column wrap',
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '100vh'
 	},
-	appbar: {
-		backgroundColor: 'black',
+	navbar: {
+		position: 'fixed',
+		paddingTop: 10,
+		width: '100%',
+		display: 'flex',
+		flexFlow: 'row nowrap',
+		alignItems: 'center',
 		justifyContent: 'space-evenly',
 		fontSize: '.8em',
 	},
@@ -85,11 +100,11 @@ const styles = createStyles({
 	},
 	link: {
 		textDecoration: 'none',
-		color: 'white',
+		color: 'black',
 		paddingBottom: 3,
 	},
 	path: {
-		borderBottom: '1px solid white',
+		borderBottom: '1px solid black',
 	}
 })
 

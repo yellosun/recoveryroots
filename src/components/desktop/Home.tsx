@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 
 interface Props {classes: any}
 interface State {}
@@ -11,21 +13,25 @@ class Home extends Component<Props, State> {
 		const {classes} = this.props
 		return (
 			<Grid container>
-				<Grid item xs={12} className={classes.header}>
-					
-						<div className={classes.introContainer}>
-							<div className={classes.title}>
-								Recovery<br/>Roots.
-							</div>
-						<div className={classes.tag}>
-							Created to support brave
-							souls through the eating disorder recovery process. It's time to reclaim your roots, and grow strong.
+				<Grid item xs={12} className={classnames(classes.container, classes.header)}>
+					<div className={classes.title}>recovery roots</div>
+				</Grid>
+				<Grid item xs={12} className={classes.container}>
+					<div className={classes.tag}>supporting brave souls through the eating disorder recovery process</div>
+					<div className={classes.featureContainer}>
+						<div className={classes.feature}>
+							<img className={classes.featImg}src='https://images.pexels.com/photos/305827/pexels-photo-305827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'/>
 						</div>
+						<div className={classes.feature}>
+							<img className={classes.featImg}src='https://images.pexels.com/photos/305827/pexels-photo-305827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'/>
 						</div>
-						
-					
-					
-					
+						<div className={classes.feature}>
+							<img className={classes.featImg}src='https://images.pexels.com/photos/305827/pexels-photo-305827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'/>
+						</div>
+						<div className={classes.feature}>
+							<img className={classes.featImg}src='https://images.pexels.com/photos/305827/pexels-photo-305827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'/>
+						</div>
+					</div>
 				</Grid>
 			</Grid>
 		)
@@ -33,28 +39,51 @@ class Home extends Component<Props, State> {
 }
 
 const styles = createStyles({
-	header: {
+	container: {
 		display: 'flex',
-		justifyContent: 'flex-end',
-		backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: '100vh',
+		flexFlow: 'column nowrap',
+	},
+	header: {
+		backgroundImage: 'url(https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		// backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
-		height: '94.2vh',
 	},
 	introContainer: {
+		 display: 'flex',
+	    flexFlow: 'column nowrap',
+	    justifyContent: 'space-evenly'
+	},
+	textContainer: {
 		margin: 40,
-		    display: 'flex',
-		    flexFlow: 'column wrap',
-		    justifyContent: 'flex-start',
-		    alignItems: 'flex-end',
-		    textAlign: 'right',
+	    display: 'flex',
+	    flexFlow: 'column wrap',
+	    justifyContent: 'flex-start',
 	},
 	title: {
 		fontSize: '7em',
-		fontWeight: 'bold'
+		letterSpacing: 40,
+		color: 'white',
+		textAlign: 'center',
 	},
 	tag: {
-		width: 300,
+		fontWeight: 'bold',
+		fontSize: '1.5em',
+	},
+	featureContainer: {
+		display: 'flex',
+		flexFlow: 'row wrap',
+
+	},
+	feature: {
+		width: '25%',
+		height: 200,
+	},
+	featImg: {
+		width: '100%'
 	}
 })
 

@@ -40,10 +40,15 @@ class Home extends Component<Props, State> {
 								{mental ? 
 									<div className={classnames(classes.featOverlay)}>
 										<div className={classes.featTitle}>mental</div>
-										<div className={classes.featBody}></div>
+										<div className={classes.featBody}>
+											Embracing the power of your mind to create new neural pathways is hard. That’s why we create safe spaces for you to practice greater bravery, resilience, openness, awareness and commitment to your recovery.
+											
+										</div>
 									</div>
 								:
-									<div className={classes.featCapital}>M</div>
+									<div className={classes.featCapital}
+									onMouseOver={e => this.setState({mental: true})}
+									onMouseOut={e => this.setState({mental: false})}>M</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.emotional)}
@@ -53,10 +58,14 @@ class Home extends Component<Props, State> {
 								{emotional ? 
 									<div className={classnames(classes.featOverlay)}>
 										<div className={classes.featTitle}>emotional</div>
-										<div className={classes.featBody}></div>
+										<div className={classes.featBody}>
+											Your emotional body is a sacred portal through which your greatest healing occurs. Our priority is providing you with the space to share vulnerably and authentically so that you can experience true validation and radical acceptance.
+										</div>
 									</div>
 								:
-									<div className={classes.featCapital}>E</div>
+									<div className={classes.featCapital}
+									onMouseOver={e => this.setState({emotional: true})}
+									onMouseOut={e => this.setState({emotional: false})}>E</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.physical)}
@@ -66,10 +75,14 @@ class Home extends Component<Props, State> {
 								{physical ? 
 									<div className={classnames(classes.featOverlay)}>
 										<div className={classes.featTitle}>physical</div>
-										<div className={classes.featBody}></div>
+										<div className={classes.featBody}>
+											When beginning to learn how to work with the physical body, our focus is on cultivating a compassionate, trusting, accepting and attuned relationship to your body’s intuitive cues and natural rhythms.
+										</div>
 									</div>
 								:
-									<div className={classes.featCapital}>P</div>
+									<div className={classes.featCapital}
+									onMouseOver={e => this.setState({physical: true})}
+									onMouseOut={e => this.setState({physical: false})}>P</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.spiritual)}
@@ -79,10 +92,14 @@ class Home extends Component<Props, State> {
 								{spiritual ? 
 									<div className={classnames(classes.featOverlay)}>
 										<div className={classes.featTitle}>spiritual</div>
-										<div className={classes.featBody}></div>
+										<div className={classes.featBody}>
+											We believe a trusting, connected and receptive relationship to your spiritual body brings clarity in uncertainty, light in dark, and love in loss. It is connecting with who you are underneath all the conditioning and pain to find your true self.
+										</div>
 									</div>
 								:
-									<div className={classes.featCapital}>S</div>
+									<div className={classes.featCapital}
+									onMouseOver={e => this.setState({spiritual: true})}
+									onMouseOut={e => this.setState({spiritual: false})}>S</div>
 								}
 							</div>
 					</div>
@@ -164,6 +181,7 @@ const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'column',
 		justifyContent: 'center',
+		padding: 20,
 	},
 	featCapital: {
 		color: 'white',
@@ -178,7 +196,8 @@ const styles = createStyles({
 		letterSpacing: 20,
 	},
 	featBody: {
-
+		paddingTop: 10,
+		width: '80%',
 	}
 })
 

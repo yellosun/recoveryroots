@@ -34,7 +34,7 @@ class Home extends Component<Props, State> {
 					<div className={classes.tag}>supporting brave souls through the eating disorder recovery process</div>
 					<div className={classnames(classes.rowContainer)}>
 							<div className={classnames(classes.feature, classes.mental)}
-								onMouseOver={e => this.setState({mental: true})}
+								onMouseEnter={e => this.setState({mental: true})}
 								onMouseOut={e => this.setState({mental: false})}
 							>
 								{mental ? 
@@ -46,13 +46,11 @@ class Home extends Component<Props, State> {
 										</div>
 									</div>
 								:
-									<div className={classes.featCapital}
-									onMouseOver={e => this.setState({mental: true})}
-									onMouseOut={e => this.setState({mental: false})}>M</div>
+									<div className={classes.featCapital}>M</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.emotional)}
-								onMouseOver={e => this.setState({emotional: true})}
+								onMouseEnter={e => this.setState({emotional: true})}
 								onMouseOut={e => this.setState({emotional: false})}
 							>
 								{emotional ? 
@@ -63,13 +61,11 @@ class Home extends Component<Props, State> {
 										</div>
 									</div>
 								:
-									<div className={classes.featCapital}
-									onMouseOver={e => this.setState({emotional: true})}
-									onMouseOut={e => this.setState({emotional: false})}>E</div>
+									<div className={classes.featCapital}>E</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.physical)}
-								onMouseOver={e => this.setState({physical: true})}
+								onMouseEnter={e => this.setState({physical: true})}
 								onMouseOut={e => this.setState({physical: false})}
 							>
 								{physical ? 
@@ -80,13 +76,11 @@ class Home extends Component<Props, State> {
 										</div>
 									</div>
 								:
-									<div className={classes.featCapital}
-									onMouseOver={e => this.setState({physical: true})}
-									onMouseOut={e => this.setState({physical: false})}>P</div>
+									<div className={classes.featCapital}>P</div>
 								}
 							</div>
 							<div className={classnames(classes.feature, classes.spiritual)}
-								onMouseOver={e => this.setState({spiritual: true})}
+								onMouseEnter={e => this.setState({spiritual: true})}
 								onMouseOut={e => this.setState({spiritual: false})}
 							>
 								{spiritual ? 
@@ -97,9 +91,7 @@ class Home extends Component<Props, State> {
 										</div>
 									</div>
 								:
-									<div className={classes.featCapital}
-									onMouseOver={e => this.setState({spiritual: true})}
-									onMouseOut={e => this.setState({spiritual: false})}>S</div>
+									<div className={classes.featCapital}>S</div>
 								}
 							</div>
 					</div>

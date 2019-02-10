@@ -107,8 +107,8 @@ const styles = createStyles({
 		justifyContent: 'center',
 	},
 	header: {
-		backgroundImage: 'url(https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
-		// backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		// backgroundImage: 'url(https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	},
@@ -127,7 +127,9 @@ const styles = createStyles({
 		fontSize: '7em',
 		letterSpacing: 40,
 		color: 'white',
-		textAlign: 'center',
+		fontWeight: 'bold',
+		backgroundColor: 'black',
+		padding: '20px 0 20px 40px '
 	},
 	tag: {
 		fontWeight: 'bold',

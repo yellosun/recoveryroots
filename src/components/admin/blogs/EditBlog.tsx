@@ -122,7 +122,7 @@ class EditBlog extends Component<Props, State> {
 							className={classes.textField}
 							variant='outlined'
 							label='Title'
-							onChange={evt => this.setState({title: evt.target.value}, ()=> console.log(this.state.title))}
+							onChange={evt => this.setState({title: evt.target.value})}
 							value={title}
 						/>
 						<TextField
@@ -156,7 +156,7 @@ class EditBlog extends Component<Props, State> {
 							<Switch
 								color='primary'
 								checked={this.state.render}
-								onChange={evt => this.setState({render: !this.state.render }, ()=> console.log(this.state.render))}
+								onChange={evt => this.setState({render: !this.state.render })}
 								value={render}
 							/>
 							<div>Publish</div>

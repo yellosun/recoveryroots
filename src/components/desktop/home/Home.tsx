@@ -9,7 +9,10 @@ import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+import TextField from '@material-ui/core/TextField'
 import CheckCircle from '@material-ui/icons/CheckCircle'
+import Mail from '@material-ui/icons/Mail'
+import Face from '@material-ui/icons/Face'
 
 interface Props {classes: any}
 
@@ -43,7 +46,7 @@ class Home extends Component<Props> {
 						<Card className={classes.ebookCard}>
 							<img src={ebookImg} height={250} width={'auto'} />
 							<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
-							<List style={{listStyleImage: `url(${CheckCircle})`}} className={classes.list}>
+							<List style={{listStyleImage: `url(${CheckCircle})`}}>
 								{ebookArr.map((text:string)=> {
 									return (
 										<ListItem style={{fontStyle: 'oblique'}}>
@@ -55,6 +58,8 @@ class Home extends Component<Props> {
 									)
 								})}
 							</List>
+							<Grid item><TextField style={{width: '100%'}} label="name" /></Grid>
+							<Grid item><TextField style={{width: '100%', marginTop: 10}} label="email" /></Grid>
 						</Card>
 					</Grid>
 				</Grid>
@@ -123,13 +128,12 @@ const styles = createStyles({
 		alignItems: 'center',
 	},
 	ebookCard: {
-		padding: 40,
-		width: '50%',
+		padding: 60,
+		width: '40%',
 	},
 	ebookTitle: {
 		fontWeight: 'bold',
 		fontSize: '2em',
-		letterSpacing: 3,
 		padding: '20px 0 10px'
 	}
 })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import FourBodies from './FourBodies'
+import ebookImg from '../../../styles/imgs/rr-ebook.jpg'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -34,21 +35,28 @@ class Home extends Component<Props> {
 				<FourBodies />
 				
 				{/* eBook Sign Up */}
-				<Grid item xs={12} className={classnames(classes.colContainer, classes.ebook)}>
-					<div className={classes.middle}></div>
-					<Card className={classes.ebookCard}>
-						<div>Download your free Roots of Recovery ebook!</div>
-						<List style={{listStyleImage: `url(${CheckCircle})`}} className={classes.list}>
-							{ebookArr.map((text:string)=> {
-								return (
-									<ListItem>
-										<ListItemIcon><CheckCircle/></ListItemIcon>
-										{text}
-									</ListItem>
-								)
-							})}
-						</List>
-					</Card>
+				<Grid item xs={12} className={classnames(classes.ebookContainer)}>
+					<Grid item xs={6} style={{height: '100%'}}>
+						<div className={classes.middle}></div>
+					</Grid>
+					<Grid item xs={6} style={{textAlign: 'center', justifyContent: 'center', display: 'flex',}}>
+						<Card className={classes.ebookCard}>
+							<img src={ebookImg} height={250} width={'auto'} />
+							<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
+							<List style={{listStyleImage: `url(${CheckCircle})`}} className={classes.list}>
+								{ebookArr.map((text:string)=> {
+									return (
+										<ListItem style={{fontStyle: 'oblique'}}>
+											<ListItemIcon>
+												<CheckCircle style={{fill: 'darkolivegreen'}}/>
+											</ListItemIcon>
+											{text}
+										</ListItem>
+									)
+								})}
+							</List>
+						</Card>
+					</Grid>
 				</Grid>
 						
 			</Grid>
@@ -63,13 +71,21 @@ const styles = createStyles({
 		alignItems: 'center',
 		height: '100vh',
 		flexFlow: 'column nowrap',
-		backgroundColor: 'seashell'
+		overflow: 'hidden',
 	},
 	rowContainer: {
 		display: 'flex',
 		flexFlow: 'row wrap',
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	ebookContainer: {
+		display: 'flex',
+		flexFlow: 'row nowrap',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '100vh',
+		backgroundColor: 'seashell',
 	},
 	header: {
 		// backgroundImage: 'url(https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
@@ -101,16 +117,20 @@ const styles = createStyles({
 		width: '100%',
 		backgroundImage: 'url(https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500)',
 		backgroundAttachment: 'fixed',
-
+		backgroundRepeat: 'no-repeat',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	ebook: {
-		overflow: 'hidden',
-	},
 	ebookCard: {
 		padding: 40,
+		width: '50%',
+	},
+	ebookTitle: {
+		fontWeight: 'bold',
+		fontSize: '2em',
+		letterSpacing: 3,
+		padding: '20px 0 10px'
 	}
 })
 

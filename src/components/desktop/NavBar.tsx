@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Link, Redirect } from 'react-router-dom'
 import classnames from 'classnames'
-import Home from './Home'
+import Home from './home/Home'
 import About from './About'
 import Blog from './Blog'
 import Contact from './Contact'

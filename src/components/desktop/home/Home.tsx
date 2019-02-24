@@ -24,6 +24,11 @@ const ebookArr = [
 
 class Home extends Component<Props> {
 
+	handleSubmit = (e:any) => {
+		e.preventDefault()
+		console.log('submitt')
+	}
+
 	render() {
 		const {classes} = this.props
 		return (
@@ -44,22 +49,35 @@ class Home extends Component<Props> {
 					</Grid>
 					<Grid item xs={6} style={{textAlign: 'center', justifyContent: 'center', display: 'flex',}}>
 						<Card className={classes.ebookCard}>
-							<img src={ebookImg} height={250} width={'auto'} />
-							<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
-							<List style={{listStyleImage: `url(${CheckCircle})`}}>
-								{ebookArr.map((text:string)=> {
-									return (
-										<ListItem style={{fontStyle: 'oblique'}}>
-											<ListItemIcon>
-												<CheckCircle style={{fill: 'darkolivegreen'}}/>
-											</ListItemIcon>
-											{text}
-										</ListItem>
-									)
-								})}
-							</List>
-							<Grid item><TextField style={{width: '100%'}} label="name" /></Grid>
-							<Grid item><TextField style={{width: '100%', marginTop: 10}} label="email" /></Grid>
+							<form>
+								<img src={ebookImg} height={250} width={'auto'} />
+								<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
+								<List style={{listStyleImage: `url(${CheckCircle})`}}>
+									{ebookArr.map((text:string)=> {
+										return (
+											<ListItem key={text} style={{fontStyle: 'oblique', padding: '10px 0'}}>
+												<ListItemIcon>
+													<CheckCircle style={{fill: 'darkolivegreen'}}/>
+												</ListItemIcon>
+												{text}
+											</ListItem>
+										)
+									})}
+								</List>
+								<Grid item>
+									<TextField style={{width: '100%'}}
+										label="name"
+										onChange={this.handleSubmit}
+									/>
+								</Grid>
+								<Grid item>
+									<TextField style={{width: '100%', marginTop: 10}}
+										label="email"
+										onChange={this.handleSubmit}
+									/>
+								</Grid>
+								<Button type='submit' className={classes.submitBtn}>grab my copy</Button>
+							</form>
 						</Card>
 					</Grid>
 				</Grid>
@@ -128,13 +146,19 @@ const styles = createStyles({
 		alignItems: 'center',
 	},
 	ebookCard: {
-		padding: 60,
+		padding: '40px 60px',
 		width: '40%',
 	},
 	ebookTitle: {
 		fontWeight: 'bold',
 		fontSize: '2em',
 		padding: '20px 0 10px'
+	},
+	submitBtn: {
+		backgroundColor: 'darkolivegreen',
+		marginTop: 30,
+		width: '100%',
+		color: 'white',
 	}
 })
 

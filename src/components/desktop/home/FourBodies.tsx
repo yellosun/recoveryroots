@@ -112,14 +112,14 @@ const styles = createStyles({
 		justifyContent: 'center',
 	},
 	tag: {
-		fontWeight: 'bold',
-		fontSize: '1.5em',
+		// fontWeight: 'bold',
+		fontSize: '1em',
 		letterSpacing: 5,
 		marginBottom: 80,
 	},
 	feature: {
-		height: 400,
-		width: 400,
+		height: 350,
+		width: 275,
 		backgroundPosition: 'center',
 		backgroundSize: 'contained',
 		overflow: 'hidden',
@@ -148,19 +148,21 @@ const styles = createStyles({
 	},
 	featCapital: {
 		color: 'white',
-		fontSize: '60em',
+		fontSize: '35em',
 	   	display: 'flex',
 	    justifyContent: 'flex-start',
 	    alignItems: 'center',
 	    height: '100%',
 	},
 	featTitle: {
-		fontSize: '1.5em',
+		fontSize: '1em',
+		fontWeight: 'bold',
 		letterSpacing: 20,
 	},
 	featBody: {
 		paddingTop: 10,
 		width: '80%',
+		fontSize: '.8em'
 	},
 })
 

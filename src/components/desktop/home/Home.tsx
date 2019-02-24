@@ -110,7 +110,7 @@ const styles = createStyles({
 	    justifyContent: 'flex-start',
 	},
 	title: {
-		fontSize: '7em',
+		fontSize: '5em',
 		letterSpacing: 40,
 		color: 'white',
 		fontWeight: 'bold',

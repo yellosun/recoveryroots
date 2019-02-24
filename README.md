@@ -1,7 +1,7 @@
 # Recovery Roots 2.0
 __www.edrecoveryroots.com__
 
-2.0 Version updates:
+2.0 version updates:
 - Node/Express backend
 - PostgreSQL database
 - React/Redux frontend

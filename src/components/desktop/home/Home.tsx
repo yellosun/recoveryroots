@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import Mail from '@material-ui/icons/Mail'
 import Face from '@material-ui/icons/Face'
+import Footer from '../../Footer'
 
 interface Props {classes: any}
 
@@ -81,7 +82,10 @@ class Home extends Component<Props> {
 						</Card>
 					</Grid>
 				</Grid>
-						
+				
+				{/* Footer */}		
+				<Footer />
+
 			</Grid>
 		)
 	}

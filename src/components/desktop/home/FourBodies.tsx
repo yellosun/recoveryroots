@@ -118,7 +118,7 @@ const styles = createStyles({
 		marginBottom: 80,
 	},
 	feature: {
-		height: 350,
+		height: 500,
 		width: 275,
 		backgroundPosition: 'center',
 		backgroundSize: 'contained',
@@ -157,7 +157,7 @@ const styles = createStyles({
 	featTitle: {
 		fontSize: '1em',
 		fontWeight: 'bold',
-		letterSpacing: 20,
+		letterSpacing: 15,
 	},
 	featBody: {
 		paddingTop: 10,

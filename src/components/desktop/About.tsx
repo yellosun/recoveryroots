@@ -23,7 +23,7 @@ class About extends Component<Props, State> {
 								Our paths aligned when we thought all light was lost. However by committing to healing, growth and each other, we discovered truly transformative recovery roots. Our simple yet powerful hope is that these scientifically supported and intuitively aligned resources, tools, and experiences also enable you in the way you need them most.
 							</div>
 						</div>
-						<div><img alt='rr-logo' src={stacy} height={250} className={classes.profile} style={{backgroundColor: 'black'}}/></div>
+						<div><img alt='rr-logo' src='https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' height={250} width={250} className={classes.profile}/></div>
 					</div>
 
 					{/* Stacy */}
@@ -47,7 +47,7 @@ class About extends Component<Props, State> {
 						</div>
 						<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
 					</div>
-					
+
 					<Footer />
 			</div>
 		)

@@ -82,7 +82,6 @@ const styles = createStyles({
 		flexFlow: 'column wrap',
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: '100vh'
 	},
 	navbar: {
 		position: 'fixed',

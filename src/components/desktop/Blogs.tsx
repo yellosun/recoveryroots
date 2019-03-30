@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Route, Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import classnames from 'classnames'
@@ -12,7 +13,8 @@ interface State {}
 class Blog extends Component<Props, State> {
 
 	state = {
-		category: 'most recent'
+		category: 'most recent',
+		blog: false
 	}
 
 	renderCategories = () => {
@@ -22,6 +24,7 @@ class Blog extends Component<Props, State> {
 		return cats.map(c=> {
 			return (
 				<div
+					key={c}
 					onClick={()=> this.setState({category: c})} 
 					className={category === c ? classnames(classes.cat, classes.selectedCat) : classes.cat}>
 					{c}
@@ -37,39 +40,45 @@ class Blog extends Component<Props, State> {
 		if (category === 'most recent') {
 			return blogs.reverse().slice(0, 9).map((b:any)=> {
 				return (
-					<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`}}>
-						<div className={classes.blogTitle}>
-							<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
-							<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
-							<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
-						</div>
-					</Card>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
+						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+							<div className={classes.blogTitle}>
+								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
+								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
+								<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
+							</div>
+						</Card>
+					</Link>
 				)
 			})
 		} else if (category.includes('violet') || category.includes('stacy')) {
 			let blogz = blogs.filter((b: any)=> b.category === category)
 			return blogz.reverse().map((b:any)=> {
 				return (
-					<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`}}>
-						<div className={classes.blogTitle}>
-							<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
-							<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
-							<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
-						</div>
-					</Card>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
+						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+							<div className={classes.blogTitle}>
+								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
+								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
+								<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
+							</div>
+						</Card>
+					</Link>
 				)
 			})
 		} else {
 			let blogz = blogs.filter((b: any)=> b.category === category)
 			return blogz.reverse().map((b:any)=> {
 				return (
-					<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`}}>
-						<div className={classes.blogTitle}>
-							<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
-							<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
-							<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
-						</div>
-					</Card>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
+						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+							<div className={classes.blogTitle}>
+								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
+								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
+								<div style={{fontSize: '.6em', color: 'rgba(255,255,255,.5)'}}>{b.description.slice(0, 120)}</div>
+							</div>
+						</Card>
+					</Link>
 				)
 			})
 		}
@@ -78,23 +87,14 @@ class Blog extends Component<Props, State> {
 	render() {
 		const {classes} = this.props
 		return (
-			<Fragment>
-				<div className={classes.parentContainer}>
-					{/*<div className={classes.catTitle}>categories</div>*/}
-					<div className={classes.sidebar}>
-						{this.renderCategories()}
-					</div>
-					<div className={classnames(classes.blogContainer, 'scrollbar')}>
-						{this.renderBlogs()}
-						{this.renderBlogs()}
-						{this.renderBlogs()}
-						{this.renderBlogs()}
-						{this.renderBlogs()}
-						{this.renderBlogs()}
-					</div>
+			<div className={classes.parentContainer}>
+				<div className={classes.sidebar}>
+					{this.renderCategories()}
 				</div>
-				<Footer />
-			</Fragment>
+				<div className={classnames(classes.blogContainer, 'scrollbar')}>
+					{this.renderBlogs()}
+				</div>
+			</div>
 		)
 	}
 }
@@ -105,13 +105,14 @@ const styles = createStyles({
 		flexFlow: 'column nowrap',
 		alignItems: 'center',
 		width: '100%',
-		height: '79vh',
+		height: '90vh',
 		backgroundColor: 'seashell'
 	},
 	blogContainer: {
 		display: 'flex',
 		flexFlow: 'row wrap',
 		alignItems: 'center',
+		justifyContent: 'center',
 	    maxWidth: 1050,
 	    maxHeight: 500,
 	    overflowY: 'auto',
@@ -123,7 +124,6 @@ const styles = createStyles({
 		height: 150,
 		width: 250,
 		margin: 20,
-		filter: 'grayscale()',
 		backgroundSize: 'cover',
 		display: 'flex',
 		flexFlow: 'column wrap',
@@ -146,7 +146,7 @@ const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'row wrap',
 		justifyContent: 'center',
-		margin: '80px 40px 20px'
+		margin: '120px 40px 60px'
 	},
 	catTitle: {
 		fontWeight: 'bold',

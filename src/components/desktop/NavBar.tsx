@@ -4,8 +4,10 @@ import classnames from 'classnames'
 import Home from './home/Home'
 import About from './About'
 import Blogs from './Blogs'
+import Blog from './Blog'
 import Contact from './Contact'
 import Community from './Community'
+import Footer from '../Footer'
 import logo from '../../styles/imgs/transparent-logo.png'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -67,9 +69,11 @@ class NavBar extends Component<Props> {
 				<div className={classes.contentContainer}>
 					<Route path='/' exact component={Home} />
 					<Route path='/about' exact component={About} />
-					<Route path='/blog' component={Blogs} />
+					<Route path='/blog' exact component={Blogs} />
+					<Route path='/blog/:uri' component={Blog} />
 					<Route path='/community' component={Community} />
 					<Route path='/contact' exact component={Contact} />
+					<Footer />
 				</div>
 			</Fragment>
 		)

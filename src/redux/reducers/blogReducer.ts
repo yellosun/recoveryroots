@@ -19,7 +19,8 @@ interface updatedBlog {
     uri:string, 
     category:string, 
     description:string, 
-    render:boolean
+    render:boolean,
+    author: string
 }
 
 export function blogReducer(state:any = initialState, action:action) {
@@ -41,7 +42,8 @@ export function blogReducer(state:any = initialState, action:action) {
                     category: blog.category,
                     headerImg: blog.headerImg,
                     render: blog.render,
-                    createdAt: blog.createdAt
+                    createdAt: blog.createdAt,
+                    author: blog.userId === 1 ? 'Stacy Jones' : 'Violet Moon'
                 }
             ]
         }
@@ -51,7 +53,6 @@ export function blogReducer(state:any = initialState, action:action) {
         const newBlog = blog[0] 
         let newBlogs = state.blogs.map((b:updatedBlog)=> {
             if (b.id !== newBlog.id) {
-                console.log(b.id, newBlog.id)
                 return b
             } else {
                 return ({
@@ -62,7 +63,8 @@ export function blogReducer(state:any = initialState, action:action) {
                     uri: newBlog.uri,
                     category: newBlog.category,
                     headerImg: newBlog.headerImg,
-                    render: newBlog.render
+                    render: newBlog.render,
+                    author: newBlog.userId === 1 ? 'Stacy Jones' : 'Violet Moon'
                 })
             }
         })

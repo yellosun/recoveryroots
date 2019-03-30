@@ -38,6 +38,7 @@ class Home extends Component<Props> {
 				{/* Landing Page */}
 				<Grid item xs={12} className={classnames(classes.colContainer, classes.header)}>
 					<div className={classes.title}>recovery roots</div>
+					<div className={classes.subTitle}><a href='/about' style={{textDecoration: 'none', color: 'black'}}>violet moon + stacy jones</a></div>
 				</Grid>
 			
 				{/* Four Core Bodies */}
@@ -82,10 +83,6 @@ class Home extends Component<Props> {
 						</Card>
 					</Grid>
 				</Grid>
-				
-				{/* Footer */}		
-				<Footer />
-
 			</Grid>
 		)
 	}
@@ -138,6 +135,15 @@ const styles = createStyles({
 		fontWeight: 'bold',
 		backgroundColor: 'black',
 		padding: '20px 0 20px 40px '
+	},
+	subTitle: {
+		fontSize: '.6em',
+		letterSpacing: 10,
+		fontWeight: 'bold',
+		position: 'absolute',
+		bottom: 0,
+		right: 0,
+		padding: 20
 	},
 	middle: {
 		height: '100%',

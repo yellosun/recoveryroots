@@ -14,42 +14,38 @@ class About extends Component<Props, State> {
 		
 		return (
 			<div className={classes.parentContainer}>
-				
-
-					{/* S+V */}
-					<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 20, maxWidth: 1200, width: '100%'}}>
-						<div className={classes.person} style={{backgroundColor: '#d4e8d466'}}>
-						<div className={classes.name}>intent</div>
-							<div className={classes.snippet}>
-								Our paths aligned when we thought all light was lost. However by committing to healing, growth and each other, we discovered truly transformative recovery roots. Our simple yet powerful hope is that these scientifically supported and intuitively aligned resources, tools, and experiences also enable you in the way you need them most.
-							</div>
-						</div>
-						<div><img alt='rr-logo' src='https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' height={250} width={250} className={classes.profile}/></div>
-					</div>
-
-					{/* Stacy */}
-					<div style={{display: 'flex', height: 300, padding: 20, maxWidth: 1200, width: '100%'}}>
-						<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
-						<div className={classes.person}>
-							<div className={classes.name}>stacy</div>
-							<div className={classes.snippet}>
-								My purpose here is to be a light for you; to show you the tools and methods to help you heal and grow. I am not here to make you do the work or to fix you. My presence here is to guide you to empowering yourself and taking back your life. Each journey and recovery path is different, and my hope is to honor that and help you discover what works best for you.
-							</div>
+				{/* S+V */}
+				<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '100%'}}>
+					<div className={classes.person} style={{backgroundColor: '#d4e8d466'}}>
+					<div className={classes.name}>intent</div>
+						<div className={classes.snippet}>
+							Our paths aligned when we thought all light was lost. However by committing to healing, growth and each other, we discovered truly transformative recovery roots. Our simple yet powerful hope is that these scientifically supported and intuitively aligned resources, tools, and experiences also enable you in the way you need them most.
 						</div>
 					</div>
+					<div><img alt='rr-logo' src='https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' height={250} width={250} className={classes.profile}/></div>
+				</div>
 
-					{/* Violet */}
-					<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 20, maxWidth: 1200, width: '100%'}}>
-						<div className={classes.person} style={{backgroundColor: 'aliceblue'}}>
-							<div className={classes.name}>violet</div>
-							<div className={classes.snippet}>
-								My purpose is to be a validating witness and source of empowering hope that you can also choose a life you have deserved since birth, a life of unwavering acceptance and unconditional love. Through experience, study, trial and much error, I am here to share what I have learned as a continuous student on the path of recovery and self-discovery.
-							</div>
+				{/* Stacy */}
+				<div style={{display: 'flex', height: 300, padding: 18, maxWidth: 1200, width: '100%'}}>
+					<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
+					<div className={classes.person}>
+						<div className={classes.name}>stacy</div>
+						<div className={classes.snippet}>
+							My purpose here is to be a light for you; to show you the tools and methods to help you heal and grow. I am not here to make you do the work or to fix you. My presence here is to guide you to empowering yourself and taking back your life. Each journey and recovery path is different, and my hope is to honor that and help you discover what works best for you.
 						</div>
-						<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile}/></div>
 					</div>
+				</div>
 
-					<Footer />
+				{/* Violet */}
+				<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '100%'}}>
+					<div className={classes.person} style={{backgroundColor: 'aliceblue'}}>
+						<div className={classes.name}>violet</div>
+						<div className={classes.snippet}>
+							My purpose is to be a validating witness and source of empowering hope that you can also choose a life you have deserved since birth, a life of unwavering acceptance and unconditional love. Through experience, study, trial and much error, I am here to share what I have learned as a continuous student on the path of recovery and self-discovery.
+						</div>
+					</div>
+					<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile}/></div>
+				</div>
 			</div>
 		)
 	}

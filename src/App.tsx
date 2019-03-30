@@ -1,6 +1,7 @@
 import React, { Component, Fragment as F} from 'react'
 import { Router, Route, Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
+import './styles/App.css'
 import { setUser } from './redux/actions/userAction'
 import history from './history'
 import Sidebar from './components/admin/Sidebar'

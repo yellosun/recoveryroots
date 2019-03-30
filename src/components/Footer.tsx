@@ -10,39 +10,51 @@ class Footer extends Component<Props, State> {
 	render() {
 		const {classes} = this.props
 		return (
-			
-			<div className={classes.footer}>
-				<img src={logo} alt='rr-logo' width={50} style={{marginBottom: '-20px'}}/>
-				<div className={classes.mission}>
-					Our mission for Recovery Roots is to help brave souls 
-					reclaim trust, awareness, alignment and acceptance 
-					through authentic experience, guidance and connection.
-				</div>
-				<div className={classes.social}>
-					<div className={classes.socialIcons}>
-						<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
-						<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
-						<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+			<div className={classes.parentContainer}>
+				<div className={classes.footer}>
+					<div>
+						<img src={logo} alt='rr-logo' width={50} style={{marginBottom: '-78px'}}/>
+						<div style={{fontSize: '.6em', letterSpacing: 2, bottom: 0, marginBottom: 20, border: '.5px solid white', padding: '10px 20px'}}>website by <a style={{color: 'white', textDecoration: 'none'}} href='http://vio1337.com'>violet moon</a></div>	
 					</div>
-					<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>
-				</div>
-				<div className={classes.links}>
-					<a className={classnames(classes.link, classes.secure)} href='#'>About Us</a>
-					<a className={classnames(classes.link, classes.secure)} href='#'>Privacy Policy</a>
-					<a className={classnames(classes.link, classes.secure)} href='#'>Disclaimer</a>
-					<a className={classnames(classes.link, classes.secure)} href='#'>Terms + Conditions</a>
-				</div>
-			</div>			
+					<div className={classes.mission}>
+						Our mission for Recovery Roots is to help brave souls 
+						reclaim trust, awareness, alignment and acceptance 
+						through authentic experience, guidance and connection.
+					</div>
+					<div className={classes.social}>
+						<div className={classes.socialIcons}>
+							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+						</div>
+						<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>
+					</div>
+					<div className={classes.links}>
+						<a className={classnames(classes.link, classes.secure)} href='#'>About Us</a>
+						<a className={classnames(classes.link, classes.secure)} href='#'>Privacy Policy</a>
+						<a className={classnames(classes.link, classes.secure)} href='#'>Disclaimer</a>
+						<a className={classnames(classes.link, classes.secure)} href='#'>Terms + Conditions</a>
+					</div>
+				</div>	
+			</div>	
 		)
 	}
 }
 
 const styles = createStyles({
-	footer: {	
+	parentContainer: {
 		backgroundColor: 'black',
 		color: 'white',
 		height: 200,
 		width: '100%',
+		display: 'flex',
+		flexFlow: 'column nowrap',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	footer: {	
+		width: '100%',
+		height: '100%',
 		display: 'flex',
 		flexFlow: 'row nowrap',
 		justifyContent: 'space-evenly',

@@ -89,13 +89,13 @@ app.get('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
 	res.json(r)
 }))
 
-app.get('/api/blogs/user/:id', authenticate, asyncMiddleware(async (req, res)=> {
+app.get('/api/blogs/user/:id', async (req, res)=> {
 	console.log(req.body)
 	let r = await db.Blog.findAll({where: {userId: req.params.id}})
 	res.json(r)
-}))
+})
 
-app.patch('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
+app.patch('/api/blogs/:id', async (req, res)=> {
 	console.log(req.body)
 	let r = await db.Blog.update({
 		title: req.body.title,
@@ -107,7 +107,7 @@ app.patch('/api/blogs/:id', authenticate, asyncMiddleware(async (req, res)=> {
 		render: req.body.render,
 		}, {where: {id: req.params.id}})
 	res.json(r)
-}))
+})
 
 app.post('/api/blogs/create', authenticate, asyncMiddleware(async (req, res)=> {
 	console.log(req.body)

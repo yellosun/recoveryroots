@@ -3,7 +3,7 @@ import { Route, Link, Redirect } from 'react-router-dom'
 import classnames from 'classnames'
 import Home from './home/Home'
 import About from './About'
-import Blog from './Blog'
+import Blogs from './Blogs'
 import Contact from './Contact'
 import Community from './Community'
 import logo from '../../styles/imgs/transparent-logo.png'
@@ -67,7 +67,7 @@ class NavBar extends Component<Props> {
 				<div className={classes.contentContainer}>
 					<Route path='/' exact component={Home} />
 					<Route path='/about' exact component={About} />
-					<Route path='/blog' component={Blog} />
+					<Route path='/blog' component={Blogs} />
 					<Route path='/community' component={Community} />
 					<Route path='/contact' exact component={Contact} />
 				</div>

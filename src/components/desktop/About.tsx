@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import stacy from '../../styles/imgs/stacy.jpg'
+import violet from '../../styles/imgs/violet.jpg'
 import logo from '../../styles/imgs/transparent-logo.png'
 import Footer from '../Footer'
 
@@ -16,7 +17,7 @@ class About extends Component<Props, State> {
 				
 
 					{/* S+V */}
-					<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 20}}>
+					<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 20, maxWidth: 1200, width: '100%'}}>
 						<div className={classes.person} style={{backgroundColor: '#d4e8d466'}}>
 						<div className={classes.name}>intent</div>
 							<div className={classes.snippet}>
@@ -27,7 +28,7 @@ class About extends Component<Props, State> {
 					</div>
 
 					{/* Stacy */}
-					<div style={{display: 'flex', height: 300, padding: 20}}>
+					<div style={{display: 'flex', height: 300, padding: 20, maxWidth: 1200, width: '100%'}}>
 						<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
 						<div className={classes.person}>
 							<div className={classes.name}>stacy</div>
@@ -38,14 +39,14 @@ class About extends Component<Props, State> {
 					</div>
 
 					{/* Violet */}
-					<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 20}}>
+					<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 20, maxWidth: 1200, width: '100%'}}>
 						<div className={classes.person} style={{backgroundColor: 'aliceblue'}}>
 							<div className={classes.name}>violet</div>
 							<div className={classes.snippet}>
 								My purpose is to be a validating witness and source of empowering hope that you can also choose a life you have deserved since birth, a life of unwavering acceptance and unconditional love. Through experience, study, trial and much error, I am here to share what I have learned as a continuous student on the path of recovery and self-discovery.
 							</div>
 						</div>
-						<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
+						<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile}/></div>
 					</div>
 
 					<Footer />
@@ -60,10 +61,12 @@ const styles = createStyles({
 		width: '100%',
 		display: 'flex',
 		flexFlow: 'column nowrap',
+		alignItems: 'center',
 		backgroundColor: 'seashell'
 	},
 	profile: {
 		borderRadius: '100%',
+		filter: 'grayscale(90%)'
 	},
 	name: {
 		fontSize: '3em',

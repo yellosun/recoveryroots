@@ -38,7 +38,7 @@ class Blog extends Component<Props, State> {
 		const {category} = this.state
 			
 		if (category === 'most recent') {
-			return blogs.reverse().slice(0, 9).map((b:any)=> {
+			return blogs.slice(0, 9).map((b:any)=> {
 				return (
 					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
 						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
@@ -53,7 +53,7 @@ class Blog extends Component<Props, State> {
 			})
 		} else if (category.includes('violet') || category.includes('stacy')) {
 			let blogz = blogs.filter((b: any)=> b.category === category)
-			return blogz.reverse().map((b:any)=> {
+			return blogz.map((b:any)=> {
 				return (
 					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
 						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
@@ -68,7 +68,7 @@ class Blog extends Component<Props, State> {
 			})
 		} else {
 			let blogz = blogs.filter((b: any)=> b.category === category)
-			return blogz.reverse().map((b:any)=> {
+			return blogz.map((b:any)=> {
 				return (
 					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
 						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>

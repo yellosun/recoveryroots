@@ -15,15 +15,30 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 
 interface Props {classes: any, history:any}
+interface State {}
 
-class NavBar extends Component<Props> {
+class NavBar extends Component<Props, State> {
+
+	state = {
+		scroll: 0
+	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', ()=> this.setState({scroll: window.scrollY}) )
+	}
+
+	componentShouldUpdate(prevProps:any, prevState:any) {
+		if (window.scrollY === 0) {
+			this.setState({scroll: false})
+		}
+	}
 
 	render() {
 		const {classes, history} = this.props
 		const path = history.location.pathname
 		return (
 			<Fragment>
-				<div className={classes.navbar}>
+				<div className={this.state.scroll > 0 ? classnames(classes.navbar, classes.scrolled) : classes.navbar} >
 						<Link
 							to='/about' 
 							className={path === '/about' ? 
@@ -108,6 +123,10 @@ const styles = createStyles({
 	},
 	path: {
 		borderBottom: '1px solid black',
+	},
+	scrolled: {
+		backgroundColor: 'rgba(0,0,0,.1)',
+		paddingBottom: 10
 	}
 })
 

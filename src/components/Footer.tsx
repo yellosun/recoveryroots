@@ -23,8 +23,8 @@ class Footer extends Component<Props, State> {
 					</div>
 					<div className={classes.social}>
 						<div className={classes.socialIcons}>
-							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
-							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+							<a className={classes.link} href='https://www.facebook.com/EDRecoveryRoots/'><Mail height={25} /></a>
+							<a className={classes.link} href='https://www.instagram.com/edrecoveryroots/'><Mail height={25} /></a>
 							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
 						</div>
 						<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>

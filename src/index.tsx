@@ -33,7 +33,7 @@ checkToken()
 })
 .then(blogs=> {
 	if (blogs) {
-		blogs.forEach((blog:any)=> {
+		blogs.reverse().forEach((blog:any)=> {
 			if (blog.render) {
 				store.dispatch(setBlog(blog))
 			}

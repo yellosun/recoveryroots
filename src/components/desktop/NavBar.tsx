@@ -27,11 +27,8 @@ class NavBar extends Component<Props, State> {
 		window.addEventListener('scroll', ()=> this.setState({scroll: window.scrollY}) )
 	}
 
-	componentShouldUpdate(prevProps:any, prevState:any) {
-		if (window.scrollY === 0) {
-			this.setState({scroll: false})
-		}
-	}
+
+
 
 	render() {
 		const {classes, history} = this.props

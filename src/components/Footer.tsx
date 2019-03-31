@@ -2,7 +2,10 @@ import React, { Component, Fragment } from 'react'
 import classnames from 'classnames'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import logo from '../styles/imgs/transparent-logo.png'
+import insta from '../styles/imgs/insta.png'
+import fb from '../styles/imgs/fb.png'
 import Mail from '@material-ui/icons/Mail'
+
 interface Props {classes: any}
 interface State {}
 
@@ -23,8 +26,8 @@ class Footer extends Component<Props, State> {
 					</div>
 					<div className={classes.social}>
 						<div className={classes.socialIcons}>
-							<a className={classes.link} href='https://www.facebook.com/EDRecoveryRoots/'><Mail height={25} /></a>
-							<a className={classes.link} href='https://www.instagram.com/edrecoveryroots/'><Mail height={25} /></a>
+							<a className={classes.link} href='https://www.facebook.com/EDRecoveryRoots/'><img src={fb} alt='gb' height={18} /></a>
+							<a className={classes.link} href='https://www.instagram.com/edrecoveryroots/'><img src={insta} alt='insta' height={18} /></a>
 							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
 						</div>
 						<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>
@@ -71,6 +74,7 @@ const styles = createStyles({
 	    width: '98%',
 	    display: 'flex',
 	    justifyContent: 'space-evenly',
+	    alignItems: 'center'
 	},
 	links: {
 		display: 'flex',

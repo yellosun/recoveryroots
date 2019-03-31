@@ -40,8 +40,8 @@ class Blog extends Component<Props, State> {
 		if (category === 'most recent') {
 			return blogs.slice(0, 9).map((b:any)=> {
 				return (
-					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
-						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}} key={b.id}>
+						<Card className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
 							<div className={classes.blogTitle}>
 								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
 								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
@@ -52,11 +52,13 @@ class Blog extends Component<Props, State> {
 				)
 			})
 		} else if (category.includes('violet') || category.includes('stacy')) {
-			let blogz = blogs.filter((b: any)=> b.category === category)
+			let blogz = blogs.filter((b: any)=> {
+				return category.includes('violet') ? b.author.includes('Violet') : b.author.includes('Stacy')
+			})
 			return blogz.map((b:any)=> {
 				return (
-					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
-						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}} key={b.id}>
+						<Card className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
 							<div className={classes.blogTitle}>
 								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
 								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
@@ -70,8 +72,8 @@ class Blog extends Component<Props, State> {
 			let blogz = blogs.filter((b: any)=> b.category === category)
 			return blogz.map((b:any)=> {
 				return (
-					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}}>
-						<Card key={b.id} className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
+					<Link to={`/blog/${b.uri}`} style={{textDecoration: 'none'}} key={b.id}>
+						<Card className={classes.blogCard} style={{backgroundImage: `url(${b.headerImg})`, backdropFilter: 'grayscale()'}}>
 							<div className={classes.blogTitle}>
 								<div style={{fontSize: '.8em', letterSpacing: 1}}>{b.title}</div>
 								<div style={{fontSize: '.6em', padding: '3px 0 6px'}}>{moment(b.createdAt).format('llll')}</div>
@@ -121,7 +123,7 @@ const styles = createStyles({
 	},
 	blogCard: {
 		backgroundPosition: 'center',
-		height: 150,
+		height: 250,
 		width: 250,
 		margin: 20,
 		backgroundSize: 'cover',
@@ -129,13 +131,13 @@ const styles = createStyles({
 		flexFlow: 'column wrap',
 		justifyContent: 'flex-end',
 		cursor: 'pointer',
-		borderRadius: 0
+		borderRadius: '100%'
 	},
 	blogTitle: {
 		backgroundColor: 'black',
-		width: '92%',
-		height: '40%',
-		padding: 10,
+		width: '76%',
+		height: '45%',
+		padding: 30,
 		color: 'white',
 		bottom: 0,
 		fontSize: '.8em',
@@ -146,7 +148,8 @@ const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'row wrap',
 		justifyContent: 'center',
-		margin: '120px 40px 60px'
+		margin: '120px 40px 60px',
+		backgroundColor: 'mintcream'
 	},
 	catTitle: {
 		fontWeight: 'bold',

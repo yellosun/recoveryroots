@@ -15,7 +15,7 @@ class About extends Component<Props, State> {
 		return (
 			<div className={classes.parentContainer}>
 				{/* S+V */}
-				<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '100%'}}>
+				<div style={{display: 'flex', height: 300, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '96%'}}>
 					<div className={classes.person} style={{backgroundColor: '#d4e8d466'}}>
 					<div className={classes.name}>intent</div>
 						<div className={classes.snippet}>
@@ -26,7 +26,7 @@ class About extends Component<Props, State> {
 				</div>
 
 				{/* Stacy */}
-				<div style={{display: 'flex', height: 300, padding: 18, maxWidth: 1200, width: '100%'}}>
+				<div style={{display: 'flex', height: 300, padding: 18, maxWidth: 1200, width: '96%'}}>
 					<div><img alt='stacy' src={stacy} height={250} width={250} className={classes.profile}/></div>
 					<div className={classes.person}>
 						<div className={classes.name}>stacy</div>
@@ -37,7 +37,7 @@ class About extends Component<Props, State> {
 				</div>
 
 				{/* Violet */}
-				<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '100%'}}>
+				<div style={{display: 'flex', height: 400, justifyContent: 'flex-end', padding: 18, maxWidth: 1200, width: '96%'}}>
 					<div className={classes.person} style={{backgroundColor: 'aliceblue'}}>
 						<div className={classes.name}>violet</div>
 						<div className={classes.snippet}>

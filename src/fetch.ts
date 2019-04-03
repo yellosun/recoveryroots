@@ -1,3 +1,7 @@
+require('dotenv/config')
+
+console.log('ENV ENV ENV', process.env)
+
 //----------->
 // JWT Routes
 //----------->
@@ -158,4 +162,11 @@ function getHeaders(): any {
             "Content-Type": "application/json",
         }
     }
+}
+
+export async function getInsta() {
+    let r = await fetch(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${process.env.REACT_APP_INSTA_TOKEN}`)
+    let instaObj = await r.json()
+    
+    return instaObj.data
 }

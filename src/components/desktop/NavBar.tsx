@@ -123,7 +123,8 @@ const styles = createStyles({
 	},
 	scrolled: {
 		backgroundColor: 'rgba(0,0,0,.1)',
-		paddingBottom: 10
+		paddingBottom: 10,
+		zIndex: 1
 	}
 })
 

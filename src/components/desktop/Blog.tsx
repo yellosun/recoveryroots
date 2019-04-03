@@ -53,8 +53,14 @@ const styles = createStyles({
 	},
 	title: {
 	    fontWeight: 'bold',
-	    fontSize: '2em',
-	    padding: '20px 0'
+	    fontSize: '2.5em',
+	    padding: '20px',
+	    backgroundColor: 'black',
+	    color: 'white',
+	    margin: '20px 0',
+	    lineHeight: 'initial',
+	    letterSpacing: 2,
+
 	},
 	time: {
 		display: 'flex',

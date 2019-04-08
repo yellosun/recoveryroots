@@ -170,3 +170,22 @@ export async function getInsta() {
     
     return instaObj.data
 }
+
+export async function mailSignup(email:string, FNAME:string, LNAME:string) {
+    let r = await fetch(`https://us18.api.mailchimp.com/3.0/${process.env.REACT_APP_MEMBER_LIST}/lists`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Data ${process.env.REACT_APP_MAILCHIMP_API_KEY}`
+        },
+        body: JSON.stringify({
+            email_address: email,
+            status: 'subscribed',
+            merge_fields: { FNAME, LNAME }
+        })
+    } )
+
+    let mailchimp = await r.json()
+    
+    return mailchimp
+}

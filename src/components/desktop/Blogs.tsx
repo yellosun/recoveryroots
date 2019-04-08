@@ -148,8 +148,8 @@ const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'row wrap',
 		justifyContent: 'center',
-		margin: '120px 40px 60px',
-		backgroundColor: 'mintcream'
+		margin: '100px 40px 60px',
+		// backgroundColor: 'mintcream'
 	},
 	catTitle: {
 		fontWeight: 'bold',
@@ -162,10 +162,13 @@ const styles = createStyles({
 
 	},
 	cat: {
-		paddingBottom: 3,
-		margin: '15px 30px',
+		margin: '5px 10px',
+		padding: '12px 20px 8px',
 		cursor: 'pointer',
-		fontSize: '.8em'
+		fontSize: '.7em',
+		letterSpacing: 2,
+		backgroundColor: 'white',
+		borderRadius: 3,
 	}
 })
 

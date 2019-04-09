@@ -4,6 +4,9 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const HTTPError = require('./util/HTTPError')
 
+const Mailchimp = require('mailchimp-api-v3')
+const mailchimp = new Mailchimp(process.env.MAILCHIMP_API_KEY)
+
 const db = require('./db/models')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
@@ -27,6 +30,27 @@ db.sequelize.sync()
 
 const asyncMiddleware = fn => (req, res, next) => { Promise.resolve(fn(req, res, next)).catch(next) }
 
+//------------------->
+// Mailchimp
+//------------------->
+
+app.post('/mailing-list', (req, res)=> {
+	mailchimp.post(`/lists/${process.env.MEMBER_LIST}/members`, {
+		email_address: req.body.email_address,
+		status: 'subscribed',
+	    merge_fields: {
+	    	FNAME: req.body.FNAME,
+	    	LNAME: req.body.LNAME
+	    }
+	})
+	.then((response) => {
+		return res.status(200).json({ response })
+	})
+	.catch((err)=> {
+		console.log(err)
+		return res.status(err.status).json({ error: err.detail })
+	})
+})
 
 //----------->
 // User Routes
@@ -42,7 +66,6 @@ app.get('/api/users', authenticate, asyncMiddleware(async (req, res)=> {
 }))
 
 app.post('/api/signup', (req, res)=> {
-	console.log(req.body)
 	db.User.create({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
@@ -71,6 +94,7 @@ app.get('/api/users/:id', authenticate, asyncMiddleware(async (req, res)=> {
 	let r = await db.User.findAll({where: {id: req.params.id}})
 	res.json(r)
 }))
+
 
 
 //----------->
@@ -146,7 +170,6 @@ app.delete('/api/blogs/delete/:id', authenticate, asyncMiddleware(async (req, re
 app.get("/checktoken", authenticate, async (req, res) => {
 	res.json(req.user)
 })
-
 
 function passportAuthenticateAsync(strategy, req, res, next) {
     return new Promise((resolve, reject) => {

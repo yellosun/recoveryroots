@@ -14,8 +14,10 @@ import CheckCircle from '@material-ui/icons/CheckCircle'
 import Mail from '@material-ui/icons/Mail'
 import Face from '@material-ui/icons/Face'
 import Footer from '../../Footer'
+import { mailchimp } from '../../../fetch'
 
 interface Props {classes: any}
+interface State {email: string, name: string, msg:string, err:string}
 
 const ebookArr = [
 	'Learn more about the roots of recovery and how they transform your healing.',
@@ -25,9 +27,44 @@ const ebookArr = [
 
 class Home extends Component<Props> {
 
-	handleSubmit = (e:any) => {
+	state = {
+		name: '',
+		email: '',
+		msg: '',
+		err: ''
+	}
+
+	handleNameChange = (e:any) => {
+		this.setState({ name: e.target.value, msg: '' })
+	}
+
+	handleEmailChange = (e:any) => {
+		this.setState({ email: e.target.value, msg: '' })
+	}
+	
+	handleSubmit = async (e:any) => {
 		e.preventDefault()
-		console.log('submitt')
+		let name = this.state.name.replace(/\b\w/g, l => l.toUpperCase()).split(' ')
+		let firstName = name[0]
+		let lastName = ''
+
+		if (name.length > 1) {
+			name.shift()
+			lastName = name.join(' ')
+		}
+
+		let data = await mailchimp(this.state.email, firstName, lastName)
+		if (data.response) {
+			this.setState({msg: 'Your book is on the way! Thank you for committing to you.'})
+		}
+
+		if (!data.ok) {
+			if (data.error.includes('already')) {
+				this.setState({err: 'Mmm, looks like this email is already taken.'})
+			} else {
+				this.setState({err: 'Oops! Something went wrong. Please try again.'})
+			}
+		}
 	}
 
 	render() {
@@ -51,7 +88,7 @@ class Home extends Component<Props> {
 					</Grid>
 					<Grid item xs={6} style={{textAlign: 'center', justifyContent: 'center', display: 'flex',}}>
 						<Card className={classes.ebookCard}>
-							<form>
+							<form onSubmit={this.handleSubmit}>
 								<img src={ebookImg} height={250} width={'auto'} />
 								<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
 								<List style={{listStyleImage: `url(${CheckCircle})`}}>
@@ -69,16 +106,21 @@ class Home extends Component<Props> {
 								<Grid item>
 									<TextField style={{width: '100%'}}
 										label="name"
-										onChange={this.handleSubmit}
+										required
+										onChange={this.handleNameChange}
 									/>
 								</Grid>
 								<Grid item>
 									<TextField style={{width: '100%', marginTop: 10}}
 										label="email"
-										onChange={this.handleSubmit}
+										type="email"
+										required
+										onChange={this.handleEmailChange}
 									/>
 								</Grid>
 								<Button type='submit' className={classes.submitBtn}>grab my copy</Button>
+								{this.state.msg ? <div style={{margin: '15px 0 -20px', color: 'darkolivegreen'}}>{this.state.msg}</div> : null}
+								{this.state.err ? <div style={{margin: '15px 0 -20px', color: '#b3190d'}}>{this.state.err}</div> : null}
 							</form>
 						</Card>
 					</Grid>

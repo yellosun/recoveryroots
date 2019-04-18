@@ -44,16 +44,8 @@ class Home extends Component<Props> {
 	
 	handleSubmit = async (e:any) => {
 		e.preventDefault()
-		let name = this.state.name.replace(/\b\w/g, l => l.toUpperCase()).split(' ')
-		let firstName = name[0]
-		let lastName = ''
 
-		if (name.length > 1) {
-			name.shift()
-			lastName = name.join(' ')
-		}
-
-		let data = await mailchimp(this.state.email, firstName, lastName)
+		let data = await mailchimp(this.state.email, this.state.name)
 		if (data.response) {
 			this.setState({msg: 'Your book is on the way! Thank you for committing to you.'})
 		}
@@ -82,7 +74,7 @@ class Home extends Component<Props> {
 				<FourBodies />
 				
 				{/* eBook Sign Up */}
-				<Grid item xs={12} className={classnames(classes.ebookContainer)}>
+				<Grid item xs={12} className={classnames(classes.ebookContainer)} id='free-workbook'>
 					<Grid item xs={6} style={{height: '100%'}}>
 						<div className={classes.middle}></div>
 					</Grid>

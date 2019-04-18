@@ -15,3 +15,15 @@
 .markdown a {
 	color: black;
 }
+
+a {
+	color: cadetblue;
+}
+
+.MuiInput-underline-86:after {
+	border-bottom: 2px solid black !important;
+}
+
+.MuiFormLabel-root-297.MuiFormLabel-focused-298 {
+	color: black !important;
+}

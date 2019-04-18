@@ -171,7 +171,15 @@ export async function getInsta() {
     return instaObj.data
 }
 
-export async function mailchimp(email_address:string, FNAME:string, LNAME:string) {
+export async function mailchimp(email_address:string, name:string) {
+    let nameArr = name.replace(/\b\w/g, l => l.toUpperCase()).split(' ')
+        let FNAME = nameArr[0]
+        let LNAME = ''
+
+        if (nameArr.length > 1) {
+            nameArr.shift()
+            LNAME = nameArr.join(' ')
+        }
     let r = await fetch(`/mailing-list`, {
         method: 'POST',
         headers: getHeaders(),

@@ -83,7 +83,7 @@ class Home extends Component<Props> {
 							<form onSubmit={this.handleSubmit}>
 								<img src={ebookImg} height={250} width={'auto'} />
 								<div className={classes.ebookTitle}><span style={{color: 'darkgray'}}>FREE</span> Recovery Workbook</div>
-								<List style={{listStyleImage: `url(${CheckCircle})`}}>
+								<List style={{listStyleImage: `url(${CheckCircle})`, fontSize: 14}}>
 									{ebookArr.map((text:string)=> {
 										return (
 											<ListItem key={text} style={{fontStyle: 'oblique', padding: '10px 0'}}>
@@ -191,11 +191,11 @@ const styles = createStyles({
 	},
 	ebookCard: {
 		padding: '40px 60px',
-		width: '40%',
+		maxWidth: '60%',
 	},
 	ebookTitle: {
 		fontWeight: 'bold',
-		fontSize: '2em',
+		fontSize: '1.8em',
 		padding: '20px 0 10px'
 	},
 	submitBtn: {

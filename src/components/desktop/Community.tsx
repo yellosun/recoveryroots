@@ -99,7 +99,7 @@ class Community extends Component<Props, State> {
 							<div style={{fontWeight: 'bold', fontSize: '1em', textAlign: 'center'}}>Dearest soul,</div>
 							<div style={{margin: '15px 0'}}>It grieves our hearts that we happen to meet under such heavy, overwhelming and often terrifying circumstances. However, we are quickly relieved to know that incredible things blossom from the impossibly dark.</div>
 							<div style={{margin: '15px 0'}}>We have been traveling the road you may be finding yourself on and want to provide a hand, a friend, a guiding light to a home you have always dreamed possible. You are worthy of acceptance. You are worthy of love. You are worthy of connection, healing, and a meaningful life.</div>
-							<div style={{margin: '15px 0'}}>Our hope is that the resources provided in our <a href='#mailing-list'>bimonthly email</a> serve as reflection and connection supports. We are so grateful that you found us and, even more, for your committment to yourself.
+							<div style={{margin: '15px 0'}}>Our hope is that the resources provided in our <a href='#digital-tribe'>bimonthly email</a> serve as reflection and connection supports. We are so grateful that you found us and, even more, for your committment to yourself.
 							</div>
 							<div style={{margin: '15px 0'}}>You are already so powerful and enough, there's truly nothing you can't do. Whether you sign up for our digital tribe or not, you are always safe, always accepted, and always supported here.</div>
 							<div style={{margin: '15px 0'}}>Know that we see you and are honored to witness your light.</div>	
@@ -109,7 +109,7 @@ class Community extends Component<Props, State> {
 					</Card>
 				</div>
 
-				<div id='mailing-list' className={classes.formContainer}>
+				<div id='digital-tribe' className={classes.formContainer}>
 					<Card className={classes.formCard}>	
 						{/*<List style={{display: 'flex', maxWidth: 400}}>
 							<ListItem>
@@ -263,7 +263,7 @@ const styles = createStyles({
 		justifyContent: 'center',
 	},
 	card: {
-		padding: '40px',
+		padding: '40px 60px',
 		maxWidth: '40%',
 	},
 	note: {

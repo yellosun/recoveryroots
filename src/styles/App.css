@@ -20,7 +20,7 @@ a {
 	color: cadetblue;
 }
 
-.MuiInput-underline-86:after {
+.MuiInput-underline:after {
 	border-bottom: 2px solid black !important;
 }
 

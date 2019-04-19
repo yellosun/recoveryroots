@@ -12,7 +12,6 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Person from '@material-ui/icons/Person'
 import Mail from '@material-ui/icons/Mail'
-import CheckCircle from '@material-ui/icons/CheckCircle'
 import LocalFlorist from '@material-ui/icons/LocalFlorist'
 import Terrain from '@material-ui/icons/Terrain'
 import FilterVintage from '@material-ui/icons/FilterVintage'
@@ -22,9 +21,10 @@ import Spa from '@material-ui/icons/Spa'
 import { getInsta } from '../../fetch'
 import heart from '../../styles/imgs/heart.png'
 import signatures from '../../styles/imgs/signatures.png'
+import { mailchimp } from '../../fetch'
 
 interface Props {classes: any}
-interface State {name:string, email:string, imgs:Array<string>, img:object}
+interface State {name:string, email:string, imgs:Array<string>, img:object, error:string|null, success:string|null}
 
 class Community extends Component<Props, State> {
 
@@ -32,7 +32,9 @@ class Community extends Component<Props, State> {
 		imgs: [],
 		img: {},
 		name: '',
-		email: ''
+		email: '',
+		success: null,
+		error: null,
 	}
 
 	componentDidMount() {
@@ -43,10 +45,6 @@ class Community extends Component<Props, State> {
 
 	handleImgHover = (img:any) => {
 		this.setState({img})
-	}
-
-	handleChange = () => {
-
 	}
 
 	renderInstaImgs = () => {
@@ -71,8 +69,24 @@ class Community extends Component<Props, State> {
 		})
 	}
 
-	handleSubmit = () => {
+	handleSubmit = async (event:any) => {
+		event.preventDefault()
+		console.log(this.state.name,this.state.email)
+		this.setState({error: null, success: null})
 
+		let data = await mailchimp(this.state.email, this.state.name)
+		console.log(data)
+		if (data.response) {
+			this.setState({success: 'Welcome to the digital tribe! We are excited to share this wild, beautiful journey with you.'})
+		}
+
+		if (data.error) {
+			if (data.error.includes('already')) {
+				this.setState({error: 'Mmm, looks like this email is already taken.'})
+			} else {
+				this.setState({error: 'Oops! Something went wrong. Please try again.'})
+			}
+		}
 	}
 
 	render() {
@@ -82,87 +96,81 @@ class Community extends Component<Props, State> {
 				<div className={classes.signUpContainer}>
 					<Card className={classes.card}>
 						<div className={classes.note}>
-							<div style={{fontWeight: 'bold', fontSize: '1em'}}>Dearest soul,</div>
+							<div style={{fontWeight: 'bold', fontSize: '1em', textAlign: 'center'}}>Dearest soul,</div>
 							<div style={{margin: '15px 0'}}>It grieves our hearts that we happen to meet under such heavy, overwhelming and often terrifying circumstances. However, we are quickly relieved to know that incredible things blossom from the impossibly dark.</div>
 							<div style={{margin: '15px 0'}}>We have been traveling the road you may be finding yourself on and want to provide a hand, a friend, a guiding light to a home you have always dreamed possible. You are worthy of acceptance. You are worthy of love. You are worthy of connection, healing, and a meaningful life.</div>
 							<div style={{margin: '15px 0'}}>Our hope is that the resources provided in our <a href='#mailing-list'>bimonthly email</a> serve as reflection and connection supports. We are so grateful that you found us and, even more, for your committment to yourself.
 							</div>
 							<div style={{margin: '15px 0'}}>You are already so powerful and enough, there's truly nothing you can't do. Whether you sign up for our digital tribe or not, you are always safe, always accepted, and always supported here.</div>
 							<div style={{margin: '15px 0'}}>Know that we see you and are honored to witness your light.</div>	
-							<div style={{margin: '15px 0'}}>With love and hope,</div>
+							<div style={{margin: '15px 0', textAlign: 'center', marginTop: 20}}>With love and hope,</div>
 						</div>
 						<img src={signatures} alt='signatures' width={200}/>
 					</Card>
 				</div>
 
 				<div id='mailing-list' className={classes.formContainer}>
-					<div className={classes.formTitle}>Join the Digital Tribe</div>
-					<List style={{display: 'flex'}}>
-						<ListItem>
-							<ListItemIcon>
-								<Terrain style={{fill: 'black'}}/>
-							</ListItemIcon>							
-						</ListItem>
-						<ListItem>
-							<ListItemIcon>
-								<LocalFlorist style={{fill: 'black'}}/>
-							</ListItemIcon>
-						</ListItem>
-						<ListItem>
-							<ListItemIcon>
-								<WbCloudy style={{fill: 'black'}}/>
-							</ListItemIcon>
-						</ListItem>
-						<ListItem>
-							<ListItemIcon>
-								<Spa style={{fill: 'black'}}/>
-							</ListItemIcon>
-						</ListItem>
-						<ListItem>
-							<ListItemIcon>
-								<FilterVintage style={{fill: 'black'}}/>
-							</ListItemIcon>
-						</ListItem>
-						<ListItem>
-							<ListItemIcon>
-								<Brightness2 style={{fill: 'black'}}/>
-							</ListItemIcon>
-						</ListItem>
-					</List>
-					<div style={{maxWidth: 500, fontSize: 11, padding: 40, textAlign: 'justify'}}>
-						In our bimonthly email, you will find personal (<a href='/about#stacy'>Stacy</a> or <a href='/about#violet'>Violet</a>) updates related to recovery, new blogs or program updates, or eating disorder recovery resources. These resources are selected based on industry best practices, compassion-centered healing, embodiment and connection. We only send tools we can personally attest to the sustainable benefit. If you have any questions or no feel aligned with the resources or content, please <a href='mailto:edrecoveryroots@gmail.com'>send us an email</a> or unsubscribe at any time.
-					</div>
-					<form className={classes.signUpForm} onSubmit={this.handleSubmit}>
-						<div style={{display: 'flex', flexFlow: 'row nowrap'}}>
-							<TextField style={{width: '100%', marginRight: 30}}
-								placeholder="name"
-								onChange={this.handleChange}
-								InputProps={{
-						          startAdornment: (
-						            <InputAdornment position="start">
-						              <Person className={classes.formIcon}/>
-						            </InputAdornment>
-						          ),
-						        }}
-							/>
-							<TextField style={{width: '100%'}}
-								placeholder="email"
-								onChange={this.handleChange}
-								InputProps={{
-						          startAdornment: (
-						            <InputAdornment position="start">
-						              <Mail className={classes.formIcon}/>
-						            </InputAdornment>
-						          ),
-						        }}
-							/>
-						</div>
+					<Card className={classes.formCard}>	
+						{/*<List style={{display: 'flex', maxWidth: 400}}>
+							<ListItem>
+								<Terrain style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+							<ListItem>
+								<LocalFlorist style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+							<ListItem>
+								<WbCloudy style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+							<ListItem>
+								<Spa style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+							<ListItem>
+								<FilterVintage style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+							<ListItem>
+								<Brightness2 style={{fill: 'black', margin: 0}}/>
+							</ListItem>
+						</List>*/}
+						
+						<div className={classes.formTitle}>Join the Digital Tribe</div>
 
-						<Button size='small' className={classes.formBtn} type='submit'>Get recovery resources</Button>
-					</form>
+						<div style={{maxWidth: 500, fontSize: 11, padding: '20px 40px 0', textAlign: 'justify'}}>
+							In our bimonthly email, you will find personal (<a href='/about#stacy'>Stacy</a> and/or <a href='/about#violet'>Violet</a>) experiences related to recovery, new blogs or program updates, and eating disorder recovery related resources.<br/><br/>These resources are selected based on industry best practices, compassion-centered healing, embodiment and connection. We only send tools, tips and guides we can personally attest to the transformative and sustainable benefit. <br/><br/>That being said, we are not liscensed professionals and these materials do not substitute for medical or professional counseling. If you wish to no longer recieve content for any reason, you can unsubscribe any time or way you need.
+						</div>
+						<form className={classes.signUpForm} onSubmit={this.handleSubmit}>
+							<div>
+							<div style={{display: 'flex', flexFlow: 'row nowrap'}}>
+								<TextField style={{width: '100%', marginRight: 30}}
+									placeholder="name"
+									onChange={(e:any)=> this.setState({name: e.target.value})}
+									InputProps={{
+							          startAdornment: (
+							            <InputAdornment position="start">
+							              <Person className={classes.formIcon}/>
+							            </InputAdornment>
+							          ),
+							        }}
+								/>
+								<TextField style={{width: '100%'}}
+									placeholder="email"
+									onChange={(e:any)=> this.setState({email: e.target.value})}
+									InputProps={{
+							          startAdornment: (
+							            <InputAdornment position="start">
+							              <Mail className={classes.formIcon}/>
+							            </InputAdornment>
+							          ),
+							        }}
+								/>
+							</div>
+							</div>
+							<Button size='small' className={classes.formBtn} type='submit'>Get recovery resources</Button>
+							{this.state.success ? <div className={classes.msg} style={{backgroundColor: '#537764'}}>{this.state.success}</div> : null}
+							{this.state.error ? <div className={classes.msg} style={{backgroundColor: '#7d2828'}}>{this.state.error}</div> : null}
+						</form>
+					</Card>
 				</div>
 
-				
 				<div className={classes.instaContainer}>
 					<GridList className={classnames(classes.instaContainer, 'scrollbar')} cols={4.5}>
 						{this.renderInstaImgs()}
@@ -174,6 +182,15 @@ class Community extends Component<Props, State> {
 }
 
 const styles = createStyles({
+	msg: {
+		position: 'absolute',
+		bottom: 0,
+		width: '100%',
+		color: 'white',
+		fontSize: 11,
+		textAlign: 'center',
+		padding: '12px 0'
+	},
 	commContainer: {
 		backgroundColor: 'seashell',
 		width: '100%',
@@ -246,8 +263,8 @@ const styles = createStyles({
 		justifyContent: 'center',
 	},
 	card: {
-		padding: 60,
-		maxWidth: '40%'
+		padding: '40px',
+		maxWidth: '40%',
 	},
 	note: {
 		lineHeight: 2,
@@ -263,26 +280,43 @@ const styles = createStyles({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	formCard: {
+		backgroundImage: 'url(https://images.pexels.com/photos/916336/pexels-photo-916336.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		backgroundSize: 'cover',
+		backgroundPositionY: '-90px',
+		height: 500,
+		display: 'flex',
+		flexFlow: 'column nowrap',
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'relative',
+	},
 	formTitle: {
 		letterSpacing: 10,
 		backgroundColor: 'black',
-		padding:'10px 20px',
-		color: 'white'
+		padding: '20px 0',
+		width: '100%',
+		textAlign: 'center',
+		color: 'white',
+		position: 'absolute',
+		top: 0
 	},
 	signUpForm: {
 		display: 'flex',
 		flexFlow: 'column nowrap',
 		alignItems: 'center',
 		justifyContent: 'center',
+		maxWidth: 500,
+		padding: '40px 0'
 	},
 	formIcon: {
 		height: '.7em !important'
 	},
 	formBtn: {
-		width: '100%',
 		textTransform: 'lowercase',
-		backgroundColor: '#324e3f',
-		padding: '8px 5px',
+		// backgroundColor: '#324e3f',
+		backgroundColor: '#866c09',
+		padding: '12px 20px',
 		letterSpacing: 2,
 		color: 'white',
 		marginTop: 40

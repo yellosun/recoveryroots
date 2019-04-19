@@ -33,8 +33,8 @@ class About extends Component<Props, State> {
 					<div className={classes.person}>
 						<div className={classes.name}>stacy</div>
 						<div className={classes.snippet}>
-							<div style={{marginBottom: 10}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/living_vulnerably/'><img height={20} src={instaBlack} alt='stacy insta' /></a></div>
 							My purpose here is to be a light for you; to show you the tools and methods to help you heal and grow. I am not here to make you do the work or to fix you. My presence here is to guide you to empowering yourself and taking back your life. Each journey and recovery path is different, and my hope is to honor that and help you discover what works best for you.
+							<div style={{marginTop: 15, marginBottom: '-20px'}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/living_vulnerably/'><img height={20} src={instaBlack} alt='stacy insta' /></a></div>
 						</div>
 					</div>
 				</div>
@@ -44,8 +44,8 @@ class About extends Component<Props, State> {
 					<div className={classes.person} style={{backgroundColor: 'aliceblue'}}>
 						<div className={classes.name}>violet</div>
 						<div className={classes.snippet}>
-						<div style={{marginBottom: 10}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/vltmn/'><img height={20} src={instaBlack} alt='violet insta' /></a></div>
 							My purpose is to be a validating witness and source of empowering hope that you can also choose a life you have deserved since birth, a life of unwavering acceptance and unconditional love. Through experience, study, trial and much error, I am here to share what I have learned as a continuous student on the path of recovery and self-discovery.
+						<div style={{marginTop: 15, marginBottom: '-20px'}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/vltmn/'><img height={20} src={instaBlack} alt='violet insta' /></a></div>
 						</div>
 					</div>
 					<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile}/></div>

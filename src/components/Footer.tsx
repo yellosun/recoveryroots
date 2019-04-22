@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import logo from '../styles/imgs/transparent-logo.png'
@@ -33,10 +34,10 @@ class Footer extends Component<Props, State> {
 						<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>
 					</div>
 					<div className={classes.links}>
-						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>About Us</a>
-						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Privacy Policy</a>
-						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Disclaimer</a>
-						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Terms + Conditions</a>
+						<a className={classnames(classes.link, classes.secure)} href='/about'>About Us</a>
+						<Link className={classnames(classes.link, classes.secure)} to='/privacy-policy'>Privacy Policy</Link>
+						<Link className={classnames(classes.link, classes.secure)} to='/disclaimer'>Disclaimer</Link>
+						<Link className={classnames(classes.link, classes.secure)} to='/terms-and-conditions'>Terms + Conditions</Link>
 					</div>
 				</div>	
 			</div>	

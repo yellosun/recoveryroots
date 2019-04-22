@@ -8,6 +8,7 @@ import Blog from './Blog'
 import Contact from './Contact'
 import Community from './Community'
 import Footer from '../Footer'
+import PDFViewer from '../PDFViewer'
 import logo from '../../styles/imgs/transparent-logo.png'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -85,6 +86,9 @@ class NavBar extends Component<Props, State> {
 					<Route path='/blog/:uri' component={Blog} />
 					<Route path='/community' component={Community} />
 					<Route path='/contact' exact component={Contact} />
+					<Route path='/disclaimer' exact render={()=> <PDFViewer type={'disclaimer'}/>} />
+					<Route path='/privacy-policy' exact render={()=> <PDFViewer type={'privacy'}/>} />
+					<Route path='/terms-and-conditions' exact render={()=> <PDFViewer type={'terms'}/>} />
 					<Footer />
 				</div>
 			</Fragment>

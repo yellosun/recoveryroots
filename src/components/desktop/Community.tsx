@@ -12,12 +12,6 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Person from '@material-ui/icons/Person'
 import Mail from '@material-ui/icons/Mail'
-import LocalFlorist from '@material-ui/icons/LocalFlorist'
-import Terrain from '@material-ui/icons/Terrain'
-import FilterVintage from '@material-ui/icons/FilterVintage'
-import WbCloudy from '@material-ui/icons/WbCloudy'
-import Brightness2 from '@material-ui/icons/Brightness2'
-import Spa from '@material-ui/icons/Spa'
 import { getInsta } from '../../fetch'
 import heart from '../../styles/imgs/heart.png'
 import signatures from '../../styles/imgs/signatures.png'
@@ -111,27 +105,6 @@ class Community extends Component<Props, State> {
 
 				<div id='digital-tribe' className={classes.formContainer}>
 					<Card className={classes.formCard}>	
-						{/*<List style={{display: 'flex', maxWidth: 400}}>
-							<ListItem>
-								<Terrain style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-							<ListItem>
-								<LocalFlorist style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-							<ListItem>
-								<WbCloudy style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-							<ListItem>
-								<Spa style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-							<ListItem>
-								<FilterVintage style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-							<ListItem>
-								<Brightness2 style={{fill: 'black', margin: 0}}/>
-							</ListItem>
-						</List>*/}
-						
 						<div className={classes.formTitle}>Join the Digital Tribe</div>
 
 						<div style={{maxWidth: 500, fontSize: 11, padding: '20px 40px 0', textAlign: 'justify'}}>

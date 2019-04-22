@@ -147,7 +147,8 @@ const styles = createStyles({
 	},
 	header: {
 		// backgroundImage: 'url(https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
-		backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		// backgroundImage: 'url(https://images.pexels.com/photos/1702333/pexels-photo-1702333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+		backgroundImage: 'url(https://images.pexels.com/photos/2106037/pexels-photo-2106037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	},
@@ -182,7 +183,8 @@ const styles = createStyles({
 	middle: {
 		height: '100%',
 		width: '100%',
-		backgroundImage: 'url(https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500)',
+		// backgroundImage: 'url(https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500)',
+		backgroundImage: 'url(https://images.pexels.com/photos/1999579/pexels-photo-1999579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
 		backgroundAttachment: 'fixed',
 		backgroundRepeat: 'no-repeat',
 		display: 'flex',

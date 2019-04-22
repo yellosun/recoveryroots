@@ -20,10 +20,13 @@ a {
 	color: cadetblue;
 }
 
-.MuiInput-underline:after {
-	border-bottom: 2px solid black !important;
+#cursor {
+  border-left: .1em solid black;
+  animation: blink .7s steps(1) infinite;
 }
 
-.MuiFormLabel-root-297.MuiFormLabel-focused-298 {
-	color: black !important;
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }

@@ -26,17 +26,17 @@ class Footer extends Component<Props, State> {
 					</div>
 					<div className={classes.social}>
 						<div className={classes.socialIcons}>
-							<a className={classes.link} href='https://www.facebook.com/EDRecoveryRoots/'><img src={fb} alt='gb' height={18} /></a>
-							<a className={classes.link} href='https://www.instagram.com/edrecoveryroots/'><img src={insta} alt='insta' height={18} /></a>
-							<a className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
+							<a target='_blank' rel="noreferrer" className={classes.link} href='https://www.facebook.com/EDRecoveryRoots/'><img src={fb} alt='gb' height={18} /></a>
+							<a target='_blank' rel="noreferrer" className={classes.link} href='https://www.instagram.com/edrecoveryroots/'><img src={insta} alt='insta' height={18} /></a>
+							<a target='_blank' rel="noreferrer" className={classes.link} href='mailto:edrecoveryroots@gmail.com'><Mail height={25} /></a>
 						</div>
 						<div style={{fontSize: '.6em', letterSpacing: 5, paddingTop: 3}}>@edrecoveryroots</div>
 					</div>
 					<div className={classes.links}>
-						<a className={classnames(classes.link, classes.secure)} href='#'>About Us</a>
-						<a className={classnames(classes.link, classes.secure)} href='#'>Privacy Policy</a>
-						<a className={classnames(classes.link, classes.secure)} href='#'>Disclaimer</a>
-						<a className={classnames(classes.link, classes.secure)} href='#'>Terms + Conditions</a>
+						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>About Us</a>
+						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Privacy Policy</a>
+						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Disclaimer</a>
+						<a target='_blank' rel="nofollow noreferrer" className={classnames(classes.link, classes.secure)} href='#'>Terms + Conditions</a>
 					</div>
 				</div>	
 			</div>	
@@ -54,6 +54,7 @@ const styles = createStyles({
 		flexFlow: 'column nowrap',
 		justifyContent: 'center',
 		alignItems: 'center',
+		zIndex: 3
 	},
 	footer: {	
 		width: '100%',

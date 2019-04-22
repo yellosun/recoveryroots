@@ -48,7 +48,7 @@ class About extends Component<Props, State> {
 						<div style={{marginTop: 15, marginBottom: '-20px'}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/vltmn/'><img height={20} src={instaBlack} alt='violet insta' /></a></div>
 						</div>
 					</div>
-					<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile}/></div>
+					<div><img alt='violet' src={violet} height={250} width={250} className={classes.profile} style={{transform: 'rotate(90deg)'}}/></div>
 				</div>
 			</div>
 		)
@@ -66,7 +66,7 @@ const styles = createStyles({
 	},
 	profile: {
 		borderRadius: '100%',
-		filter: 'grayscale(90%)'
+		// filter: 'grayscale(90%)'
 	},
 	name: {
 		fontSize: '3em',

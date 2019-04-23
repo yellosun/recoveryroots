@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import classnames from 'classnames'
 import { withStyles, createStyles, Theme } from '@material-ui/core/styles'
-import Footer from '../Footer'
+import Footer from '../../Footer'
 import Card from '@material-ui/core/Card'
 
 interface Props {classes: any, blogs: any}

@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Link, Redirect } from 'react-router-dom'
 import classnames from 'classnames'
-import Home from './home/Home'
-import About from './About'
-import Blogs from './blogs/Blogs'
-import Blog from './blogs/Blog'
-import Contact from './Contact'
-import Community from './Community'
+import Home from '../desktop/home/Home'
+import About from '../desktop/About'
+import Blogs from '../desktop/blogs/Blogs'
+import Blog from '../desktop/blogs/Blog'
+import Contact from '../desktop/Contact'
+import Community from '../desktop/Community'
 import Footer from '../Footer'
 import PDFViewer from '../PDFViewer'
 import logo from '../../styles/imgs/transparent-logo.png'
@@ -20,23 +20,12 @@ interface State {}
 
 class NavBar extends Component<Props, State> {
 
-	state = {
-		scroll: 0
-	}
-
-	componentDidMount() {
-		window.addEventListener('scroll', ()=> this.setState({scroll: window.scrollY}) )
-	}
-
-
-
-
 	render() {
 		const {classes, history} = this.props
 		const path = history.location.pathname
 		return (
 			<Fragment>
-				<div className={this.state.scroll > 0 ? classnames(classes.navbar, classes.scrolled) : classes.navbar} >
+				<div className={classes.navbar} >
 						<Link
 							to='/about' 
 							className={path === '/about' ? 

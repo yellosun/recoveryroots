@@ -22,6 +22,7 @@ class About extends Component<Props, State> {
 					<div className={classes.name}>intent</div>
 						<div className={classes.snippet}>
 							Our paths aligned when we thought all light was lost. However by committing to healing, growth and each other, we discovered truly transformative recovery roots. Our simple yet powerful hope is that these scientifically supported and intuitively aligned resources, tools, and experiences also enable you in the way you need them most.
+						<div style={{marginTop: 15, marginBottom: '-20px'}}><a rel="noopener noreferrer" target="_blank" href='https://www.instagram.com/edrecoveryroots/'><img height={20} src={instaBlack} alt='rr insta' /></a></div>
 						</div>
 					</div>
 					<div><img alt='rr-logo' src='https://images.pexels.com/photos/1859622/pexels-photo-1859622.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' height={250} width={250} className={classes.profile}/></div>

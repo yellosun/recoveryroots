@@ -37,7 +37,7 @@ class NavBar extends Component<Props, State> {
 		return (
 			<Fragment>
 				<div className={this.state.scroll > 0 ? classnames(classes.navbar, classes.scrolled) : classes.navbar} >
-						<Link
+						{/*<Link
 							to='/about' 
 							className={path === '/about' ? 
 							classnames(classes.link, classes.path)
@@ -52,7 +52,7 @@ class NavBar extends Component<Props, State> {
 							: classes.link}
 						>
 							contact
-						</Link>
+						</Link>*/}
 						<Link 
 							to='/'
 							className={path === '/' ? 
@@ -61,22 +61,22 @@ class NavBar extends Component<Props, State> {
 						>
 							<img height={25} src={logo}/>
 						</Link>
-						<Link 
-							to='/community'
-							className={path === '/community' ? 
-							classnames(classes.link, classes.path)
-							: classes.link}
-						>
-							community
-						</Link>
-						<Link 
-							to='/blog'
-							className={path === '/blog' ? 
-							classnames(classes.link, classes.path)
-							: classes.link}
-						>
-							blog
-						</Link>
+					{/*	<Link 
+						to='/community'
+						className={path === '/community' ? 
+						classnames(classes.link, classes.path)
+						: classes.link}
+					>
+						community
+					</Link>
+					<Link 
+						to='/blog'
+						className={path === '/blog' ? 
+						classnames(classes.link, classes.path)
+						: classes.link}
+					>
+						blog
+					</Link>*/}
 					
 				</div>
 				<div className={classes.contentContainer}>

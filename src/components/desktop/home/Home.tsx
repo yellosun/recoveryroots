@@ -20,9 +20,9 @@ interface Props {classes: any}
 interface State {email: string, name: string, msg:string, err:string}
 
 const ebookArr = [
-	'Learn more about the roots of recovery and how they transform your healing.',
+	'Learn more about the roots of recovery and their role in building a healing foundation.',
 	'Reflect using guided jounaling prompts designed for any stage of recovery.',
-	'Empower yourself with tools for deeper self awareness, trust and compassion.'
+	'Empower yourself with practical tools for deeper self awareness, trust, and compassion.'
 ]
 
 class Home extends Component<Props> {

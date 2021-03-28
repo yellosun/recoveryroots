@@ -18,10 +18,10 @@ class Footer extends Component<Props, State> {
 				<div className={classes.footer}>
 					<div>
 						<img src={logo} alt='rr-logo' width={50} style={{marginBottom: '-78px'}}/>
-						<div style={{fontSize: '.6em', letterSpacing: 2, bottom: 0, marginBottom: 20, border: '.5px solid white', padding: '10px 20px'}}>website by <a style={{color: 'white', textDecoration: 'none'}} href='http://vio1337.com'>violet moon</a></div>	
+						<div style={{fontSize: '.6em', letterSpacing: 2, bottom: 0, marginBottom: 20, border: '.5px solid white', padding: '10px 20px'}}>website by <a style={{color: 'white', textDecoration: 'none'}} href='http://moonriseviolet.com'>moonriseviolet</a></div>	
 					</div>
 					<div className={classes.mission}>
-						Our mission for Recovery Roots is to help brave souls 
+						Our mission for Recovery Roots is to help
 						reclaim trust, awareness, alignment and acceptance 
 						through authentic experience, guidance and connection.
 					</div>

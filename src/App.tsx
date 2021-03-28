@@ -38,6 +38,8 @@ class App extends Component<Props> {
 	}
 }
 
-const mapStateToProps = (state:any) => ({email: state.user.user.email})
+const mapStateToProps = (state:any) => {
+	return ({email: state.user.user.email || null })
+}
 
 export default connect(mapStateToProps)(App)

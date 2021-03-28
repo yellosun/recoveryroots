@@ -26,7 +26,7 @@ class FourBodies extends Component<Props, State> {
 
 		return (
 			<Grid item xs={12} className={classes.colContainer}>
-				<div className={classes.tag}>supporting brave souls through the eating disorder recovery process</div>
+				<div className={classes.tag}>sustainable eating disorder recovery resources and support</div>
 				<div className={classnames(classes.rowContainer)}>
 						<div className={classnames(classes.feature, classes.mental)}
 							onMouseEnter={e => this.setState({mental: true})}

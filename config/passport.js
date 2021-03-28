@@ -54,9 +54,6 @@ passport.use(new LocalStrategy({
             return done(null, false)
         }
 
-        // console.log('USER ~>', user)
-        // console.log('xyzzy ~>', {email, password, pw: user.password})
-
         const isMatch = await bcrypt.compareAsync(password, user.password)
         if (isMatch) {
             done(null, user)

@@ -17,30 +17,30 @@ const store = createStore(
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()	
 )
 
-checkToken()
-.then(user => {	
-	if (user) {
-		store.dispatch(setUser(user))
-		return user
-	}
-})
-.then(user=> {
-	if (user) {
-		return getUserBlogs(user.id)
-	} else {
-		return getBlogs()
-	}
-})
-.then(blogs=> {
-	if (blogs) {
-		blogs.reverse().forEach((blog:any)=> {
-			if (blog.render) {
-				store.dispatch(setBlog(blog))
-			}
-		})
-	}
-})
-.catch(err=> console.log(err))
+// checkToken()
+// .then(user => {	
+// 	if (user) {
+// 		store.dispatch(setUser(user))
+// 		return user
+// 	}
+// })
+// .then(user=> {
+// 	if (user) {
+// 		return getUserBlogs(user.id)
+// 	} else {
+// 		return getBlogs()
+// 	}
+// })
+// .then(blogs=> {
+// 	if (blogs) {
+// 		blogs.reverse().forEach((blog:any)=> {
+// 			if (blog.render) {
+// 				store.dispatch(setBlog(blog))
+// 			}
+// 		})
+// 	}
+// })
+// .catch(err=> console.log(err))
 
 ReactDOM.render(
 	<Provider store={store}>
